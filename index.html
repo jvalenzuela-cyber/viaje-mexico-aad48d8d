@@ -388,6 +388,7 @@
 
   .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
   .daynote.sinplan{background:rgba(232,163,61,.1);border-left-color:var(--gold);font-style:italic}
+  .froute .ap.busap{display:inline-flex;align-items:center;color:var(--aegean)}
   .splithead{display:flex;gap:10px;margin-bottom:12px}
   .splithead .sh{flex:1;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
     border-radius:14px;padding:12px 13px;box-shadow:var(--shadow)}
@@ -548,8 +549,8 @@ const CITY = {
 const STATS = [ {v:'20', k:'noches'}, {v:'4', k:'destinos'}, {v:'6', k:'vuelos'} ];
 /*SYNC:TOTALS*/
 const TOTALS = {
-  eur_total:'5.753,00 €', mxn_total:'115.639 MXN',
-  eur_pp:'2.877,00 €', mxn_pp:'57.820 MXN',
+  eur_total:'5.780,00 €', mxn_total:'116.175 MXN',
+  eur_pp:'2.890,00 €', mxn_pp:'58.087 MXN',
   rate:'1 € ≈ 20,10 MXN', rate_val:20.1,
   pagado:'3.263,03 €', pagado_val:3263.03,
   sin_asignar:'50,00 €', sin_asignar_val:50.0,
@@ -578,12 +579,12 @@ const NEXT = [
 
 /*SYNC:FLIGHTS*/
 const FLIGHTS = [
-  {n:1,date:'03/10',from:'BCN',to:'MEX',cityFrom:'Barcelona',cityTo:'Ciudad de México',airline:'Emirates EK255',dep:'por confirmar',arr:'por confirmar',loc:'RMQTJB',terminal:'T1 BCN',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Vuelo directo BCN-MEX. Clase Turista. Pedido MyTrip 1127-541-022. Confirmar horarios y franquicia.'},
-  {n:2,date:'23/10',from:'MEX',to:'BCN',cityFrom:'Ciudad de México',cityTo:'Barcelona',airline:'Emirates EK256',dep:'por confirmar',arr:'por confirmar',loc:'RMQTJB',terminal:'-',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Llega a BCN el 24/10 por husos horarios. Pedido MyTrip 1127-541-022. Confirmar.'},
-  {n:3,date:'05/10',from:'MEX',to:'OAX',cityFrom:'Ciudad de México',cityTo:'Oaxaca',airline:'Aeroméxico/Volaris/VivaAerobus',dep:'15:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'48,00 €',status:'Pagado',stop:false,note:'Vuelo directo ~1h. Alternativa: bus ADO ~6-7h.'},
-  {n:4,date:'10/10',from:'OAX',to:'PXM',cityFrom:'Oaxaca',cityTo:'Puerto Escondido',airline:'Aerotucán (regional)',dep:'por confirmar',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'bus'},
-  {n:5,date:'14/10',from:'PXM',to:'DGO',cityFrom:'Puerto Escondido',cityTo:'Durango',airline:'Volaris',dep:'13:00',arr:'por confirmar',loc:'KLSYGE',terminal:'',bag:'verificar',price:'121,00 €',status:'Pagado',stop:true,note:'PXM-DGO con 1 escala. Check-in en línea desde 3 días antes. Para llegar a la boda.'},
-  {n:6,date:'18/10',from:'DGO',to:'MEX',cityFrom:'Durango',cityTo:'Ciudad de México',airline:'Aeroméxico/Volaris/VivaAerobus',dep:'15:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'199,94 €',status:'Pagado',stop:false,note:'Vuelo directo ~1h50. 2 vuelos/día. Volver para el EK256 del 23.'}
+  {n:1,date:'03/10',from:'BCN',to:'MEX',cityFrom:'Barcelona',cityTo:'Ciudad de México',airline:'Emirates EK255',dep:'por confirmar',arr:'por confirmar',loc:'RMQTJB',terminal:'T1 BCN',bag:'verificar',price:'sin precio',status:'Pagado',modo:'avion',stop:false,note:'Vuelo directo BCN-MEX. Clase Turista. Pedido MyTrip 1127-541-022. Confirmar horarios y franquicia.'},
+  {n:2,date:'23/10',from:'MEX',to:'BCN',cityFrom:'Ciudad de México',cityTo:'Barcelona',airline:'Emirates EK256',dep:'por confirmar',arr:'por confirmar',loc:'RMQTJB',terminal:'-',bag:'verificar',price:'sin precio',status:'Pagado',modo:'avion',stop:false,note:'Llega a BCN el 24/10 por husos horarios. Pedido MyTrip 1127-541-022. Confirmar.'},
+  {n:3,date:'05/10',from:'NLU',to:'OAX',cityFrom:'Ciudad de México',cityTo:'Oaxaca',airline:'VivaAerobus VB 9214',dep:'15:00',arr:'16:08',loc:'ADS1TJ',terminal:'',bag:'verificar',price:'48,00 €',status:'Pagado',modo:'avion',stop:false,note:'OJO: sale del AIFA (NLU), no del aeropuerto de la ciudad (MEX). Reserva por Etraveli; para el check-in en línea hay que vincular la reserva a una cuenta Viva. Vuelo de 1h08.'},
+  {n:4,date:'10/10',from:'BUS',to:'BUS',cityFrom:'Oaxaca',cityTo:'Puerto Escondido (autobús ADO)',airline:'ADO',dep:'10:45',arr:'13:45',loc:'200153079396',terminal:'',bag:'verificar',price:'sin precio',status:'Pagado',modo:'bus',stop:false,note:'AUTOBÚS, no avión. Sale de la Terminal ADO de Oaxaca y llega a la terminal ADO de Puerto Escondido. Ref. 200153079396 / #080162968030, a nombre de Javiera. ~3h.'},
+  {n:5,date:'14/10',from:'PXM',to:'DGO',cityFrom:'Puerto Escondido',cityTo:'Durango',airline:'Volaris',dep:'13:26',arr:'17:54',loc:'KLSYGE',terminal:'',bag:'verificar',price:'121,00 €',status:'Pagado',modo:'avion',stop:true,note:'Volaris con escala en Guadalajara. PXM 13:26 → GDL 15:04 (Y4 1351), escala de 1h49, GDL 16:53 → DGO 17:54 (Y4 1390). Check-in en línea desde 3 días antes.'},
+  {n:6,date:'18/10',from:'DGO',to:'NLU',cityFrom:'Durango',cityTo:'Santa Lucía/AIFA',airline:'Aeroméxico AM 2469',dep:'15:42',arr:'17:12',loc:'por confirmar',terminal:'',bag:'verificar',price:'199,94 €',status:'Pagado',modo:'avion',stop:false,note:'Itinerario cambiado por la aerolínea. Llega al AIFA (NLU), no al aeropuerto de la ciudad: contar ~1h hasta el centro. Falta el localizador.'}
 ];
 /*END:FLIGHTS*/
 
@@ -592,7 +593,8 @@ const HOTELS = [
   {city:'MEX',name:'Condesa Suites',type:'Studio',inn:'03/10',out:'',nights:2,ppn:'51,38 €',total:'102,75 €',status:'Pagado',addr:'Ciudad de México (inicio)',note:'Llegada 03/10'},
   {city:'OAX',name:'Hotel Posada San Rafael',type:'Hotel',inn:'05/10',out:'10/10',nights:5,ppn:'29,40 €',total:'147,00 €',status:'Pendiente',addr:'Oaxaca',note:''},
   {city:'PXM',name:'Carri Surf Studio',type:'Hotel',inn:'10/10',out:'14/10',nights:4,ppn:'43,45 €',total:'173,80 €',status:'Pagado',addr:'Puerto Escondido',note:'Playa, fin temporada lluvias'},
-  {city:'DGO',name:'Hampton Inn',type:'Hotel',inn:'14/10',out:'18/10',nights:4,ppn:'67,79 €',total:'271,16 €',status:'Pendiente',addr:'Durango (boda)',note:'4 noches (14-18 oct). El importe de 271,16 era de 3 noches: confirmar el real.'},
+  {city:'DGO',name:'Hotel Maria Elena',type:'Hotel',inn:'14/10',out:'15/10',nights:1,ppn:'26,65 €',total:'26,65 €',status:'Pendiente',addr:'Durango (boda)',note:'Noche de llegada: el vuelo aterriza a las 17:54.'},
+  {city:'DGO',name:'Hampton Inn',type:'Hotel',inn:'15/10',out:'18/10',nights:3,ppn:'90,39 €',total:'271,16 €',status:'Pendiente',addr:'Durango (boda)',note:'Confirmar si hay bloqueo de habitaciones del evento.'},
   {city:'MEX',name:'Uniko Living',type:'Hotel',inn:'18/10',out:'23/10',nights:5,ppn:'45,30 €',total:'226,48 €',status:'Pagado',addr:'Ciudad de México (final)',note:'Antes del vuelo del 23/10'}
 ];
 /*END:HOTELS*/
@@ -610,20 +612,20 @@ const TRANSFERS_LOG = [
 const ITIN = [
   {date:'03/10',dow:'Sábado',city:'MEX',tag:'LLEGADA',hotel:'Condesa Suites',m:'',a:'',e:'Llegada vuelo Emirates EK255',tr:'Vuelo internacional Barcelona-CDMX',note:'Aterriza en CDMX. Organizar traslado aeropuerto a alojamiento.'},
   {date:'04/10',dow:'Domingo',city:'MEX',tag:'',hotel:'Condesa Suites',m:'',a:'',e:'',tr:'',note:''},
-  {date:'05/10',dow:'Lunes',city:'OAX',tag:'LLEGADA',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'CDMX a Oaxaca (avión, 15:00)',note:''},
+  {date:'05/10',dow:'Lunes',city:'OAX',tag:'LLEGADA',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'CDMX a Oaxaca (VivaAerobus 15:00)',note:'Sale del AIFA (NLU), no del aeropuerto de la ciudad. Vuelo VB 9214, llega 16:08.'},
   {date:'06/10',dow:'Martes',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
   {date:'07/10',dow:'Miércoles',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
   {date:'08/10',dow:'Jueves',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
   {date:'09/10',dow:'Viernes',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
-  {date:'10/10',dow:'Sábado',city:'PXM',tag:'LLEGADA',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'Oaxaca a Puerto Escondido (avión)',note:''},
+  {date:'10/10',dow:'Sábado',city:'PXM',tag:'LLEGADA',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'Oaxaca a Puerto Escondido (autobús ADO 10:45)',note:'Llega a las 13:45 a la terminal ADO de Puerto Escondido.'},
   {date:'11/10',dow:'Domingo',city:'PXM',tag:'',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'',note:''},
   {date:'12/10',dow:'Lunes',city:'PXM',tag:'',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'',note:''},
   {date:'13/10',dow:'Martes',city:'PXM',tag:'',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'',note:''},
-  {date:'14/10',dow:'Miércoles',city:'DGO',tag:'LLEGADA',hotel:'Hotel Maria Elena',m:'',a:'',e:'',tr:'Puerto Escondido a Durango (avión, escala 13:00)',note:''},
+  {date:'14/10',dow:'Miércoles',city:'DGO',tag:'LLEGADA',hotel:'Hotel Maria Elena',m:'',a:'',e:'',tr:'Puerto Escondido a Durango (Volaris 13:26, escala en Guadalajara)',note:'Llega a Durango a las 17:54.'},
   {date:'15/10',dow:'Jueves',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'Cambio de hotel (a Hampton Inn)',note:'Inicio ventana boda (15-18 oct).'},
   {date:'16/10',dow:'Viernes',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'',note:''},
   {date:'17/10',dow:'Sábado',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'BODA',tr:'',note:'Evento principal del viaje (sábado).'},
-  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:'Inicio ventana boda (15-18 oct).'},
+  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'',tr:'Durango a CDMX (Aeroméxico AM 2469, 15:42)',note:'Llega al AIFA a las 17:12. Fin ventana boda.'},
   {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
   {date:'20/10',dow:'Martes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Frida Kahlo 11:30',a:'',e:'',tr:'',note:''},
   {date:'21/10',dow:'Miércoles',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
@@ -704,7 +706,7 @@ const BUDGET = [
   {cat:'Vuelos internos',v:'120,00 €',real:'48,00 €',n:'CDMX-Oaxaca (2 pax)',ic:I.plane},
   {cat:'Vuelos internos',v:'196,00 €',real:'196,00 €',n:'Puerto Escondido-Durango (2 pax)',ic:I.plane},
   {cat:'Vuelos internos',v:'200,00 €',real:'200,00 €',n:'Durango-CDMX (2 pax)',ic:I.plane},
-  {cat:'Alojamiento',v:'921,19 €',real:'921,19 €',n:'Total alojamiento (enlazado)',ic:I.bed},
+  {cat:'Alojamiento',v:'947,84 €',real:'947,84 €',n:'Total alojamiento (enlazado)',ic:I.bed},
   {cat:'Comida y bebida',v:'1.200,00 €',real:'—',n:'Aprox. por día x 20 días x 2 pax',ic:I.food},
   {cat:'Transporte local',v:'200,00 €',real:'—',n:'Taxis, colectivos, metro, Uber/Didi',ic:I.bus},
   {cat:'Actividades y tours',v:'400,00 €',real:'—',n:'Monte Albán, Teotihuacán, snorkel, mezcal...',ic:I.star},
@@ -726,7 +728,8 @@ const PAYMENTS = [
   {c:'Condesa Suites · Ciudad de México (inicio)',k:'hotel',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
   {c:'Hotel Posada San Rafael · Oaxaca',k:'hotel',by:'—',amt:'147,00 €',val:147.0,st:'Pendiente',n:'5 noches · 29,40 €/noche · se paga en recepción'},
   {c:'Carri Surf Studio · Puerto Escondido',k:'hotel',by:'Juan',amt:'173,80 €',val:173.8,st:'Pagado',n:'4 noches · 43,45 €/noche'},
-  {c:'Hampton Inn · Durango (boda)',k:'hotel',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'4 noches · 67,79 €/noche · se paga en recepción'},
+  {c:'Hotel Maria Elena · Durango (boda)',k:'hotel',by:'—',amt:'26,65 €',val:26.65,st:'Pendiente',n:'1 noches · 26,65 €/noche · se paga en recepción'},
+  {c:'Hampton Inn · Durango (boda)',k:'hotel',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'3 noches · 90,39 €/noche · se paga en recepción'},
   {c:'Uniko Living · Ciudad de México (final)',k:'hotel',by:'Juan',amt:'226,48 €',val:226.48,st:'Pagado',n:'5 noches · 45,30 €/noche'}
 ];
 /*END:PAYMENTS*/
@@ -784,7 +787,8 @@ const TASKS = [
   {cat:'Equipaje',t:'Revisar franquicia de equipaje Emirates',n:'',done:false},
   {cat:'Seguro',t:'Contratar seguro de viaje',n:'Recomendado, no obligatorio.',done:false},
   {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Emirates',n:'Reserva RMQTJB. Emirates suele abrirlo 48h antes de cada vuelo.',done:false},
-  {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Volaris',n:'Reserva KLSYGE (PXM-DGO del 14/10). Se abre 3 días antes.',done:false}
+  {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Volaris',n:'Reserva KLSYGE (PXM-DGO del 14/10). Se abre 3 días antes.',done:false},
+  {cat:'Reservas',t:'Vincular la reserva de VivaAerobus a una cuenta Viva',n:'Reserva ADS1TJ (CDMX-Oaxaca del 5/10). Sin vincularla no se puede hacer check-in en línea ni modificarla.',done:false}
 ];
 /*END:TASKS*/
 
@@ -891,7 +895,7 @@ const CONTACTS = [
   {t:'Alojamiento CDMX',sub:'Condesa Suites / Uniko Living · 03-05 oct (inicio) y 18-23 oct (final)',tel:'',web:'',ic:I.bed},
   {t:'Alojamiento Oaxaca',sub:'Hotel Posada San Rafael · 05-10 oct',tel:'',web:'',ic:I.bed},
   {t:'Alojamiento Pto Escondido',sub:'Carri Surf Studio · 10-14 oct',tel:'',web:'',ic:I.bed},
-  {t:'Alojamiento Durango',sub:'Hampton Inn · 14-18 oct (boda)',tel:'',web:'',ic:I.bed},
+  {t:'Alojamiento Durango',sub:'Hotel Maria Elena / Hampton Inn · 14-15 y 15-18 oct (boda)',tel:'',web:'',ic:I.bed},
   {t:'Boda',sub:'Contacto del evento · Anfitriones / organización.',tel:'',web:'',ic:I.star},
   {t:'Aeropuertos',sub:'MEX (CDMX) · OAX · PXM · DGO · Confirmar terminal de llegada de Emirates.',tel:'',web:'',ic:I.plane}
 ];
@@ -1043,7 +1047,9 @@ function renderHoyTrip(v, idx){
   // siguiente / destacado
   const fl=(flightByDate[d.date]||[])[0];
   let nx;
-  if(fl){ nx={k:'Vuelo de hoy',b:`${fl.dep} · ${fl.from} → ${fl.to}`,s:`${fl.airline} · loc. ${fl.loc}`,ic:I.plane}; }
+  if(fl){ nx = fl.modo==='bus'
+    ? {k:'Autobús de hoy',b:`${fl.dep} · ${fl.cityFrom} → ${fl.cityTo}`,s:`${fl.airline} · ref. ${fl.loc}`,ic:I.bus}
+    : {k:'Vuelo de hoy',b:`${fl.dep} · ${fl.from} → ${fl.to}`,s:`${fl.airline} · loc. ${fl.loc}`,ic:I.plane}; }
   else if(d.m||d.a||d.e){
     const [k,b,ic] = d.m ? ['Primer plan', d.m, I.sun]
                    : d.a ? ['Por la tarde', d.a, I.noon]
@@ -1152,7 +1158,7 @@ function renderPlan(){
     const tagHtml=d.tag?`<span class="pill info" style="font-size:9.5px;padding:2px 7px">${d.tag}</span>`:'';
     const fl=(flightByDate[d.date]||[])[0];
     const boda = d.date==='17/10';
-    const hicons = (fl?`<span class="hicon">${I.plane}</span>`:'')+(boda?`<span class="hicon">${I.star}</span>`:'');
+    const hicons = (fl?`<span class="hicon">${fl.modo==='bus'?I.bus:I.plane}</span>`:'')+(boda?`<span class="hicon">${I.star}</span>`:'');
     const todayBadge = idx===todayIdx?`<span class="pill" style="background:rgba(47,158,110,.16);color:#217a53;font-size:9.5px;padding:2px 7px">HOY</span>`:'';
     const head=el('div','day-head');
     head.innerHTML=`
@@ -1171,20 +1177,23 @@ function renderPlan(){
 /* ============== LOGISTICA ============== */
 function renderLog(){
   const v=$('#v-logistica'); v.innerHTML=backbar('mas');
-  v.appendChild(el('div','sec-title','Vuelos'));
+  v.appendChild(el('div','sec-title','Vuelos y transporte'));
   FLIGHTS.forEach(f=>{
     const c=el('div','card fcard');
     const pillCls=(f.status==='Comprado'||f.status==='Pagado')?'ok':'pend';
+    const bus=f.modo==='bus';
     c.innerHTML=`
-      <div class="froute"><span class="ap">${f.from}</span>
-        <span class="arr">${f.stop?'<span class="plus">escala</span>':''}</span>
-        <span class="ap">${f.to}</span></div>
+      <div class="froute">${bus
+        ? `<span class="ap busap">${I.bus}</span><span class="arr"></span><span class="ap busap">${I.bus}</span>`
+        : `<span class="ap">${f.from}</span>
+           <span class="arr">${f.stop?'<span class="plus">escala</span>':''}</span>
+           <span class="ap">${f.to}</span>`}</div>
       <div class="ftimes"><span><b>${f.dep}</b> · ${f.cityFrom}</span><span>${f.cityTo} · <b>${f.arr}</b></span></div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <span style="font-size:13px;font-weight:600">${f.date} · ${f.airline}</span>
         <span class="pill ${pillCls}">${f.status}</span></div>
       <div class="fmeta">
-        <span>Loc. <b>${f.loc}</b></span><span>Equipaje <b>${f.bag}</b></span>${f.price!=='sin precio'?`<span>Precio <b>${f.price}</b></span>`:''}
+        <span>${bus?'Ref.':'Loc.'} <b>${f.loc}</b></span>${bus?'':`<span>Equipaje <b>${f.bag}</b></span>`}${f.price!=='sin precio'?`<span>Precio <b>${f.price}</b></span>`:''}
       </div>
       ${f.note?`<div class="daynote" style="margin-top:10px">${f.note}</div>`:''}`;
     v.appendChild(c);
