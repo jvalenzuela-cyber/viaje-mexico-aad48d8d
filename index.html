@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#5e1f3d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="México 2026">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>México · Oaxaca · Puerto Escondido · Durango</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea:#5e1f3d; --sea2:#8e2750; --aegean:#1f8fa0; --turq:#2ab0bf;
+    --sand:#f7ecd9; --paper:#fdf7ee; --ink:#2b1a20; --muted:#7a6068;
+    --line:rgba(94,31,61,.12); --gold:#e8a33d; --rose:#d4674f; --orbital:#2f9e6e;
+    --good:#2f9e6e; --bad:#c8443a; --warn:#d9902c;
+    --card:#ffffff; --shadow:0 6px 24px rgba(94,31,61,.10);
+    --safe-b:env(safe-area-inset-bottom,0px);
+    --safe-t:env(safe-area-inset-top,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+    padding-bottom:calc(76px + var(--safe-b));
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif}
+  a{color:var(--aegean);text-decoration:none}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:linear-gradient(160deg,#5e1f3d,#8e2750);
+    color:#fff;padding:calc(12px + var(--safe-t)) 0 12px;
+    box-shadow:0 4px 18px rgba(94,31,61,.25);
+  }
+  .head-inner{padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand .eyebrow{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#f2bfd0;font-weight:600}
+  .brand h1{font-size:17px;margin:2px 0 0;font-weight:600;line-height:1.15}
+  .count{
+    text-align:right;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;padding:6px 12px;min-width:74px;backdrop-filter:blur(4px)
+  }
+  .count .num{font-family:'Fraunces',serif;font-size:22px;font-weight:700;line-height:1}
+  .count .lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#f5d5df}
+
+  /* ---------- Bottom nav ---------- */
+  .bnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;
+    background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);
+    padding:7px 4px calc(7px + var(--safe-b));box-shadow:0 -4px 20px rgba(94,31,61,.08)}
+  .bnav button{flex:1;border:0;background:none;font-family:inherit;display:flex;flex-direction:column;
+    align-items:center;gap:3px;padding:4px 2px;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;transition:.15s}
+  .bnav button .bi{opacity:.65;transition:.15s;display:grid;place-items:center}
+  .bnav button.on{color:var(--aegean)}
+  .bnav button.on .bi{opacity:1;transform:translateY(-1px)}
+
+  /* offline bar */
+  .offline-bar{position:fixed;left:0;right:0;bottom:calc(76px + var(--safe-b));z-index:55;
+    background:var(--warn);color:#fff;text-align:center;font-size:12px;font-weight:600;
+    padding:7px 12px;transform:translateY(150%);transition:transform .3s;box-shadow:0 -2px 12px rgba(0,0,0,.15)}
+  .offline-bar.show{transform:none}
+
+  /* ---------- Layout ---------- */
+  main{max-width:680px;margin:0 auto;padding:16px 16px 30px}
+  .view{display:none;animation:fade .25s ease}
+  .view.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .sec-title{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--aegean);font-weight:700;margin:22px 2px 10px}
+  .sec-title:first-child{margin-top:4px}
+  .backbar{display:inline-flex;align-items:center;gap:6px;color:var(--aegean);font-weight:600;font-size:13px;padding:2px 0 14px;cursor:pointer}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;box-shadow:var(--shadow);margin-bottom:12px}
+  .card.flat{box-shadow:none}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+  .pill.ok{background:rgba(47,158,110,.13);color:var(--good)}
+  .pill.pend{background:rgba(217,144,44,.15);color:var(--warn)}
+  .pill.info{background:rgba(31,143,160,.12);color:var(--aegean)}
+  .pill.pay{background:rgba(47,158,110,.13);color:var(--good)}
+
+  /* map button */
+  .mapbtn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--aegean);background:rgba(31,143,160,.1);padding:8px 13px;border-radius:10px;margin-top:11px}
+
+  /* ---------- Hoy ---------- */
+  .cd-hero{border-radius:20px;overflow:hidden;position:relative;color:#fff;
+    background:linear-gradient(150deg,#5e1f3d 0%,#8e2750 55%,#c4633a 100%);
+    padding:22px 20px;box-shadow:var(--shadow);margin-bottom:14px;text-align:center}
+  .cd-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(42,176,191,.45),transparent 70%)}
+  .cd-hero>*{position:relative}
+  .cd-hero .eq{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#f5d5df;font-weight:600}
+  .cd-hero .big{font-family:'Fraunces',serif;font-size:60px;font-weight:700;line-height:.95;margin:6px 0 2px}
+  .cd-hero .u{font-size:13px;color:#fdeef3;font-weight:500}
+  .cd-hero .dts{font-size:12.5px;color:#f5d5df;margin-top:10px}
+  .cd-hero .who{margin-top:14px;display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+  .ava{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:5px 11px 5px 5px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .ava i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#3d1026}
+
+  .todayhero{border-radius:20px;overflow:hidden;position:relative;color:#fff;
+    background:linear-gradient(150deg,#5e1f3d,#b5365f);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:12px}
+  .todayhero::after{content:"";position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(47,158,110,.35),transparent 70%)}
+  .todayhero>*{position:relative}
+  .todayhero .dd{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#f5d5df;font-weight:700}
+  .todayhero h2{font-family:'Fraunces';font-size:27px;margin:4px 0 0;font-weight:600}
+  .todayhero .meta{font-size:12.5px;color:#f9e2ea;margin-top:7px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .todayhero .meta .chip{background:rgba(255,255,255,.15);border-radius:999px;padding:3px 10px;display:inline-flex;align-items:center;gap:5px}
+
+  .nextup{display:flex;align-items:center;gap:13px;background:#fff;border:1px solid rgba(47,158,110,.4);border-left:4px solid var(--orbital);border-radius:14px;padding:13px 15px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .nextup .ni{width:40px;height:40px;border-radius:11px;background:rgba(47,158,110,.14);color:#217a53;display:grid;place-items:center;flex:0 0 auto}
+  .nextup .nx{flex:1;min-width:0}
+  .nextup .nx .k{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .nextup .nx b{font-size:15px;display:block;margin-top:1px}
+  .nextup .nx span{font-size:12px;color:var(--muted)}
+
+  .prep{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:center;gap:11px}
+  .pcard .pi{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto}
+  .pcard .pv{font-family:'Fraunces';font-size:20px;font-weight:700;color:var(--sea);line-height:1}
+  .pcard .pk{font-size:11px;color:var(--muted);margin-top:2px}
+
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 12px;text-align:center;box-shadow:var(--shadow)}
+  .stat .v{font-family:'Fraunces',serif;font-size:21px;font-weight:700;color:var(--sea)}
+  .stat .k{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:600}
+
+  .budget-hero{background:linear-gradient(135deg,#5e1f3d,#b5365f);color:#fff;border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:16px;position:relative;overflow:hidden}
+  .budget-hero::after{content:"";position:absolute;right:-30px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(47,158,110,.4),transparent 70%)}
+  .budget-hero>*{position:relative}
+  .budget-hero .bh-top{display:flex;justify-content:space-between;align-items:center}
+  .budget-hero .bh-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#f5d5df;font-weight:600}
+  .budget-hero .bh-rate{font-size:10.5px;color:#f5d5df;background:rgba(255,255,255,.14);padding:3px 9px;border-radius:8px;font-weight:600}
+  .budget-hero .bh-clp{font-family:'Fraunces',serif;font-size:33px;font-weight:700;line-height:1.05;margin-top:7px}
+  .budget-hero .bh-eur{font-size:12.5px;color:#f5d5df;margin-top:3px}
+  .budget-hero .bh-pp{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);font-size:13px;color:#fdeef3;display:flex;align-items:baseline;gap:7px}
+  .budget-hero .bh-pp b{font-family:'Fraunces',serif;font-size:17px}
+  .budget-hero .bh-pp .sec{color:#bfe3ec;margin-left:auto;font-size:12px}
+
+  .next li{list-style:none}
+  .next ul{margin:0;padding:0}
+  .next li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .next li:last-child{border-bottom:0}
+  .next .tag{flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--rose);padding:3px 8px;border-radius:7px;margin-top:1px}
+
+  /* ---------- Itinerary ---------- */
+  .day{margin-bottom:14px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--card)}
+  .day.istoday{border:1px solid rgba(47,158,110,.55);box-shadow:0 0 0 2px rgba(47,158,110,.18),var(--shadow)}
+  .day-head{display:flex;align-items:center;gap:12px;padding:13px 15px;cursor:pointer;background:linear-gradient(100deg,rgba(31,143,160,.06),transparent)}
+  .day-head .date{flex:0 0 auto;text-align:center;background:var(--sea);color:#fff;border-radius:12px;padding:6px 9px;min-width:46px}
+  .day.istoday .day-head .date{background:var(--orbital);color:#ffffff}
+  .day-head .date .d{font-family:'Fraunces',serif;font-size:18px;font-weight:700;line-height:1}
+  .day-head .date .mo{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:#bfe3ec}
+  .day.istoday .day-head .date .mo{color:#ffffff}
+  .day-head .ti{flex:1;min-width:0}
+  .day-head .ti b{font-size:15px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .day-head .ti span{font-size:11.5px;color:var(--muted);display:block;margin-top:2px}
+  .day-head .hicon{display:inline-flex;align-items:center;gap:4px;color:var(--aegean)}
+  .day-head .chev{transition:.25s;color:var(--aegean);flex:0 0 auto}
+  .day.open .chev{transform:rotate(180deg)}
+  .day-body{display:none;padding:4px 15px 14px}
+  .day.open .day-body{display:block}
+  .slot{display:flex;gap:11px;padding:9px 0;border-top:1px solid var(--line)}
+  .slot .ic{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(31,143,160,.1);color:var(--aegean)}
+  .slot .tx{flex:1;font-size:13.5px}
+  .slot .tx b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:block;font-weight:700}
+  .slot .tx b.mealk{color:var(--gold)}
+  .daynote{margin-top:11px;font-size:12.5px;color:var(--sea2);background:rgba(31,143,160,.07);border-left:3px solid var(--aegean);padding:9px 11px;border-radius:0 10px 10px 0}
+  .badge-city{font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;padding:2px 8px;border-radius:7px}
+  .hotelrow{display:flex;align-items:center;gap:10px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:13px}
+  .hotelrow .hi{color:var(--aegean)}
+  .hotelrow .ha{margin-left:auto}
+
+  /* ---------- Flight / hotel cards ---------- */
+  .fcard{position:relative}
+  .froute{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .froute .ap{font-family:'Fraunces',serif;font-size:21px;font-weight:700}
+  .froute .arr{flex:1;height:1px;background:linear-gradient(90deg,var(--line),var(--aegean),var(--line));position:relative}
+  .froute .arr::after{content:"✈";position:absolute;right:-2px;top:-10px;color:var(--aegean);font-size:14px}
+  .froute .arr .plus{position:absolute;left:50%;top:-9px;transform:translateX(-50%);font-size:10px;color:var(--muted);background:var(--card);padding:0 5px}
+  .ftimes{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px}
+  .ftimes b{color:var(--ink);font-size:13px}
+  .fmeta{display:flex;flex-wrap:wrap;gap:7px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
+  .fmeta b{color:var(--ink)}
+  .hotel .hh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .hotel .hh h3{margin:0;font-size:17px}
+  .hotel .stay{font-size:12px;color:var(--muted);margin-top:3px}
+  .hotel .feat{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .feat .t{font-size:11.5px;background:rgba(94,31,61,.05);border:1px solid var(--line);padding:4px 9px;border-radius:8px;color:var(--sea2)}
+  .booklink{display:inline-flex;align-items:center;gap:6px;margin-top:11px;margin-right:8px;font-size:13px;font-weight:600;background:rgba(31,143,160,.1);padding:8px 13px;border-radius:10px}
+
+  /* ---------- Money ---------- */
+  .balcard{display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:14px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:10px}
+  .balcard i{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-family:'Fraunces',serif;font-size:16px;color:#3d1026;flex:0 0 auto}
+  .balcard .nm{flex:1}
+  .balcard .nm b{font-size:15px}
+  .balcard .nm span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px;max-width:32ch}
+  .balcard .amt{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:16px;white-space:nowrap}
+  .amt.owe{color:var(--bad)} .amt.get{color:var(--good)}
+  .transfer{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .transfer:last-child{border-bottom:0}
+  .transfer .ar{color:var(--aegean);font-weight:700}
+  .transfer .tamt{margin-left:auto;font-weight:700;font-family:'Fraunces',serif;color:var(--sea)}
+  .bud{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .bud:last-child{border-bottom:0}
+  .bud .bic{width:30px;height:30px;border-radius:9px;background:rgba(31,143,160,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
+  .bud .bn{flex:1;font-size:13.5px}
+  .bud .bn span{display:block;font-size:11px;color:var(--muted)}
+  .bud .bv{font-weight:700;font-family:'Fraunces',serif;font-size:14.5px;white-space:nowrap}
+  .total-bar{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(120deg,#5e1f3d,#b5365f);color:#fff;border-radius:14px;padding:14px 17px;margin-top:6px}
+  .total-bar .tt{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f5d5df}
+  .total-bar .tv{font-family:'Fraunces',serif;font-size:24px;font-weight:700}
+  .total-bar small{display:block;font-size:11px;color:#bfe3ec;text-transform:none;letter-spacing:0}
+  .payitem{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .payitem:last-child{border-bottom:0}
+  .payitem .pc{flex:1}
+  .payitem .pc b{font-size:13.5px}
+  .payitem .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .payitem .pv{text-align:right;white-space:nowrap}
+  .payitem .pv b{font-family:'Fraunces',serif;font-size:14px}
+  .paysum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:12px}
+  .paysum .bar{height:10px;border-radius:999px;background:rgba(200,68,58,.16);overflow:hidden;margin-bottom:10px}
+  .paysum .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--good),#2fb6c4);transition:width .4s}
+  .paysum .legend{display:flex;justify-content:space-between;font-size:12.5px}
+  .paysum .legend .k{color:var(--muted)}
+  .paysum .legend b{font-family:'Fraunces',serif;font-size:15px;display:block;margin-top:1px}
+  .paysum .legend .paid b{color:var(--good)} .paysum .legend .pend b{color:var(--bad)}
+  .paychk{display:flex;gap:11px;align-items:flex-start;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+  .paychk:last-child{border-bottom:0}
+  .paychk .box{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;transition:.15s;margin-top:1px;background:#fff}
+  .paychk.done .box{background:var(--good);border-color:var(--good)}
+  .paychk .box svg{opacity:0;transition:.15s}
+  .paychk.done .box svg{opacity:1}
+  .paychk .pc{flex:1;min-width:0}
+  .paychk .pc b{font-size:13.5px}
+  .paychk .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .paychk .pv{text-align:right;white-space:nowrap;font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--bad)}
+  .paychk.done .pv{color:var(--good)}
+  /* quién debe a quién (simplificado) */
+  .callout{display:flex;gap:11px;align-items:flex-start;background:rgba(47,158,110,.1);border:1px solid rgba(47,158,110,.32);border-radius:14px;padding:13px 15px;margin-bottom:12px;font-size:13.5px;color:var(--sea)}
+  .callout .ci{color:#217a53;flex:0 0 auto;margin-top:1px}
+  .settle{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;box-shadow:var(--shadow);margin-bottom:10px}
+  .settle .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-family:'Fraunces';font-size:14px;color:#3d1026;flex:0 0 auto}
+  .settle .ar{color:var(--muted);flex:0 0 auto;display:grid;place-items:center}
+  .settle .slbl{flex:1;min-width:0;font-size:13.5px;margin-left:3px}
+  .settle .samt{font-family:'Fraunces';font-weight:700;font-size:18px;color:var(--sea);white-space:nowrap}
+  .detail{margin-top:4px}
+  .detail-h{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--aegean);font-weight:600;font-size:13px;padding:6px 2px}
+  .detail-h .chev{transition:.25s}
+  .detail.open .detail-h .chev{transform:rotate(180deg)}
+  .detail-b{display:none;margin-top:8px}
+  .detail.open .detail-b{display:block}
+
+  /* ---------- Food ---------- */
+  .meal{margin-bottom:12px}
+  .meal .mh{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .meal .mh .md{font-family:'Fraunces',serif;font-weight:700;font-size:15px;color:var(--sea)}
+  .meal .mh .mc{font-size:11px;color:var(--muted)}
+  .meal .row{display:flex;gap:10px;padding:7px 0;font-size:13px;border-top:1px solid var(--line)}
+  .meal .row .lab{flex:0 0 58px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--aegean);padding-top:2px}
+  .dish{padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .dish:last-child{border-bottom:0}
+  .dish b{display:block;font-size:13.5px}
+  .dish span{display:block;font-size:12.5px;color:var(--muted)}
+  .dish .wheretoeat{display:inline-flex}
+  .wheretoeat{display:inline-flex;align-items:flex-start;gap:5px;margin-top:7px;font-size:12px;font-weight:600;color:var(--aegean);line-height:1.35;background:rgba(31,143,160,.08);padding:6px 10px;border-radius:9px}
+  .wheretoeat svg{flex:0 0 auto;margin-top:1px}
+
+  /* ---------- Lists (check) ---------- */
+  .progress{height:8px;border-radius:999px;background:rgba(94,31,61,.1);overflow:hidden;margin:6px 0 14px}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--turq),var(--good));transition:.4s}
+  .chk{display:flex;gap:11px;align-items:flex-start;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+  .chk:last-child{border-bottom:0}
+  .chk .box{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;transition:.15s;margin-top:1px;background:#fff}
+  .chk.done .box{background:var(--good);border-color:var(--good)}
+  .chk .box svg{opacity:0;transition:.15s}
+  .chk.done .box svg{opacity:1}
+  .chk .ct{flex:1;font-size:14px}
+  .chk .ct span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .chk.done .ct b{text-decoration:line-through;color:var(--muted)}
+  .chk .cat{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--aegean);background:rgba(31,143,160,.1);padding:2px 7px;border-radius:6px;flex:0 0 auto;margin-top:2px}
+  .reset{display:block;margin:14px auto 0;background:none;border:1px solid var(--line);color:var(--muted);font-family:inherit;font-size:12px;padding:7px 16px;border-radius:999px;cursor:pointer}
+
+  /* ---------- Info ---------- */
+  .note{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .note:last-child{border-bottom:0}
+  .note .ni{flex:0 0 auto;color:var(--aegean);margin-top:1px}
+  .contact{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .contact:last-child{border-bottom:0}
+  .contact .ci{width:38px;height:38px;border-radius:11px;background:rgba(31,143,160,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
+  .contact .cd{flex:1;min-width:0}
+  .contact .cd b{font-size:13.5px}
+  .contact .cd span{display:block;font-size:11.5px;color:var(--muted)}
+  .contact .cact{display:flex;gap:8px}
+  .contact .cact a{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--sea);color:#fff}
+  .ferry{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .ferry:last-child{border-bottom:0}
+  .ferry b{flex:1}
+  .ferry .fp{font-weight:700;font-family:'Fraunces',serif;color:var(--sea)}
+  .ferry .ft{font-size:11.5px;color:var(--muted)}
+  .act{padding:10px 0;border-bottom:1px solid var(--line)}
+  .act:last-child{border-bottom:0}
+  .act b{font-size:14px}
+  .act p{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
+  .climate{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .climate:last-child{border-bottom:0}
+  .climate .cdot{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:#fff;flex:0 0 auto}
+  .climate .cc{flex:1}
+  .climate .cc b{font-size:13.5px}
+  .climate .cc span{display:block;font-size:11.5px;color:var(--muted)}
+  .climate .ct{font-family:'Fraunces';font-weight:700;color:var(--sea);white-space:nowrap}
+  /* ruta del día (Plan) */
+  .dayroute{margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+  .dayroute .drh{display:flex;align-items:center;gap:7px;font-size:13px;margin-bottom:9px}
+  .dayroute .drh .hi{color:var(--aegean);display:grid;place-items:center}
+  .dayroute .drh .route{margin-left:auto;margin-top:0}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .mapchip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--sea2);background:rgba(94,31,61,.05);border:1px solid var(--line);padding:6px 10px;border-radius:9px}
+  .mapchip svg{color:var(--aegean);flex:0 0 auto}
+  /* lugares de interés extra (Info) */
+  .extra{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .extra:last-child{border-bottom:0}
+  .extra .xi{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(232,163,61,.14);color:var(--gold);display:grid;place-items:center;margin-top:1px}
+  .extra .xc{flex:1;min-width:0}
+  .extra .xc b{font-size:14px}
+  .extra .xc p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .extra .xc .mapbtn{margin-top:8px}
+
+  /* ---------- Más hub ---------- */
+  .mtile{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow);margin-bottom:10px;cursor:pointer;font-family:inherit}
+  .mtile .mi{width:42px;height:42px;border-radius:12px;background:rgba(31,143,160,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
+  .mtile .mt{flex:1}
+  .mtile .mt b{font-size:15px;color:var(--ink)}
+  .mtile .mt span{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+  .mtile .arr{margin-left:auto;color:var(--muted)}
+
+  /* ---------- Conversor ---------- */
+  .conv{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);margin-bottom:12px}
+  .conv .seg{display:flex;gap:6px;margin-bottom:13px}
+  .conv .seg button{flex:1;border:1px solid var(--line);background:#fff;font-family:inherit;font-weight:700;font-size:14px;color:var(--muted);padding:9px;border-radius:11px;cursor:pointer}
+  .conv .seg button.on{background:var(--sea);color:#fff;border-color:var(--sea)}
+  .conv .amt-in{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-family:'Fraunces';font-size:26px;font-weight:700;color:var(--sea);text-align:right;outline:none}
+  .conv .out{margin-top:12px}
+  .conv .orow{display:flex;justify-content:space-between;align-items:baseline;padding:11px 2px;border-bottom:1px solid var(--line)}
+  .conv .orow:last-child{border-bottom:0}
+  .conv .orow .ol{font-size:13px;color:var(--muted);font-weight:600}
+  .conv .orow .ov{font-family:'Fraunces';font-weight:700;font-size:20px;color:var(--ink)}
+  .rates{font-size:12px;color:var(--muted)}
+  .rates label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .rates label:last-child{border-bottom:0}
+  .rates input{width:110px;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-family:'Inter';font-size:14px;text-align:right;outline:none;color:var(--ink)}
+
+  /* ---------- Frases ---------- */
+  .phrase{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .phrase:last-child{border-bottom:0}
+  .phrase .pes{flex:0 0 38%;font-size:13px;color:var(--muted)}
+  .phrase .pt{flex:1}
+  .phrase .pt b{font-size:14.5px}
+  .phrase .pt span{display:block;font-size:11.5px;color:var(--aegean);margin-top:1px;font-style:italic}
+
+  /* ---------- Photos / skeleton ---------- */
+  img.ph{opacity:0;transition:opacity .4s ease}
+  img.ph.loaded{opacity:1}
+  .thumb,.rcard .cover{background:linear-gradient(100deg,rgba(94,31,61,.05),rgba(94,31,61,.11),rgba(94,31,61,.05));background-size:200% 100%;animation:shimmer 1.4s infinite linear}
+  @keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+  @media (prefers-reduced-motion:reduce){.thumb,.rcard .cover{animation:none}}
+  .rcard{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px;background:var(--card)}
+  .rcard .cover{position:relative;height:130px;overflow:hidden}
+  .rcard .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .rcard .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,26,32,.05) 30%,rgba(43,26,32,.78))}
+  .rcard .ov{position:absolute;left:14px;bottom:10px;right:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;z-index:2}
+  .rcard .ov .nm{color:#fff}
+  .rcard .ov .nm .num{font-family:'Fraunces',serif;font-size:12px;font-weight:700;opacity:.85;letter-spacing:.04em}
+  .rcard .ov .nm b{font-family:'Fraunces',serif;font-size:22px;font-weight:600;display:block;line-height:1.05;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  .rcard .ov .when{color:#fff;text-align:right;font-size:11px;font-weight:600;background:rgba(0,0,0,.28);padding:4px 9px;border-radius:8px;backdrop-filter:blur(3px);white-space:nowrap}
+  .rcard .desc{padding:10px 14px 13px;font-size:12.5px;color:var(--muted)}
+  .thumb{flex:0 0 auto;width:74px;height:74px;border-radius:12px;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .act.hasimg,.dish.hasimg{display:flex;gap:12px;align-items:flex-start}
+  .act.hasimg .meta,.dish.hasimg .meta{flex:1;min-width:0}
+
+  .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
+  .daynote.sinplan{background:rgba(232,163,61,.1);border-left-color:var(--gold);font-style:italic}
+
+  /* --- fix heredado: la insignia de ciudad se volvia invisible dentro de .ti --- */
+  .day-head .ti .badge-city{color:#fff}
+
+  /* --- reparto de lo pendiente --- */
+  .putrow{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:14px;background:var(--card);
+    border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:10px}
+  .putrow .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-style:normal;
+    font-weight:700;font-family:'Fraunces',serif;font-size:15px;color:#fff;flex:0 0 auto}
+  .putrow .pr{flex:1;min-width:0}
+  .putrow .pr b{font-size:15px}
+  .putrow .pr span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+  .putrow .pamt{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:17px;white-space:nowrap;color:var(--sea)}
+  .putrow .pk{font-size:10px;font-weight:600;color:var(--muted);font-family:'Inter',sans-serif}
+  .callout.warn{border-color:rgba(217,144,44,.45);background:rgba(217,144,44,.08)}
+  .callout.warn .ci{background:rgba(217,144,44,.16);color:var(--warn)}
+
+  /* --- gastos sobre la marcha --- */
+  .expform input[type=text],.expform input[type=number]{width:100%;font-family:inherit;font-size:15px;
+    padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--paper);color:var(--ink)}
+  .expform .exrow{display:flex;gap:8px;margin-top:9px;align-items:stretch}
+  .expform .exrow input{flex:1}
+  .expform .exlbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin:14px 0 6px}
+  .expform .seg{display:flex;gap:6px}
+  .expform .seg button{flex:1;font-family:inherit;font-size:13px;font-weight:600;padding:9px 6px;border-radius:10px;
+    border:1px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer;transition:.15s}
+  .expform .seg button.on{background:var(--aegean);border-color:var(--aegean);color:#fff}
+  .expform .seg.small{flex:0 0 auto;width:132px}
+  .expform .exadd{width:100%;margin-top:15px;font-family:inherit;font-size:14.5px;font-weight:700;padding:13px;
+    border:0;border-radius:12px;background:var(--sea);color:#fff;cursor:pointer}
+  .exitem{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .exitem:last-child{border-bottom:0}
+  .exitem .pc{flex:1;min-width:0}
+  .exitem .pc b{font-size:14px;display:block}
+  .exitem .pc span{font-size:11.5px;color:var(--muted)}
+  .exitem .pv{font-family:'Fraunces',serif;font-weight:700;font-size:15px;white-space:nowrap;text-align:right}
+  .exitem .pv .sub2{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;color:var(--muted)}
+  .exitem .exdel{border:0;background:none;color:var(--muted);font-size:22px;line-height:1;padding:0 2px;cursor:pointer}
+  .exacts{display:flex;gap:8px;margin-bottom:12px}
+  .exacts .exbtn{flex:1;font-family:inherit;font-size:12.5px;font-weight:600;padding:10px 6px;border-radius:11px;
+    border:1px solid var(--line);background:var(--card);color:var(--aegean);cursor:pointer}
+
+  /* --- quien puso cada pago --- */
+  .whosel{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+  .whosel button{font-family:inherit;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;
+    border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+  .whosel button.on{background:var(--aegean);border-color:var(--aegean);color:#fff}
+  .bud .bv .breal{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:var(--good)}
+
+  /* --- boda --- */
+  .bodaday{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .bodaday:last-child{border-bottom:0}
+  .bodaday.isboda{background:rgba(232,163,61,.1);border-radius:11px;padding:11px 12px;border-bottom:0}
+  .bodaday .date{width:40px;text-align:center;flex:0 0 auto}
+  .bodaday .date .d{font-family:'Fraunces',serif;font-size:19px;font-weight:700;line-height:1}
+  .bodaday .date .mo{font-size:9.5px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
+  .bodaday .ti b{font-size:14px}
+  .bodaday .ti span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+  .footer{text-align:center;font-size:11px;color:var(--muted);margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <div class="brand">
+      <div class="eyebrow">México · Octubre 2026</div>
+      <h1>CDMX · Oaxaca · Pto Escondido · Durango</h1>
+    </div>
+    <div class="count">
+      <div class="lbl" id="cdPre">faltan</div>
+      <div class="num" id="cdNum">–</div>
+      <div class="lbl" id="cdLbl">días</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="view on" id="v-hoy"></section>
+  <section class="view" id="v-plan"></section>
+  <section class="view" id="v-dinero"></section>
+  <section class="view" id="v-comida"></section>
+  <section class="view" id="v-mas"></section>
+  <section class="view" id="v-logistica"></section>
+  <section class="view" id="v-listas"></section>
+  <section class="view" id="v-info"></section>
+  <section class="view" id="v-conversor"></section>
+  <section class="view" id="v-boda"></section>
+  <div class="footer">App de viaje · hecha desde la hoja de planificación · funciona sin conexión</div>
+</main>
+
+<div class="offline-bar" id="offlineBar">Sin conexión · usando los datos guardados</div>
+<nav class="bnav" id="bnav"></nav>
+
+<script>
+/* ============== ICONS ============== */
+const I = {
+  plane:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5S18 4 16.5 5.5L13 9 4.8 7.2c-.3-.1-.7 0-.9.3l-.5.5c-.3.3-.2.7.2.9L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 2.1 5.4c.2.4.6.5.9.2l.5-.5c.3-.2.4-.6.3-.9z"/></svg>',
+  bed:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>',
+  map:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>',
+  euro:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7a6 6 0 1 0 0 10M5 9h7M5 13h6"/></svg>',
+  food:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2M5 2v9M5 11v11M18 2c-1.7 0-3 2-3 5s1.3 5 3 5v9"/></svg>',
+  check:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+  info:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  sun:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  moon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+  noon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M5 12H2M22 12h-3M5 19l-1 1M19 19l1 1M5.6 5.6 4.5 4.5M18.4 5.6l1.1-1.1"/><circle cx="12" cy="13" r="4"/></svg>',
+  bus:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 10h18M7 17v3M17 17v3"/><circle cx="7.5" cy="14" r=".5"/><circle cx="16.5" cy="14" r=".5"/></svg>',
+  chev:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+  chevR:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+  back:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>',
+  phone:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
+  globe:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>',
+  ship:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16s1.5-1 3-1 3 1 5 1 3.5-1 5-1 3 1 3 1M4 14V7l8-3 8 3v7M12 4v10"/></svg>',
+  star:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>',
+  pin:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  clock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>',
+  balloon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3.6 3.1 6.2 5 7h4c1.9-.8 5-3.4 5-7a7 7 0 0 0-7-7z"/><path d="M9.5 16h5l-.6 3h-3.8z"/><path d="M10.5 19h3"/></svg>',
+  coins:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="6" rx="6" ry="3"/><path d="M3 6v6c0 1.7 2.7 3 6 3s6-1.3 6-3V6"/><path d="M15 12c2.8.3 6 1.4 6 3v0c0 1.7-2.7 3-6 3-1.3 0-2.5-.2-3.5-.6"/></svg>',
+  chat:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg>',
+  wind:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.7 7.5A2.5 2.5 0 1 1 19.5 12H2"/></svg>',
+  spark:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>',
+};
+
+/* ============== DATA ============== */
+const TRIP = { start:'2026-10-03', end:'2026-10-23', pax:'Javiera · Juan' };
+
+const CITY = {
+  MEX:{n:'Ciudad de México', c:'#8e2750'},
+  OAX:{n:'Oaxaca', c:'#c4633a'},
+  PXM:{n:'Puerto Escondido', c:'#1f8fa0'},
+  DGO:{n:'Durango', c:'#b08324'},
+  BCN:{n:'Barcelona', c:'#7a6068'},
+};
+
+const STATS = [ {v:'20', k:'noches'}, {v:'4', k:'destinos'}, {v:'6', k:'vuelos'} ];
+/*SYNC:TOTALS*/
+const TOTALS = {
+  eur_total:'5.780,00 €', mxn_total:'116.175 MXN',
+  eur_pp:'2.890,00 €', mxn_pp:'58.087 MXN',
+  rate:'1 € ≈ 20,10 MXN', rate_val:20.1,
+  pagado:'3.263,03 €', pagado_val:3263.03,
+  sin_asignar:'446,00 €', sin_asignar_val:446.0,
+};
+/*END:TOTALS*/
+
+const ROUTE = [
+  {city:'MEX', name:'Ciudad de México', days:'3–5 oct', nights:'2 noches', img:'mex_hero', desc:'Llegada el 3 con el vuelo de Emirates. Dos noches en la Condesa para aterrizar, con la altitud tomándoselo con calma.'},
+  {city:'OAX', name:'Oaxaca', days:'5–10 oct', nights:'5 noches', img:'oax_hero', desc:'Centro histórico, Monte Albán, Hierve el Agua, mercados y mezcal. La parada más larga del viaje.'},
+  {city:'PXM', name:'Puerto Escondido', days:'10–14 oct', nights:'4 noches', img:'pxm_hero', desc:'Playa y desconexión antes de la boda: Carrizalillo, Zicatela y bioluminiscencia de noche.'},
+  {city:'DGO', name:'Durango', days:'14–18 oct', nights:'4 noches', img:'dgo_hero', desc:'El motivo del viaje: la boda del sábado 17. Una noche en el Maria Elena y tres en el Hampton Inn.'},
+  {city:'MEX', name:'Ciudad de México', days:'18–23 oct', nights:'5 noches', img:'mex_hero2', desc:'Vuelta a la capital para cerrar: Frida Kahlo, Teotihuacán, museos y lo que quedó pendiente.'},
+];
+
+const NEXT = [
+  {tag:'3 oct', t:'Llegada a CDMX con Emirates EK255. Falta confirmar horarios y a qué terminal llega, para cerrar el traslado al alojamiento.'},
+  {tag:'5 oct', t:'Vuelo CDMX→Oaxaca a las 15:00. Check-out del Condesa Suites por la mañana.'},
+  {tag:'10 oct', t:'Oaxaca→Puerto Escondido. En la hoja figura como Aerotucán con nota "bus": confirmar cuál de los dos es antes de viajar.'},
+  {tag:'14 oct', t:'Puerto Escondido→Durango saliendo a las 13:00, con escala (no hay vuelo directo). Es el día que hay que llegar sí o sí.'},
+  {tag:'15 oct', t:'Cambio de hotel en Durango: del Maria Elena al Hampton Inn. Empieza la ventana de la boda.'},
+  {tag:'17 oct', t:'BODA. Sábado, el evento principal del viaje.'},
+  {tag:'18 oct', t:'Durango→CDMX a las 15:00, y check-in en Uniko Living hasta el final.'},
+  {tag:'20 oct', t:'Museo Frida Kahlo a las 11:30: la entrada se reserva online con antelación y se agota.'},
+  {tag:'23 oct', t:'Vuelo de vuelta EK256. Llega a Barcelona el 24 por el cambio horario.'},
+];
+
+/*SYNC:FLIGHTS*/
+const FLIGHTS = [
+  {n:1,date:'03/10',from:'BCN',to:'MEX',cityFrom:'Barcelona',cityTo:'Ciudad de México',airline:'Emirates EK255',dep:'por confirmar',arr:'por confirmar',loc:'MyTrip 1127-541-022',terminal:'T1 BCN',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Vuelo directo BCN-MEX. Clase Turista. Confirmar horarios y franquicia.'},
+  {n:2,date:'23/10',from:'MEX',to:'BCN',cityFrom:'Ciudad de México',cityTo:'Barcelona',airline:'Emirates EK256',dep:'por confirmar',arr:'por confirmar',loc:'MyTrip 1127-541-022',terminal:'-',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Llega a BCN el 24/10 por husos horarios. Confirmar.'},
+  {n:3,date:'05/10',from:'MEX',to:'OAX',cityFrom:'Ciudad de México',cityTo:'Oaxaca',airline:'Aeroméxico/Volaris/VivaAerobus',dep:'15:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'48,00 €',status:'Pagado',stop:false,note:'Vuelo directo ~1h. Alternativa: bus ADO ~6-7h.'},
+  {n:4,date:'10/10',from:'OAX',to:'PXM',cityFrom:'Oaxaca',cityTo:'Puerto Escondido',airline:'Aerotucán (regional)',dep:'por confirmar',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'bus'},
+  {n:5,date:'14/10',from:'PXM',to:'DGO',cityFrom:'Puerto Escondido',cityTo:'Durango',airline:'vía CDMX o Guadalajara',dep:'13:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'121,00 €',status:'Pagado',stop:false,note:'Sin vuelo directo. Conexión necesaria. Para llegar a la boda (15 oct).'},
+  {n:6,date:'18/10',from:'DGO',to:'MEX',cityFrom:'Durango',cityTo:'Ciudad de México',airline:'Aeroméxico/Volaris/VivaAerobus',dep:'15:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'199,94 €',status:'Pagado',stop:false,note:'Vuelo directo ~1h50. 2 vuelos/día. Volver para el EK256 del 23.'}
+];
+/*END:FLIGHTS*/
+
+/*SYNC:HOTELS*/
+const HOTELS = [
+  {city:'MEX',name:'Condesa Suites',type:'Studio',inn:'03/10',out:'',nights:2,ppn:'51,38 €',total:'102,75 €',status:'Pagado',addr:'Ciudad de México (inicio)',note:'Llegada 03/10'},
+  {city:'OAX',name:'Hotel Posada San Rafael',type:'Hotel',inn:'05/10',out:'10/10',nights:5,ppn:'29,40 €',total:'147,00 €',status:'Pendiente',addr:'Oaxaca',note:''},
+  {city:'PXM',name:'Carri Surf Studio',type:'Hotel',inn:'10/10',out:'14/10',nights:4,ppn:'43,45 €',total:'173,80 €',status:'Pagado',addr:'Puerto Escondido',note:'Playa, fin temporada lluvias'},
+  {city:'DGO',name:'Hotel Maria Elena',type:'Hotel',inn:'14/10',out:'15/10',nights:1,ppn:'26,65 €',total:'26,65 €',status:'Pendiente',addr:'Durango (boda)',note:''},
+  {city:'DGO',name:'Hampton Inn',type:'Hotel',inn:'15/10',out:'18/10',nights:3,ppn:'90,39 €',total:'271,16 €',status:'Pendiente',addr:'Durango (boda)',note:'Confirmar si hay hotel/bloqueo del evento'},
+  {city:'MEX',name:'Uniko Living',type:'Hotel',inn:'18/10',out:'23/10',nights:5,ppn:'45,30 €',total:'226,48 €',status:'Pagado',addr:'Ciudad de México (final)',note:'Antes del vuelo del 23/10'}
+];
+/*END:HOTELS*/
+
+/*SYNC:TRANSFERS*/
+const TRANSFERS_LOG = [
+  {t:'Traslado aeropuerto CDMX',op:'Taxi autorizado / Uber-Didi',when:'durante el viaje',status:'Pendiente',note:'30-60 min. Confirmar a qué terminal llega Emirates.'},
+  {t:'Transporte local CDMX',op:'Metro / Uber-Didi',when:'durante el viaje',status:'Pendiente',note:'Metro barato; Uber/Didi cómodos. Llevar efectivo (MXN).'},
+  {t:'Transporte local Puerto Escondido',op:'Colectivos / taxi',when:'durante el viaje',status:'Pendiente',note:'Colectivos baratos; taxis sin taxímetro (acordar precio).'},
+  {t:'Coche de alquiler (opcional)',op:'Coche',when:'durante el viaje',status:'Pendiente',note:'Valorar para excursiones. Carné de conducir internacional recomendado.'}
+];
+/*END:TRANSFERS*/
+
+/*SYNC:ITIN*/
+const ITIN = [
+  {date:'03/10',dow:'Sábado',city:'MEX',tag:'LLEGADA',hotel:'Condesa Suites',m:'',a:'',e:'Llegada vuelo Emirates EK255',tr:'Vuelo internacional Barcelona-CDMX',note:'Aterriza en CDMX. Organizar traslado aeropuerto a alojamiento.'},
+  {date:'04/10',dow:'Domingo',city:'MEX',tag:'',hotel:'Condesa Suites',m:'',a:'',e:'',tr:'',note:''},
+  {date:'05/10',dow:'Lunes',city:'OAX',tag:'LLEGADA',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'CDMX a Oaxaca (avión, 15:00)',note:''},
+  {date:'06/10',dow:'Martes',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
+  {date:'07/10',dow:'Miércoles',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
+  {date:'08/10',dow:'Jueves',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
+  {date:'09/10',dow:'Viernes',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
+  {date:'10/10',dow:'Sábado',city:'PXM',tag:'LLEGADA',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'Oaxaca a Puerto Escondido (avión)',note:''},
+  {date:'11/10',dow:'Domingo',city:'PXM',tag:'',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'',note:''},
+  {date:'12/10',dow:'Lunes',city:'PXM',tag:'',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'',note:''},
+  {date:'13/10',dow:'Martes',city:'PXM',tag:'',hotel:'Carri Surf Studio',m:'',a:'',e:'',tr:'',note:''},
+  {date:'14/10',dow:'Miércoles',city:'DGO',tag:'LLEGADA',hotel:'Hotel Maria Elena',m:'',a:'',e:'',tr:'Puerto Escondido a Durango (avión, escala 13:00)',note:''},
+  {date:'15/10',dow:'Jueves',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'Cambio de hotel (a Hampton Inn)',note:'Inicio ventana boda (15-18 oct).'},
+  {date:'16/10',dow:'Viernes',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'',note:''},
+  {date:'17/10',dow:'Sábado',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'BODA',tr:'',note:'Evento principal del viaje (sábado).'},
+  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'',tr:'Durango a CDMX (avión, 15:00)',note:'Fin ventana boda.'},
+  {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
+  {date:'20/10',dow:'Martes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Frida Kahlo 11:30',a:'',e:'',tr:'',note:''},
+  {date:'21/10',dow:'Miércoles',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
+  {date:'22/10',dow:'Jueves',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
+  {date:'23/10',dow:'Viernes',city:'MEX',tag:'REGRESO',hotel:'Uniko Living (check-out)',m:'',a:'',e:'Vuelo Emirates EK256',tr:'Vuelo internacional CDMX-Barcelona',note:'Llega a Barcelona el 24/10 por husos horarios. Confirmar horarios.'}
+];
+/*END:ITIN*/
+
+/* Puntos sugeridos por día (curado a mano desde la pestaña Recomendaciones).
+   Los días de puro vuelo o llegada no llevan ruta a propósito. */
+const DAY_PLACES = {
+  '04/10':{mode:'walking',pts:[
+    {n:'Zócalo',q:'Zocalo, Ciudad de Mexico'},
+    {n:'Catedral Metropolitana',q:'Catedral Metropolitana, Ciudad de Mexico'},
+    {n:'Templo Mayor',q:'Templo Mayor, Ciudad de Mexico'},
+    {n:'Palacio de Bellas Artes',q:'Palacio de Bellas Artes, Ciudad de Mexico'},
+  ]},
+  '06/10':{mode:'walking',pts:[
+    {n:'Templo de Santo Domingo',q:'Templo de Santo Domingo de Guzman, Oaxaca'},
+    {n:'Zócalo de Oaxaca',q:'Zocalo, Oaxaca de Juarez'},
+    {n:'Mercado Benito Juárez',q:'Mercado Benito Juarez, Oaxaca'},
+    {n:'Mercado 20 de Noviembre',q:'Mercado 20 de Noviembre, Oaxaca'},
+  ]},
+  '07/10':{mode:'driving',pts:[
+    {n:'Monte Albán',q:'Monte Alban, Oaxaca'},
+    {n:'Centro histórico',q:'Centro Historico, Oaxaca de Juarez'},
+  ]},
+  '08/10':{mode:'driving',pts:[
+    {n:'Hierve el Agua',q:'Hierve el Agua, Oaxaca'},
+    {n:'Teotitlán del Valle',q:'Teotitlan del Valle, Oaxaca'},
+    {n:'Árbol del Tule',q:'Arbol del Tule, Santa Maria del Tule'},
+  ]},
+  '09/10':{mode:'walking',pts:[
+    {n:'Andador turístico',q:'Andador Turistico Macedonio Alcala, Oaxaca'},
+    {n:'Catas de mezcal',q:'mezcalerias centro Oaxaca'},
+  ]},
+  '11/10':{mode:'driving',pts:[
+    {n:'Playa Carrizalillo',q:'Playa Carrizalillo, Puerto Escondido'},
+    {n:'Playa Zicatela',q:'Playa Zicatela, Puerto Escondido'},
+    {n:'Playa Manzanillo',q:'Playa Manzanillo, Puerto Escondido'},
+  ]},
+  '12/10':{mode:'driving',pts:[
+    {n:'Laguna de Manialtepec',q:'Laguna de Manialtepec, Oaxaca'},
+    {n:'Playa Bacocho',q:'Playa Bacocho, Puerto Escondido'},
+  ]},
+  '13/10':{mode:'driving',pts:[
+    {n:'Lagunas de Chacahua',q:'Lagunas de Chacahua, Oaxaca'},
+    {n:'Zicatela al atardecer',q:'Playa Zicatela, Puerto Escondido'},
+  ]},
+  '16/10':{mode:'walking',pts:[
+    {n:'Plaza de Armas',q:'Plaza de Armas, Durango'},
+    {n:'Catedral de Durango',q:'Catedral Basilica Menor de Durango'},
+    {n:'Paseo Túnel de Minería',q:'Tunel de Mineria, Durango'},
+    {n:'Cerro de los Remedios',q:'Cerro de los Remedios, Durango'},
+  ]},
+  '19/10':{mode:'driving',pts:[
+    {n:'Teotihuacán',q:'Teotihuacan, Estado de Mexico'},
+  ]},
+  '20/10':{mode:'walking',pts:[
+    {n:'Museo Frida Kahlo',q:'Museo Frida Kahlo, Coyoacan'},
+    {n:'Coyoacán',q:'Coyoacan, Ciudad de Mexico'},
+    {n:'Mercado de Coyoacán',q:'Mercado de Coyoacan, Ciudad de Mexico'},
+  ]},
+  '21/10':{mode:'walking',pts:[
+    {n:'Museo Nacional de Antropología',q:'Museo Nacional de Antropologia, Ciudad de Mexico'},
+    {n:'Bosque de Chapultepec',q:'Bosque de Chapultepec, Ciudad de Mexico'},
+    {n:'Castillo de Chapultepec',q:'Castillo de Chapultepec, Ciudad de Mexico'},
+  ]},
+  '22/10':{mode:'walking',pts:[
+    {n:'Xochimilco',q:'Xochimilco, Ciudad de Mexico'},
+    {n:'Roma y Condesa',q:'Colonia Roma, Ciudad de Mexico'},
+  ]},
+};
+
+/*SYNC:BUDGET*/
+const BUDGET = [
+  {cat:'Vuelos internacionales',v:'2.266,00 €',real:'2.266,00 €',n:'Emirates ida+vuelta (2 pax), YA PAGADO',ic:I.plane},
+  {cat:'Vuelos internos',v:'120,00 €',real:'48,00 €',n:'CDMX-Oaxaca (2 pax)',ic:I.plane},
+  {cat:'Vuelos internos',v:'196,00 €',real:'196,00 €',n:'Puerto Escondido-Durango (2 pax)',ic:I.plane},
+  {cat:'Vuelos internos',v:'200,00 €',real:'200,00 €',n:'Durango-CDMX (2 pax)',ic:I.plane},
+  {cat:'Alojamiento',v:'947,84 €',real:'947,84 €',n:'Total alojamiento (enlazado)',ic:I.bed},
+  {cat:'Comida y bebida',v:'1.200,00 €',real:'—',n:'Aprox. por día x 20 días x 2 pax',ic:I.food},
+  {cat:'Transporte local',v:'200,00 €',real:'—',n:'Taxis, colectivos, metro, Uber/Didi',ic:I.bus},
+  {cat:'Actividades y tours',v:'400,00 €',real:'—',n:'Monte Albán, Teotihuacán, snorkel, mezcal...',ic:I.star},
+  {cat:'Conectividad',v:'50,00 €',real:'50,00 €',n:'eSIM México (2 pax)',ic:I.globe},
+  {cat:'Compras / souvenirs',v:'200,00 €',real:'—',n:'Artesanía, mezcal, regalos',ic:I.euro}
+];
+/*END:BUDGET*/
+/*SYNC:PAYMENTS*/
+const PAYMENTS = [
+  {c:'Vuelos internacionales · Emirates ida+vuelta (2 pax), YA PAGADO',by:'Javiera',amt:'2.266,00 €',val:2266.0,st:'Pagado',n:'2.356.875 CLP, recibo MyTrip 1127-541-022. Pon aquí el importe en EUR de tu cargo.'},
+  {c:'Vuelos internos · CDMX-Oaxaca (2 pax)',by:'Javiera',amt:'48,00 €',val:48.0,st:'Pagado',n:''},
+  {c:'Vuelos internos · Puerto Escondido-Durango (2 pax)',by:'—',amt:'196,00 €',val:196.0,st:'Pagado',n:''},
+  {c:'Vuelos internos · Durango-CDMX (2 pax)',by:'—',amt:'200,00 €',val:200.0,st:'Pagado',n:''},
+  {c:'Comida y bebida · Aprox. por día x 20 días x 2 pax',by:'—',amt:'1.200,00 €',val:1200.0,st:'Pendiente',n:''},
+  {c:'Transporte local · Taxis, colectivos, metro, Uber/Didi',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
+  {c:'Actividades y tours · Monte Albán, Teotihuacán, snorkel, mezcal...',by:'—',amt:'400,00 €',val:400.0,st:'Pendiente',n:''},
+  {c:'Conectividad · eSIM México (2 pax)',by:'—',amt:'50,00 €',val:50.0,st:'Pagado',n:''},
+  {c:'Compras / souvenirs · Artesanía, mezcal, regalos',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
+  {c:'Alojamiento · Condesa Suites (Ciudad de México (inicio))',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
+  {c:'Alojamiento · Hotel Posada San Rafael (Oaxaca)',by:'—',amt:'147,00 €',val:147.0,st:'Pendiente',n:'5 noches · 29,40 €/noche · se paga en recepción'},
+  {c:'Alojamiento · Carri Surf Studio (Puerto Escondido)',by:'Juan',amt:'173,80 €',val:173.8,st:'Pagado',n:'4 noches · 43,45 €/noche'},
+  {c:'Alojamiento · Hotel Maria Elena (Durango (boda))',by:'—',amt:'26,65 €',val:26.65,st:'Pendiente',n:'1 noches · 26,65 €/noche · se paga en recepción'},
+  {c:'Alojamiento · Hampton Inn (Durango (boda))',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'3 noches · 90,39 €/noche · se paga en recepción'},
+  {c:'Alojamiento · Uniko Living (Ciudad de México (final))',by:'Juan',amt:'226,48 €',val:226.48,st:'Pagado',n:'5 noches · 45,30 €/noche'}
+];
+/*END:PAYMENTS*/
+
+const DISHES = {
+  'Ciudad de México': [
+    {n:'Tacos al pastor',img:'d_pastor',d:'El clásico de la capital: trompo, piña y salsa. De noche y en puesto de barrio.',where:'Roma y Condesa',wq:'taqueria al pastor Colonia Roma, Ciudad de Mexico'},
+    {n:'Churros con chocolate',img:'d_churros',d:'Institución del centro, abierta prácticamente a cualquier hora.',where:'El Moro, Centro',wq:'Churreria El Moro, Centro Historico, Ciudad de Mexico'},
+    {n:'Pozole y comida corrida',img:'d_pozole',d:'Fondas y mercados: la manera barata y buena de comer a mediodía.',where:'Mercado de Coyoacán',wq:'Mercado de Coyoacan, Ciudad de Mexico'},
+  ],
+  'Oaxaca': [
+    {n:'Mole',img:'d_mole',d:'Oaxaca es la cuna del mole: negro, coloradito, amarillo. Vale la pena probar más de uno.',where:'Mercado 20 de Noviembre',wq:'Mercado 20 de Noviembre, Oaxaca'},
+    {n:'Tlayudas',img:'d_tlayuda',d:'La tortilla grande con asiento, frijol, quesillo y carne. Mejor de noche y a la brasa.',where:'Puestos del centro',wq:'tlayudas Oaxaca centro'},
+    {n:'Chapulines y quesillo',img:'d_chapulines',d:'Para picar en el mercado, con limón y chile. El quesillo es el queso oaxaqueño de hebra.',where:'Mercado Benito Juárez',wq:'Mercado Benito Juarez, Oaxaca'},
+    {n:'Mezcal',img:'d_mezcal',d:'Catas en el centro y en los pueblos del valle. Se bebe despacio, no de golpe.',where:'Mezcalerías del andador',wq:'mezcaleria Andador Macedonio Alcala, Oaxaca'},
+  ],
+  'Puerto Escondido': [
+    {n:'Pescado y mariscos',img:'d_pescado',d:'Pescado del día, ceviches y tostadas a pie de playa.',where:'Playa Zicatela',wq:'mariscos Playa Zicatela, Puerto Escondido'},
+    {n:'Desayuno de playa',img:'d_desayuno',d:'Fruta, huevos y café en los cafés de Carrizalillo antes de bajar al agua.',where:'Carrizalillo',wq:'cafe Playa Carrizalillo, Puerto Escondido'},
+  ],
+  'Durango': [
+    {n:'Caldillo durangueño',img:'d_caldillo',d:'El plato con nombre propio del estado: carne de res con chile colorado.',where:'Centro de Durango',wq:'caldillo duranguense, Durango centro'},
+    {n:'Gorditas y antojitos',img:'d_gorditas',d:'Rellenas de guisado, en puestos del centro. Barato y de todo el día.',where:'Mercado Gómez Palacio',wq:'gorditas Durango centro'},
+  ],
+};
+
+/*SYNC:TASKS*/
+const TASKS = [
+  {cat:'Documentos',t:'Pasaporte vigente (verificar validez, mejor +6 meses)',n:'',done:true},
+  {cat:'Documentos',t:'Billetes de avión ida y vuelta (digital + impreso)',n:'Recibo MyTrip 1127-541-022.',done:true},
+  {cat:'Documentos',t:'Visa NO necesaria (Chile y España, turismo hasta 180 días)',n:'Llevar billete de salida y reservas por si lo piden.',done:true},
+  {cat:'Documentos',t:'Guardar comprobante FMM al entrar (digital en CDMX)',n:'',done:false},
+  {cat:'Documentos',t:'Copias/fotos de pasaporte y reservas (físico + nube)',n:'',done:false},
+  {cat:'Documentos',t:'Carné de conducir internacional (si se alquila coche)',n:'',done:false},
+  {cat:'Salud',t:'Ninguna vacuna obligatoria; valorar Hep. A/Tifoidea con médico',n:'Consejo general, confirmar con profesional.',done:false},
+  {cat:'Salud',t:'Botiquín, repelente, protector solar',n:'',done:false},
+  {cat:'Salud',t:'Medicación personal con receta',n:'',done:false},
+  {cat:'Dinero',t:'Avisar al banco del viaje / activar uso en extranjero',n:'',done:false},
+  {cat:'Dinero',t:'Tarjeta sin comisiones en extranjero',n:'',done:false},
+  {cat:'Dinero',t:'Llevar algo de efectivo / plan para cambiar a MXN',n:'',done:false},
+  {cat:'Conectividad',t:'Contratar eSIM o roaming para México',n:'',done:false},
+  {cat:'Conectividad',t:'Mapas offline + traductor offline',n:'',done:false},
+  {cat:'Reservas',t:'Alojamiento CDMX / Oaxaca / Pto Escondido / Durango',n:'Ver pestaña Alojamiento.',done:false},
+  {cat:'Reservas',t:'Vuelos internos (4 tramos)',n:'Ver pestaña Vuelos.',done:true},
+  {cat:'Reservas',t:'Tours con reserva previa (Casa Azul, etc.)',n:'',done:false},
+  {cat:'Boda',t:'Confirmar logística y hotel en Durango',n:'',done:false},
+  {cat:'Boda',t:'Atuendo + código de vestimenta',n:'',done:false},
+  {cat:'Boda',t:'Regalo / mesa de regalos',n:'',done:false},
+  {cat:'Equipaje',t:'Adaptador de enchufe (tipo A/B, 127V)',n:'',done:false},
+  {cat:'Equipaje',t:'Revisar franquicia de equipaje Emirates',n:'',done:false},
+  {cat:'Seguro',t:'Contratar seguro de viaje',n:'Recomendado, no obligatorio.',done:false}
+];
+/*END:TASKS*/
+
+/*SYNC:PACK*/
+const PACK = [
+  {cat:'Documentos',t:'Pasaporte',n:'imprescindible'},
+  {cat:'Documentos',t:'Billetes y reservas (impreso/digital)',n:''},
+  {cat:'Documentos',t:'Copias de documentos',n:''},
+  {cat:'Dinero',t:'Tarjetas + algo de efectivo',n:''},
+  {cat:'Electrónica',t:'Móvil + cargador',n:''},
+  {cat:'Electrónica',t:'Adaptador de enchufe (tipo A/B)',n:''},
+  {cat:'Electrónica',t:'Powerbank',n:''},
+  {cat:'Electrónica',t:'Cámara',n:''},
+  {cat:'Ropa',t:'Ropa ligera (calor playa)',n:'Pto Escondido 25-30°C'},
+  {cat:'Ropa',t:'Capa fina / chaqueta (noches Durango)',n:''},
+  {cat:'Ropa',t:'Ropa cómoda para ciudad',n:''},
+  {cat:'Ropa',t:'Calzado cómodo para caminar',n:''},
+  {cat:'Ropa',t:'Chubasquero / paraguas plegable',n:'lluvias breves de tarde'},
+  {cat:'Boda',t:'Atuendo formal (según código)',n:''},
+  {cat:'Boda',t:'Zapatos de vestir',n:''},
+  {cat:'Boda',t:'Accesorios / complementos',n:''},
+  {cat:'Playa',t:'Bañador x2',n:''},
+  {cat:'Playa',t:'Toalla rápida',n:''},
+  {cat:'Playa',t:'Gafas de sol',n:''},
+  {cat:'Playa',t:'Sombrero / gorra',n:''},
+  {cat:'Neceser',t:'Protector solar',n:''},
+  {cat:'Neceser',t:'Repelente de insectos',n:''},
+  {cat:'Neceser',t:'Aseo personal',n:''},
+  {cat:'Botiquín',t:'Medicación personal',n:''},
+  {cat:'Botiquín',t:'Antidiarreico, analgésico, tiritas',n:''},
+  {cat:'Varios',t:'Mochila de día',n:''},
+  {cat:'Varios',t:'Botella de agua reutilizable',n:''},
+  {cat:'Varios',t:'Candado para maleta',n:''}
+];
+/*END:PACK*/
+
+const NOTES = [
+  'Moneda: peso mexicano (MXN). Llevar efectivo para mercados, colectivos y propinas.',
+  'Propinas: alrededor del 10-15% en restaurantes.',
+  'Agua: beber siempre embotellada.',
+  'CDMX está a unos 2.240 m de altitud: el primer día, con calma.',
+  'Enchufes: México usa tipo A/B a 127V. Para aparatos europeos hace falta adaptador.',
+  'Entrada al país: chilenos y españoles no necesitan visa para turismo (hasta 180 días). Llevar pasaporte vigente, billete de salida y reservas por si migración los pide.',
+  'FMM digital en el aeropuerto de CDMX: guardar el comprobante.',
+  'Fuente de estas notas: pestaña Recomendaciones de la hoja de planificación.',
+];
+
+const CLIMATE = {
+  MEX:{t:'20-24°C', d:'Templado de día, fresco de noche. A 2.240 m de altitud.', ic:I.sun, c:'#8e2750'},
+  OAX:{t:'25-28°C', d:'Templado y agradable, final de la temporada de lluvias.', ic:I.sun, c:'#c4633a'},
+  PXM:{t:'25-30°C', d:'Tropical. Lluvias breves de tarde o noche, mañanas despejadas.', ic:I.sun, c:'#1f8fa0'},
+  DGO:{t:'cálido y seco', d:'Días cálidos y noches frescas: llevar algo de abrigo para la noche.', ic:I.sun, c:'#b08324'},
+};
+const CLIMATE_NOTE = 'Clima típico de octubre según la hoja de planificación (Puerto Escondido y Durango) y datos generales de la zona. No es un pronóstico: confirmar antes de salir.';
+
+/* EXTRAS: ideas que NO están en el plan del día, por si sobra tiempo */
+const EXTRAS = {
+  'Ciudad de México':[
+    {n:'Xochimilco',d:'Paseo en trajinera por los canales.',q:'Xochimilco, Ciudad de Mexico',img:'x_xochimilco'},
+    {n:'Museo Nacional de Antropología',d:'De los mejores del mundo, con Chapultepec al lado.',q:'Museo Nacional de Antropologia, Ciudad de Mexico',img:'x_antropologia'},
+    {n:'Puebla y Cholula',d:'Excursión de un día desde la capital.',q:'Cholula, Puebla',img:'x_cholula'},
+    {n:'Roma y Condesa',d:'Barrios para comer, café y noche.',q:'Colonia Condesa, Ciudad de Mexico',img:'x_condesa'},
+  ],
+  'Oaxaca':[
+    {n:'Teotitlán del Valle',d:'Pueblo de tejedores y textiles.',q:'Teotitlan del Valle, Oaxaca',img:'x_teotitlan'},
+    {n:'Árbol del Tule',d:'El árbol con el tronco más ancho del mundo.',q:'Arbol del Tule, Santa Maria del Tule',img:'x_tule'},
+    {n:'Hierve el Agua',d:'Cascadas petrificadas y pozas naturales.',q:'Hierve el Agua, Oaxaca',img:'x_hierve'},
+  ],
+  'Puerto Escondido':[
+    {n:'Bioluminiscencia',d:'Laguna de Manialtepec o Chacahua, de noche.',q:'Laguna de Manialtepec, Oaxaca',img:'x_biolumi'},
+    {n:'Liberación de tortugas',d:'En temporada, en Playa Bacocho. Confirmar fechas.',q:'Playa Bacocho, Puerto Escondido',img:'x_tortugas'},
+    {n:'Clase de surf',d:'Zicatela es meca mundial; para aprender, playas más tranquilas.',q:'surf lessons Puerto Escondido',img:'x_surf'},
+  ],
+  'Durango':[
+    {n:'Sets de cine western',d:'Villa del Oeste y Chupaderos: Durango fue plató de muchas películas.',q:'Villa del Oeste, Durango',img:'x_western'},
+    {n:'Teleférico',d:'Sube al Cerro de los Remedios, con vistas de la ciudad.',q:'Teleferico Durango',img:'x_teleferico'},
+  ],
+};
+
+/* La boda: lo único que está cerrado es la fecha y la ventana de días */
+const BODA = {
+  fecha:'Sábado 17 de octubre de 2026',
+  lugar:'Durango',
+  ventana:'Estancia del 15 al 18 de octubre',
+  hoteles:'Hotel Maria Elena (14-15 oct) y Hampton Inn (15-18 oct)',
+  pendientes:[
+    'Confirmar logística y hotel del evento (si los novios tienen bloqueo de habitaciones).',
+    'Código de vestimenta y atuendo.',
+    'Regalo o mesa de regalos.',
+    'Contacto de los anfitriones u organización, para tenerlo a mano.',
+  ],
+};
+
+/*SYNC:CONTACTS*/
+const CONTACTS = [
+  {t:'Emergencias México',sub:'Número único · En todo México.',tel:'911',web:'',ic:I.shield},
+  {t:'Asistencia carretera',sub:'Ángeles Verdes · Turistas en carretera.',tel:'078',web:'',ic:I.shield},
+  {t:'Embajada de España',sub:'En Ciudad de México · Confirmar teléfono actual.',tel:'verificar',web:'https://exteriores.gob.es',ic:I.globe},
+  {t:'Consulado de Chile',sub:'En Ciudad de México · Confirmar teléfono actual.',tel:'verificar',web:'https://chile.gob.cl',ic:I.globe},
+  {t:'Aerolínea',sub:'Emirates · Vuelos EK255 / EK256.',tel:'verificar',web:'https://emirates.com',ic:I.plane},
+  {t:'Agencia',sub:'MyTrip / Gotogate · Pedido 1127-541-022.',tel:'',web:'https://mytrip.com',ic:I.plane},
+  {t:'Seguro de viaje',sub:'(rellenar al contratar) · Asistencia 24h.',tel:'',web:'',ic:I.shield},
+  {t:'Bloqueo de tarjetas',sub:'Banco · Por si pérdida/robo.',tel:'',web:'',ic:I.coins},
+  {t:'Alojamiento CDMX',sub:'Condesa Suites / Uniko Living · 03-05 oct (inicio) y 18-23 oct (final)',tel:'',web:'',ic:I.bed},
+  {t:'Alojamiento Oaxaca',sub:'Hotel Posada San Rafael · 05-10 oct',tel:'',web:'',ic:I.bed},
+  {t:'Alojamiento Pto Escondido',sub:'Carri Surf Studio · 10-14 oct',tel:'',web:'',ic:I.bed},
+  {t:'Alojamiento Durango',sub:'Hotel Maria Elena / Hampton Inn · 14-15 y 15-18 oct (boda)',tel:'',web:'',ic:I.bed},
+  {t:'Boda',sub:'Contacto del evento · Anfitriones / organización.',tel:'',web:'',ic:I.star},
+  {t:'Aeropuertos',sub:'MEX (CDMX) · OAX · PXM · DGO · Confirmar terminal de llegada de Emirates.',tel:'',web:'',ic:I.plane}
+];
+/*END:CONTACTS*/
+
+
+/* ============== HELPERS ============== */
+const $ = s => document.querySelector(s);
+const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const cityBadge = c => `<span class="badge-city" style="background:${CITY[c].c}">${CITY[c].n}</span>`;
+const eur = n => (n<0?'−':'')+Math.abs(n).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')">`;
+const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+const mapBtn = (q,label) => `<a class="mapbtn" href="${mapsUrl(q)}" target="_blank" rel="noopener">${I.pin} ${label||'Ver en mapa'}</a>`;
+const dirUrl = (pts, mode) => {
+  if(!pts || pts.length<2) return null;
+  const enc = s => encodeURIComponent(s);
+  const origin=enc(pts[0].q), dest=enc(pts[pts.length-1].q);
+  const mid=pts.slice(1,-1).map(p=>enc(p.q)).join('|');
+  let u=`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=${mode||'walking'}`;
+  if(mid) u+=`&waypoints=${mid}`;
+  return u;
+};
+function loadState(key){try{return JSON.parse(localStorage.getItem(key))||{};}catch(e){return {};}}
+function saveState(key,obj){localStorage.setItem(key,JSON.stringify(obj));}
+const checkSVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+/* dates (with ?d=YYYY-MM-DD override for testing) */
+function parseDM(dm){ const [d,m]=dm.split('/').map(Number); return new Date(2026, m-1, d); }
+function todayDate(){ const p=new URLSearchParams(location.search).get('d'); const t=p?new Date(p+'T09:00:00'):new Date(); t.setHours(0,0,0,0); return t; }
+function tripDayIndex(){ const tm=todayDate().getTime(); return ITIN.findIndex(d=>parseDM(d.date).getTime()===tm); }
+function daysToStart(){ return Math.round((parseDM(ITIN[0].date)-todayDate())/86400000); }
+const flightByDate = {}; FLIGHTS.forEach(f=>{ (flightByDate[f.date]=flightByDate[f.date]||[]).push(f); });
+const hotelByName = {}; HOTELS.forEach(h=>hotelByName[h.name]=h);
+const monName = mm => ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][parseInt(mm)];
+
+/* check counters for Hoy */
+function checkCount(items,key,hasDefaults){
+  const st=loadState(key); let done=0;
+  items.forEach((it,i)=>{ const id=key+'_'+i; const c=(id in st)?st[id]:(hasDefaults?!!it.done:false); if(c)done++; });
+  return {done,total:items.length,pending:items.length-done};
+}
+function pendingPay(){
+  const st=loadState('mx_pagos'); let pend=0;
+  PAYMENTS.forEach((p,i)=>{ const id='mx_pagos_'+i; const paid=(id in st)?st[id]:(p.st==='Pagado'); if(!paid) pend+=p.val; });
+  return pend;
+}
+
+/* ============== NAVIGATION ============== */
+const PRIMARY=['hoy','plan','dinero','comida','mas'];
+const PARENT={logistica:'mas',listas:'mas',info:'mas',conversor:'mas',boda:'mas'};
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  const sec=$('#v-'+id); if(sec) sec.classList.add('on');
+  const active=PRIMARY.includes(id)?id:(PARENT[id]||'hoy');
+  document.querySelectorAll('.bnav button').forEach(b=>b.classList.toggle('on', b.dataset.id===active));
+  window.scrollTo({top:0});
+}
+const BNAV=[
+  {id:'hoy',label:'Hoy',ic:I.sun},
+  {id:'plan',label:'Plan',ic:I.map},
+  {id:'dinero',label:'Dinero',ic:I.euro},
+  {id:'comida',label:'Comida',ic:I.food},
+  {id:'mas',label:'Más',ic:I.chev},
+];
+const bnavEl=$('#bnav');
+BNAV.forEach(t=>{
+  const b=el('button',t.id==='hoy'?'on':'',`<span class="bi">${t.ic}</span>${t.label}`);
+  b.dataset.id=t.id; b.onclick=()=>showView(t.id);
+  bnavEl.appendChild(b);
+});
+const backbar = to => `<div class="backbar" onclick="showView('${to}')">${I.back} Volver</div>`;
+
+/* ============== COUNTDOWN ============== */
+function countdown(){
+  const dep=parseDM(ITIN[0].date), now=todayDate();
+  const back=parseDM(ITIN[ITIN.length-1].date);
+  const diff=Math.round((dep-now)/86400000);
+  const num=$('#cdNum'), lbl=$('#cdLbl'), pre=$('#cdPre');
+  const setPre = t => { pre.textContent=t; pre.style.display=t?'block':'none'; };
+  if(now>=dep && now<=back){ setPre(''); num.textContent='✈'; num.style.fontSize='22px'; lbl.textContent='¡en ruta!'; }
+  else if(diff>0){ setPre('faltan'); num.textContent=diff; lbl.textContent=diff===1?'día':'días'; }
+  else if(diff===0){ setPre(''); num.textContent='¡Hoy!'; num.style.fontSize='15px'; lbl.textContent='salida'; }
+  else { setPre(''); num.textContent='♥'; lbl.textContent='vuelta'; }
+}
+
+/* ============== HOY ============== */
+function renderHoy(){
+  const v=$('#v-hoy'); v.innerHTML='';
+  const idx=tripDayIndex();
+  const before = todayDate() < parseDM(ITIN[0].date);
+  const after = todayDate() > parseDM(ITIN[ITIN.length-1].date);
+
+  if(idx>=0){ renderHoyTrip(v, idx); }
+  else if(before){ renderHoyBefore(v); }
+  else { renderHoyAfter(v); }
+}
+
+function renderHoyBefore(v){
+  const d=daysToStart();
+  const hero=el('div','cd-hero');
+  hero.innerHTML=`<div class="eq">Cuenta atrás para el viaje</div>
+    <div class="big">${d}</div><div class="u">${d===1?'día para salir':'días para salir'}</div>
+    <div class="dts">Salida sáb 3 oct · regreso vie 23 oct · 20 noches</div>
+    <div class="who">
+      <span class="ava"><i style="background:#1f8fa0">J</i>Javiera</span>
+      <span class="ava"><i style="background:#c4633a">J</i>Juan</span>
+    </div>`;
+  v.appendChild(hero);
+
+  // preparativos
+  const tareas=checkCount(TASKS,'mx_tasks',true);
+  const maleta=checkCount(PACK,'mx_pack',false);
+  const pend=pendingPay();
+  const prep=el('div','prep');
+  prep.innerHTML=`
+    <div class="pcard" onclick="showView('listas')"><div class="pi" style="background:rgba(31,143,160,.12);color:var(--aegean)">${I.check}</div><div><div class="pv">${tareas.pending}</div><div class="pk">tareas pendientes</div></div></div>
+    <div class="pcard" onclick="showView('dinero')"><div class="pi" style="background:rgba(200,68,58,.12);color:var(--bad)">${I.coins}</div><div><div class="pv">${eur(pend).replace(',00','')}</div><div class="pk">por pagar</div></div></div>
+    <div class="pcard" onclick="showView('listas')"><div class="pi" style="background:rgba(47,158,110,.12);color:var(--good)">${I.bed}</div><div><div class="pv">${maleta.done}/${maleta.total}</div><div class="pk">maleta</div></div></div>
+    <div class="pcard" onclick="showView('plan')"><div class="pi" style="background:rgba(232,163,61,.14);color:var(--gold)">${I.map}</div><div><div class="pv">21</div><div class="pk">días de plan</div></div></div>`;
+  v.appendChild(prep);
+
+  // próximos hitos
+  v.appendChild(el('div','sec-title','Lo importante de los próximos días'));
+  const nc=el('div','card next'); const ul=el('ul');
+  NEXT.forEach(n=>ul.appendChild(el('li','',`<span class="tag">${n.tag}</span><span>${n.t}</span>`)));
+  nc.appendChild(ul); v.appendChild(nc);
+
+  // presupuesto
+  v.appendChild(el('div','sec-title','Presupuesto'));
+  v.appendChild(budgetHero());
+
+  // ruta
+  v.appendChild(el('div','sec-title','La ruta'));
+  ROUTE.forEach((r,i)=>v.appendChild(routeCard(r,i)));
+}
+
+function renderHoyTrip(v, idx){
+  const d=ITIN[idx];
+  const [dd,mm]=d.date.split('/');
+  const cl=CLIMATE[d.city];
+  const hero=el('div','todayhero');
+  hero.innerHTML=`<div class="dd">Hoy · día ${idx+1} de ${ITIN.length}</div>
+    <h2>${CITY[d.city].n}</h2>
+    <div class="meta"><span class="chip">${d.dow} ${dd} ${monName(mm)}</span>
+      ${cl?`<span class="chip">${cl.ic} ${cl.t}</span>`:''}${d.tag?`<span class="chip">${d.tag}</span>`:''}</div>`;
+  v.appendChild(hero);
+
+  // siguiente / destacado
+  const fl=(flightByDate[d.date]||[])[0];
+  let nx;
+  if(fl){ nx={k:'Vuelo de hoy',b:`${fl.dep} · ${fl.from} → ${fl.to}`,s:`${fl.airline} · loc. ${fl.loc}`,ic:I.plane}; }
+  else if(d.m||d.a||d.e){
+    const [k,b,ic] = d.m ? ['Primer plan', d.m, I.sun]
+                   : d.a ? ['Por la tarde', d.a, I.noon]
+                         : ['Por la noche', d.e, I.moon];
+    nx={k, b, s:d.tr?('Transporte: '+d.tr):('Alojamiento: '+d.hotel), ic};
+  }
+  else {
+    const dp=DAY_PLACES[d.date];
+    nx = dp ? {k:'Ideas para hoy',b:dp.pts.map(p=>p.n).join(' · '),s:'Sin plan escrito: toca abajo para abrir el mapa',ic:I.pin}
+            : {k:'Hoy',b:'Día libre en '+CITY[d.city].n,s:'Alojamiento: '+d.hotel,ic:I.sun};
+  }
+  const nu=el('div','nextup');
+  nu.innerHTML=`<div class="ni">${nx.ic}</div><div class="nx"><div class="k">${nx.k}</div><b>${nx.b}</b><span>${nx.s}</span></div>`;
+  v.appendChild(nu);
+
+  // plan del día
+  v.appendChild(el('div','sec-title','El plan de hoy'));
+  v.appendChild(dayBody(d, true));
+
+  // mañana
+  if(idx+1<ITIN.length){
+    const t=ITIN[idx+1];
+    v.appendChild(el('div','sec-title','Mañana'));
+    const c=el('div','card'); c.style.cursor='pointer'; c.onclick=()=>showView('plan');
+    c.innerHTML=`<div style="display:flex;align-items:center;gap:10px">
+      ${cityBadge(t.city)} <b style="font-size:14px">${t.dow}</b>
+      <span style="margin-left:auto;color:var(--aegean)">${I.chevR}</span></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:7px">${t.m}</div>`;
+    v.appendChild(c);
+  }
+}
+
+function renderHoyAfter(v){
+  const hero=el('div','cd-hero');
+  hero.innerHTML=`<div class="eq">Viaje terminado</div><div class="big">♥</div>
+    <div class="u">¡Espero que fuera increíble!</div>
+    <div class="dts">CDMX · Oaxaca · Puerto Escondido · Durango · octubre 2026</div>`;
+  v.appendChild(hero);
+  v.appendChild(el('div','sec-title','Resumen del viaje'));
+  v.appendChild(budgetHero());
+  v.appendChild(el('div','sec-title','La ruta'));
+  ROUTE.forEach((r,i)=>v.appendChild(routeCard(r,i)));
+}
+
+function budgetHero(){
+  /* mismo número que la pestaña Dinero: lo pagado más lo que queda, no el
+     total teórico de la hoja. Así no hay dos totales distintos en la app. */
+  const M=moneyState();
+  const mxn=v=>'$'+Math.round(v*(TOTALS.rate_val||20.1)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' MXN';
+  const bh=el('div','budget-hero');
+  bh.innerHTML=`
+    <div class="bh-top"><span class="bh-lbl">Total del viaje · 2 personas</span><span class="bh-rate">${TOTALS.rate}</span></div>
+    <div class="bh-clp">${eurN(M.total)}</div>
+    <div class="bh-eur">${mxn(M.total)} · estimado</div>
+    <div class="bh-pp">Por persona <b>${eurN(M.total/2)}</b><span class="sec">${mxn(M.total/2)}</span></div>`;
+  return bh;
+}
+function routeCard(r,i){
+  const card=el('div','rcard');
+  card.innerHTML=`
+    <div class="cover">${photo(r.img, r.name)}
+      <div class="ov">
+        <div class="nm"><span class="num">${i+1} · ${r.nights}</span><b>${r.name}</b></div>
+        <div class="when">${r.days}</div>
+      </div>
+    </div>
+    <div class="desc">${r.desc}</div>`;
+  return card;
+}
+
+/* ============== PLAN (day-centric: plan + comidas + mapa) ============== */
+function dayBody(d, openMeals){
+  const body=el('div','day-body');
+  body.style.display='block'; body.style.padding='4px 0 0';
+  const hotel=hotelByName[d.hotel];
+  const dp=DAY_PLACES[d.date];
+  const route=dp?dirUrl(dp.pts, dp.mode):null;
+  const routeBlock = dp ? `
+    <div class="dayroute">
+      <div class="drh"><span class="hi">${I.pin}</span><b>Puntos del día</b>
+        ${route?`<a class="mapbtn route" href="${route}" target="_blank" rel="noopener">${I.map} Ver la ruta</a>`:''}</div>
+      <div class="chips">${dp.pts.map(p=>`<a class="mapchip" href="${mapsUrl(p.q)}" target="_blank" rel="noopener">${I.pin} ${p.n}</a>`).join('')}</div>
+    </div>` : '';
+  const slot=(ic,lbl,txt)=>txt?`<div class="slot"><div class="ic">${ic}</div><div class="tx"><b>${lbl}</b>${txt}</div></div>`:'';
+  const sinPlan = !d.m && !d.a && !d.e;
+  body.innerHTML=`
+    ${slot(I.sun,'Mañana',d.m)}
+    ${slot(I.noon,'Tarde',d.a)}
+    ${slot(I.moon,'Noche',d.e)}
+    ${slot(I.bus,'Transporte',d.tr)}
+    ${sinPlan?`<div class="daynote sinplan">Día libre, todavía sin plan escrito en la hoja.${dp?' Abajo tienes las ideas de la zona.':''}</div>`:''}
+    ${d.note?`<div class="daynote">${d.note}</div>`:''}
+    ${routeBlock}
+    ${hotel?`<div class="hotelrow"><span class="hi">${I.bed}</span><div><b>${hotel.name}</b><div style="font-size:11.5px;color:var(--muted)">${hotel.addr}</div></div>
+      <a class="ha mapbtn" style="margin-top:0" href="${mapsUrl(hotel.name+' '+hotel.addr)}" target="_blank" rel="noopener">${I.pin} Mapa</a></div>`:''}`;
+  return body;
+}
+function renderPlan(){
+  const v=$('#v-plan'); v.innerHTML='';
+  v.appendChild(el('div','sec-title','Itinerario día a día'));
+  v.appendChild(el('div','sub','Cada día con su plan, transporte, hotel y los puntos sugeridos de la zona. Toca para abrir.'));
+  const todayIdx=tripDayIndex();
+  ITIN.forEach((d,idx)=>{
+    const day=el('div','day'+(idx===todayIdx?' istoday':''));
+    const [dd,mm]=d.date.split('/');
+    const tagHtml=d.tag?`<span class="pill info" style="font-size:9.5px;padding:2px 7px">${d.tag}</span>`:'';
+    const fl=(flightByDate[d.date]||[])[0];
+    const boda = d.date==='17/10';
+    const hicons = (fl?`<span class="hicon">${I.plane}</span>`:'')+(boda?`<span class="hicon">${I.star}</span>`:'');
+    const todayBadge = idx===todayIdx?`<span class="pill" style="background:rgba(47,158,110,.16);color:#217a53;font-size:9.5px;padding:2px 7px">HOY</span>`:'';
+    const head=el('div','day-head');
+    head.innerHTML=`
+      <div class="date"><div class="d">${dd}</div><div class="mo">${monName(mm)}</div></div>
+      <div class="ti"><b>${cityBadge(d.city)} ${todayBadge} ${tagHtml} ${hicons}</b><span>${d.dow} · ${d.hotel}</span></div>
+      <div class="chev">${I.chev}</div>`;
+    const bodyWrap=el('div','day-body');
+    bodyWrap.innerHTML=dayBody(d).innerHTML;
+    day.appendChild(head); day.appendChild(bodyWrap);
+    head.onclick=()=>day.classList.toggle('open');
+    if(idx===todayIdx || (todayIdx<0 && idx===0)) day.classList.add('open');
+    v.appendChild(day);
+  });
+}
+
+/* ============== LOGISTICA ============== */
+function renderLog(){
+  const v=$('#v-logistica'); v.innerHTML=backbar('mas');
+  v.appendChild(el('div','sec-title','Vuelos'));
+  FLIGHTS.forEach(f=>{
+    const c=el('div','card fcard');
+    const pillCls=(f.status==='Comprado'||f.status==='Pagado')?'ok':'pend';
+    c.innerHTML=`
+      <div class="froute"><span class="ap">${f.from}</span>
+        <span class="arr">${f.stop?'<span class="plus">escala</span>':''}</span>
+        <span class="ap">${f.to}</span></div>
+      <div class="ftimes"><span><b>${f.dep}</b> · ${f.cityFrom}</span><span>${f.cityTo} · <b>${f.arr}</b></span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:13px;font-weight:600">${f.date} · ${f.airline}</span>
+        <span class="pill ${pillCls}">${f.status}</span></div>
+      <div class="fmeta">
+        <span>Loc. <b>${f.loc}</b></span><span>Equipaje <b>${f.bag}</b></span>${f.price!=='sin precio'?`<span>Precio <b>${f.price}</b></span>`:''}
+      </div>
+      ${f.note?`<div class="daynote" style="margin-top:10px">${f.note}</div>`:''}`;
+    v.appendChild(c);
+  });
+
+  v.appendChild(el('div','sec-title','Hoteles'));
+  HOTELS.forEach(h=>{
+    const c=el('div','card hotel');
+    const pagado=h.status.toLowerCase().startsWith('pagado');
+    const pillCls=pagado?'ok':'info';
+    const estado=pagado?'Pagado':'Reservado · se paga allí';
+    c.innerHTML=`
+      <div class="hh"><div><h3>${h.name}</h3><div class="stay">${cityBadge(h.city)} ${h.inn} → ${h.out} · ${h.nights} noches</div></div>
+        <span class="pill ${pillCls}">${estado}</span></div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:9px">${h.addr}</div>
+      <div class="feat">${h.type?`<span class="t">${h.type}</span>`:''}
+        <span class="t" style="background:rgba(31,143,160,.12);color:var(--sea)"><b>${h.ppn}/noche · ${h.total}</b></span></div>
+      <div><a class="booklink" href="${mapsUrl(h.name+' '+h.addr)}" target="_blank" rel="noopener">${I.pin} Mapa</a></div>
+      ${h.note?`<div class="daynote" style="margin-top:10px">${h.note}</div>`:''}`;
+    v.appendChild(c);
+  });
+
+  v.appendChild(el('div','sec-title','Traslados y transporte'));
+  const tc=el('div','card flat');
+  TRANSFERS_LOG.forEach(t=>{
+    const cls=t.status==='Pagado'?'ok':(t.status==='Reservado'?'info':'pend');
+    tc.appendChild(el('div','payitem',
+      `<div class="pc"><b>${t.t}</b><span>${t.op} · ${t.when}</span><span>${t.note}</span></div>
+       <div class="pv"><span class="pill ${cls}">${t.status}</span></div>`));
+  });
+  v.appendChild(tc);
+}
+
+/* ============== DINERO ============== */
+/* Todo el dinero se calcula aquí, en el momento, a partir de:
+   - PAYMENTS (lo que viene de la hoja de planificación)
+   - lo que se marca como pagado en este móvil (mx_pagos)
+   - quién puso cada pago (mx_pagador), editable desde la app
+   - los gastos que se van añadiendo sobre la marcha (mx_gastos)
+   Regla: el viaje se reparte a medias salvo que un gasto se marque de uno solo. */
+const PAYKEY='mx_pagos', WHOKEY='mx_pagador', EXPKEY='mx_gastos';
+const YO=['Javiera','Juan'];
+const PCOLOR={Javiera:'#1f8fa0', Juan:'#c4633a'};
+
+function loadExpenses(){ try{ return JSON.parse(localStorage.getItem(EXPKEY))||[]; }catch(e){ return []; } }
+function saveExpenses(a){ localStorage.setItem(EXPKEY, JSON.stringify(a)); }
+/* formato español a mano: toLocaleString no siempre agrupa los miles según el
+   navegador, y quedaban importes como "5707,84 €" en vez de "5.707,84 €" */
+const eurN = v => {
+  const neg = v<0; const [ent,dec] = Math.abs(v).toFixed(2).split('.');
+  return (neg?'-':'') + ent.replace(/\B(?=(\d{3})+(?!\d))/g,'.') + ',' + dec + ' €';
+};
+
+function moneyState(){
+  const paidSt=loadState(PAYKEY), whoSt=loadState(WHOKEY);
+  const isPaid=(p,i)=> (PAYKEY+'_'+i in paidSt) ? paidSt[PAYKEY+'_'+i] : (p.st==='Pagado');
+  const payer =(p,i)=> (WHOKEY+'_'+i in whoSt)  ? whoSt[WHOKEY+'_'+i]  : (YO.includes(p.by)?p.by:'');
+
+  const put={Javiera:0,Juan:0};       // lo que cada uno ha desembolsado
+  const oweAll={Javiera:0,Juan:0};    // su parte de todo el viaje (lo pagado sin dueño no se reparte: ya está pagado)
+  const owePaid={Javiera:0,Juan:0};   // su parte de lo pagado Y con dueño conocido: sirve para liquidar hoy
+  let paid=0, pend=0, unassigned=0;
+
+  // reparte un importe entre los dos segun a quien corresponda el gasto
+  const share=(acc,val,split)=>{
+    if(split==='medias'||!YO.includes(split)){ acc.Javiera+=val/2; acc.Juan+=val/2; }
+    else acc[split]+=val;
+  };
+
+  PAYMENTS.forEach((p,i)=>{
+    const done=isPaid(p,i), by=done?payer(p,i):'';
+    if(done){
+      paid+=p.val;
+      if(YO.includes(by)){ put[by]+=p.val; share(oweAll,p.val,'medias'); share(owePaid,p.val,'medias'); }
+      else unassigned+=p.val;          // pagado, pero no se sabe quien: fuera del reparto hasta asignarlo
+    } else {
+      pend+=p.val;
+      share(oweAll,p.val,'medias');
+    }
+  });
+
+  const exps=loadExpenses();
+  exps.forEach(e=>{
+    paid+=e.eur;
+    if(YO.includes(e.by)){ put[e.by]+=e.eur; share(oweAll,e.eur,e.split); share(owePaid,e.eur,e.split); }
+    else unassigned+=e.eur;
+  });
+
+  const total=paid+pend;
+  const rows=YO.map(n=>({
+    name:n, put:put[n], owe:oweAll[n],
+    falta: oweAll[n]-put[n],      // lo que le queda por poner hasta el final del viaje
+    saldo: owePaid[n]-put[n]      // si liquidaran hoy: positivo = debe, negativo = le deben
+  }));
+  return {isPaid, payer, paid, pend, total, unassigned, rows, exps};
+}
+
+function settleMoves(rows){
+  const cred=rows.filter(r=>r.saldo<-0.005).map(r=>({name:r.name,amt:-r.saldo}));
+  const deb =rows.filter(r=>r.saldo> 0.005).map(r=>({name:r.name,amt: r.saldo}));
+  const res=[]; let i=0,j=0;
+  while(i<deb.length && j<cred.length){
+    const m=Math.min(deb[i].amt,cred[j].amt);
+    if(m>0.005) res.push({from:deb[i].name,to:cred[j].name,amt:Math.round(m*100)/100});
+    deb[i].amt-=m; cred[j].amt-=m;
+    if(deb[i].amt<0.005)i++; if(cred[j].amt<0.005)j++;
+  }
+  return res;
+}
+
+function renderMoney(){
+  const v=$('#v-dinero'); v.innerHTML='';
+  const M=moneyState();
+
+  /* ---- 1. cuánto llevamos ---- */
+  v.appendChild(el('div','sec-title','Cómo va el dinero'));
+  const tb=el('div','total-bar');
+  tb.innerHTML=`<div><div class="tt">Total del viaje</div><small>2 personas · 20 noches</small></div>
+    <div style="text-align:right"><div class="tv">${eurN(M.total)}</div><small>${eurN(M.total/2)} por persona</small></div>`;
+  v.appendChild(tb);
+  const pb=el('div','paysum');
+  pb.innerHTML=`<div class="bar"><i style="width:${M.total?(M.paid/M.total*100):0}%"></i></div>
+    <div class="legend"><span class="paid"><span class="k">Ya pagado</span><b>${eurN(M.paid)}</b></span>
+    <span class="pend" style="text-align:right"><span class="k">Queda por pagar</span><b>${eurN(M.pend)}</b></span></div>`;
+  v.appendChild(pb);
+
+  if(M.unassigned>0.005){
+    v.appendChild(el('div','callout warn',
+      `<span class="ci">${I.info}</span><div>Hay <b>${eurN(M.unassigned)}</b> ya pagados sin saber quién los puso.
+       Asígnalos en <b>Estado de pagos</b>, abajo, y el reparto se recalcula solo.</div>`));
+  }
+
+  /* ---- 2. lo que queda, repartido para que salga equitativo ---- */
+  v.appendChild(el('div','sec-title','Lo que queda por pagar, repartido'));
+  v.appendChild(el('div','sub','Cada uno paga esta parte de lo que falta y al final del viaje quedan a la par, sin transferencias.'));
+  const split=el('div','card flat');
+  let algoNegativo=false;
+  M.rows.forEach(r=>{
+    const falta=Math.max(0, r.falta);
+    if(r.falta<-0.005) algoNegativo=true;
+    split.appendChild(el('div','putrow',
+      `<i class="av" style="background:${PCOLOR[r.name]}">${r.name[0]}</i>
+       <div class="pr"><b>${r.name}</b><span>Ya ha puesto ${eurN(r.put)} · su parte del viaje son ${eurN(r.owe)}</span></div>
+       <div class="pamt">${eurN(falta)}<div class="pk">le toca poner</div></div>`));
+  });
+  v.appendChild(split);
+  if(algoNegativo){
+    v.appendChild(el('div','sub','Alguien ya ha puesto más de lo que le corresponde en todo el viaje: aunque no pague nada más, el otro tendrá que devolverle la diferencia (abajo).'));
+  }
+
+  /* ---- 3. quién paga a quién ---- */
+  const moves=settleMoves(M.rows);
+  v.appendChild(el('div','sec-title','Quién debe a quién, ahora mismo'));
+  if(!moves.length){
+    v.appendChild(el('div','callout',`<span class="ci">${I.check}</span><div>Están a la par con lo pagado hasta ahora.</div>`));
+  } else {
+    v.appendChild(el('div','sub','Si liquidaran hoy, solo con lo que ya está pagado.'));
+    moves.forEach(m=>v.appendChild(el('div','settle',
+      `<i class="av" style="background:${PCOLOR[m.from]||'#7a6068'}">${m.from[0]}</i>
+       <span class="ar">${I.chevR}</span>
+       <i class="av" style="background:${PCOLOR[m.to]||'#7a6068'}">${m.to[0]}</i>
+       <div class="slbl"><b>${m.from}</b> le debe a <b>${m.to}</b></div>
+       <div class="samt">${eurN(m.amt)}</div>`)));
+  }
+
+  /* ---- 4. gastos sobre la marcha ---- */
+  v.appendChild(el('div','sec-title','Gastos del viaje'));
+  v.appendChild(el('div','sub','Apunta aquí lo que vayan gastando allí. Se guarda en este móvil: para que el otro lo vea, usa Compartir.'));
+
+  const form=el('div','card expform');
+  form.innerHTML=`
+    <input class="ex-c" type="text" placeholder="Concepto (comida, taxi, entradas...)">
+    <div class="exrow">
+      <input class="ex-a" type="number" inputmode="decimal" placeholder="0,00">
+      <div class="seg small ex-cur"><button data-c="MXN" class="on">MXN</button><button data-c="EUR">EUR</button></div>
+    </div>
+    <div class="exlbl">Quién pagó</div>
+    <div class="seg ex-by"><button data-b="Javiera" class="on">Javiera</button><button data-b="Juan">Juan</button></div>
+    <div class="exlbl">De quién es el gasto</div>
+    <div class="seg ex-sp"><button data-s="medias" class="on">A medias</button><button data-s="Javiera">Solo Javiera</button><button data-s="Juan">Solo Juan</button></div>
+    <button class="exadd">Añadir gasto</button>`;
+  v.appendChild(form);
+  const segPick=(sel,attr)=>{
+    const box=form.querySelector(sel);
+    box.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+      box.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+    });
+    return ()=>box.querySelector('button.on').dataset[attr];
+  };
+  const getCur=segPick('.ex-cur','c'), getBy=segPick('.ex-by','b'), getSp=segPick('.ex-sp','s');
+  form.querySelector('.exadd').onclick=()=>{
+    const c=form.querySelector('.ex-c').value.trim();
+    const a=parseFloat((form.querySelector('.ex-a').value||'').replace(',','.'));
+    if(!c || !a || a<=0){ form.querySelector('.ex-c').focus(); return; }
+    const cur=getCur();
+    const rate=TOTALS.rate_val||20.1;
+    const eurVal=Math.round((cur==='MXN'? a/rate : a)*100)/100;
+    const exps=loadExpenses();
+    exps.push({id:Date.now(), c, amt:a, cur, eur:eurVal, by:getBy(), split:getSp(),
+               d:new Date().toISOString().slice(0,10)});
+    saveExpenses(exps);
+    renderMoney(); renderHoy();
+  };
+
+  const exps=M.exps;
+  if(exps.length){
+    const lc=el('div','card flat');
+    exps.slice().reverse().forEach(e=>{
+      const row=el('div','exitem');
+      const dd=e.d?e.d.slice(8,10)+'/'+e.d.slice(5,7):'';
+      const spl=e.split==='medias'?'a medias':'solo '+e.split;
+      row.innerHTML=`<div class="pc"><b>${e.c}</b><span>${dd} · pagó ${e.by} · ${spl}</span></div>
+        <div class="pv">${eurN(e.eur)}${e.cur==='MXN'?`<div class="sub2">${e.amt.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')} MXN</div>`:''}</div>
+        <button class="exdel" title="Borrar">×</button>`;
+      row.querySelector('.exdel').onclick=()=>{
+        saveExpenses(loadExpenses().filter(x=>x.id!==e.id));
+        renderMoney(); renderHoy();
+      };
+      lc.appendChild(row);
+    });
+    v.appendChild(lc);
+
+    const acts=el('div','exacts');
+    acts.innerHTML=`<button class="exbtn share">Compartir resumen</button>
+                    <button class="exbtn copy">Copiar datos</button>
+                    <button class="exbtn paste">Pegar datos</button>`;
+    v.appendChild(acts);
+    acts.querySelector('.share').onclick=()=>{
+      const lines=exps.map(e=>`· ${e.c}: ${eurN(e.eur)} (pagó ${e.by}${e.split!=='medias'?', solo '+e.split:''})`);
+      const mv=settleMoves(M.rows).map(m=>`${m.from} le debe a ${m.to}: ${eurN(m.amt)}`).join(' · ')||'están a la par';
+      const txt=`Gastos del viaje a México\n${lines.join('\n')}\n\nTotal apuntado: ${eurN(exps.reduce((s,e)=>s+e.eur,0))}\n${mv}`;
+      if(navigator.share) navigator.share({text:txt}).catch(()=>{});
+      else { navigator.clipboard.writeText(txt); alert('Resumen copiado.'); }
+    };
+    acts.querySelector('.copy').onclick=()=>{
+      navigator.clipboard.writeText(JSON.stringify(exps));
+      alert('Datos copiados. Pégalos en el otro móvil con "Pegar datos".');
+    };
+    acts.querySelector('.paste').onclick=async()=>{
+      const txt=prompt('Pega aquí los datos copiados del otro móvil:');
+      if(!txt) return;
+      try{
+        const inc=JSON.parse(txt);
+        if(!Array.isArray(inc)) throw 0;
+        const mine=loadExpenses(), ids=new Set(mine.map(x=>x.id));
+        inc.forEach(x=>{ if(!ids.has(x.id)) mine.push(x); });
+        saveExpenses(mine); renderMoney(); renderHoy();
+      }catch(e){ alert('Esos datos no se entienden. Copia otra vez desde el otro móvil.'); }
+    };
+  }
+
+  /* ---- 5. presupuesto previsto ---- */
+  v.appendChild(el('div','sec-title','Presupuesto previsto'));
+  v.appendChild(el('div','sub','Lo que estimaron en la hoja, categoría a categoría.'));
+  const bc=el('div','card');
+  BUDGET.forEach(b=>bc.appendChild(el('div','bud',
+    `<div class="bic">${b.ic}</div><div class="bn">${b.cat}<span>${b.n}</span></div>
+     <div class="bv">${b.v}${b.real&&b.real!=='—'?`<div class="breal">real ${b.real}</div>`:''}</div>`)));
+  v.appendChild(bc);
+
+  /* ---- 6. estado de pagos, con quién puso cada uno ---- */
+  v.appendChild(el('div','sec-title','Estado de pagos'));
+  v.appendChild(el('div','sub','Marca lo que ya esté pagado y di quién lo puso. Se guarda en este móvil.'));
+  const paidSt=loadState(PAYKEY), whoSt=loadState(WHOKEY);
+  const pc=el('div','card flat');
+  PAYMENTS.forEach((p,i)=>{
+    const done=M.isPaid(p,i), by=M.payer(p,i);
+    const row=el('div','paychk'+(done?' done':''));
+    row.innerHTML=`<div class="box">${checkSVG}</div>
+      <div class="pc"><b>${p.c}</b><span>${p.n||''}</span>
+        <div class="whosel">${YO.map(n=>`<button data-w="${n}" class="${by===n?'on':''}">${n}</button>`).join('')}
+          <button data-w="" class="${by?'':'on'}">sin asignar</button></div>
+      </div>
+      <div class="pv">${p.amt}</div>`;
+    row.querySelector('.box').onclick=()=>{
+      const now=!row.classList.contains('done');
+      paidSt[PAYKEY+'_'+i]=now; saveState(PAYKEY,paidSt);
+      renderMoney(); renderHoy();
+    };
+    row.querySelectorAll('.whosel button').forEach(b=>b.onclick=(ev)=>{
+      ev.stopPropagation();
+      whoSt[WHOKEY+'_'+i]=b.dataset.w; saveState(WHOKEY,whoSt);
+      renderMoney();
+    });
+    pc.appendChild(row);
+  });
+  v.appendChild(pc);
+}
+
+/* ============== COMIDA ============== */
+function renderFood(){
+  const v=$('#v-comida'); v.innerHTML='';
+  v.appendChild(el('div','sec-title','Qué probar en cada sitio'));
+  v.appendChild(el('div','sub','Platos típicos de cada zona y dónde buscarlos. Ideas, no reservas.'));
+  Object.entries(DISHES).forEach(([title,arr])=>{
+    const card=el('div','card');
+    card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${title}</div>`));
+    arr.forEach(d=>card.appendChild(el('div','dish hasimg',
+      `<div class="thumb">${photo(d.img, d.n)}</div>
+       <div class="meta"><b>${d.n}</b><span>${d.d}</span>${d.where?`<a class="wheretoeat" href="${mapsUrl(d.wq)}" target="_blank" rel="noopener">${I.pin} ${d.where}</a>`:''}</div>`)));
+    v.appendChild(card);
+  });
+  const nota=el('div','card flat');
+  nota.appendChild(el('div','note',`<span class="ni">${I.info}</span><span>Propinas: alrededor del 10-15% en restaurantes. Agua, siempre embotellada.</span>`));
+  v.appendChild(nota);
+}
+
+/* ============== LISTAS ============== */
+function renderCheckList(view, items, key, hasDefaults){
+  const state=loadState(key);
+  const wrap=el('div','card flat');
+  const bar=el('div','progress'); const fill=el('i'); bar.appendChild(fill);
+  const counter=el('div','sub');
+  function update(){
+    let done=0;
+    items.forEach((it,i)=>{ const id=key+'_'+i; if((id in state)?state[id]:(hasDefaults?!!it.done:false)) done++; });
+    const pct=Math.round(done/items.length*100); fill.style.width=pct+'%';
+    counter.textContent=`${done} de ${items.length} · ${pct}%`;
+  }
+  items.forEach((it,i)=>{
+    const id=key+'_'+i;
+    const checked=(id in state)?state[id]:(hasDefaults?!!it.done:false);
+    const row=el('div','chk'+(checked?' done':''));
+    row.innerHTML=`<div class="box">${checkSVG}</div>
+      <div class="ct"><b>${it.t}</b>${it.n?`<span>${it.n}</span>`:''}</div>
+      <span class="cat">${it.cat}</span>`;
+    row.onclick=()=>{ const now=!row.classList.contains('done'); row.classList.toggle('done',now); state[id]=now; saveState(key,state); update(); renderHoy(); };
+    wrap.appendChild(row);
+  });
+  view.appendChild(bar); view.appendChild(counter); view.appendChild(wrap);
+  const reset=el('button','reset','Reiniciar esta lista');
+  reset.onclick=()=>{ if(confirm('¿Reiniciar las marcas de esta lista?')){localStorage.removeItem(key);renderListas();renderHoy();} };
+  view.appendChild(reset); update();
+}
+function renderListas(){
+  const v=$('#v-listas'); v.innerHTML=backbar('mas');
+  v.appendChild(el('div','sec-title','Checklist de tareas'));
+  v.appendChild(el('div','sub','Se guarda en este móvil. Pendientes de la hoja marcadas según su estado.'));
+  renderCheckList(v, TASKS, 'mx_tasks', true);
+  v.appendChild(el('div','sec-title','Maleta'));
+  renderCheckList(v, PACK, 'mx_pack', false);
+}
+
+/* ============== INFO ============== */
+function renderInfo(){
+  const v=$('#v-info'); v.innerHTML=backbar('mas');
+  v.appendChild(el('div','sec-title','Clima típico en octubre'));
+  v.appendChild(el('div','sub',CLIMATE_NOTE));
+  const wc=el('div','card flat');
+  Object.entries(CLIMATE).forEach(([k,c])=>wc.appendChild(el('div','climate',
+    `<div class="cdot" style="background:${c.c}">${c.ic}</div><div class="cc"><b>${CITY[k].n}</b><span>${c.d}</span></div><div class="ct">${c.t}</div>`)));
+  v.appendChild(wc);
+
+  v.appendChild(el('div','sec-title','Notas prácticas'));
+  const nc=el('div','card');
+  NOTES.forEach(n=>nc.appendChild(el('div','note',`<span class="ni">${I.info}</span><span>${n}</span>`)));
+  v.appendChild(nc);
+
+  v.appendChild(el('div','sec-title','Más lugares de interés'));
+  v.appendChild(el('div','sub','Ideas que NO están en el plan del día, por si sobra tiempo. Cada una con su mapa.'));
+  Object.entries(EXTRAS).forEach(([city,arr])=>{
+    const c=el('div','card');
+    c.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:6px">${city}</div>`));
+    arr.forEach(a=>c.appendChild(el('div','extra',
+      `<div class="thumb">${photo(a.img, a.n)}</div>
+       <div class="xc"><b>${a.n}</b><p>${a.d}</p>${mapBtn(a.q)}</div>`)));
+    v.appendChild(c);
+  });
+
+  v.appendChild(el('div','sec-title','Contactos y emergencias'));
+  const cc=el('div','card flat');
+  CONTACTS.forEach(c=>{
+    const acts=[];
+    if(c.tel && c.tel!=='verificar') acts.push(`<a href="tel:${c.tel.replace(/\s/g,'')}">${I.phone}</a>`);
+    if(c.web) acts.push(`<a href="${c.web}" target="_blank" rel="noopener">${I.globe}</a>`);
+    cc.appendChild(el('div','contact',
+      `<div class="ci">${c.ic}</div>
+       <div class="cd"><b>${c.t}</b><span>${c.sub}${c.tel==='verificar'?' · teléfono por confirmar':''}</span></div>
+       <div class="cact">${acts.join('')}</div>`));
+  });
+  v.appendChild(cc);
+}
+
+/* ============== MÁS ============== */
+function renderMas(){
+  const v=$('#v-mas'); v.innerHTML='';
+  v.appendChild(el('div','sec-title','Más'));
+  const items=[
+    {id:'logistica',ic:I.plane,t:'Vuelos y hoteles',s:`${FLIGHTS.length} vuelos, ${HOTELS.length} alojamientos y traslados`},
+    {id:'boda',ic:I.star,t:'La boda',s:'Sábado 17 de octubre, en Durango'},
+    {id:'info',ic:I.info,t:'Guía y qué ver',s:'Lugares, clima, notas y contactos'},
+    {id:'conversor',ic:I.coins,t:'Conversor de moneda',s:'Peso mexicano, euro y peso chileno'},
+    {id:'listas',ic:I.check,t:'Listas',s:'Tareas pendientes y maleta'},
+  ];
+  items.forEach(it=>{
+    const b=el('button','mtile');
+    b.innerHTML=`<div class="mi">${it.ic}</div><div class="mt"><b>${it.t}</b><span>${it.s}</span></div><span class="arr">${I.chevR}</span>`;
+    b.onclick=()=>showView(it.id);
+    v.appendChild(b);
+  });
+}
+
+/* ============== CONVERSOR ============== */
+function renderConversor(){
+  const v=$('#v-conversor'); v.innerHTML=backbar('mas');
+  v.appendChild(el('div','sec-title','Conversor de moneda'));
+  const RKEY='mx_rates';
+  const rates=Object.assign({MXN:(TOTALS.rate_val||20.1), CLP:1044}, loadState(RKEY)); // por 1 €
+  let from='MXN', amount=100;
+  const conv=el('div','conv');
+  conv.innerHTML=`
+    <div class="seg">
+      <button data-c="MXN">Peso $</button><button data-c="EUR">EUR €</button><button data-c="CLP">CLP $</button>
+    </div>
+    <input class="amt-in" type="number" inputmode="decimal" value="100">
+    <div class="out"></div>`;
+  v.appendChild(conv);
+  const out=conv.querySelector('.out');
+  const inp=conv.querySelector('.amt-in');
+  const per={EUR:1, MXN:rates.MXN, CLP:rates.CLP};
+  function fmt(c,val){
+    if(c==='CLP') return '$'+Math.round(val).toLocaleString('es-CL')+' CLP';
+    if(c==='MXN') return '$'+Math.round(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' MXN';
+    return val.toLocaleString('es-ES',{maximumFractionDigits:2})+' €';
+  }
+  function calc(){
+    per.MXN=rates.MXN; per.CLP=rates.CLP;
+    const eurVal=(amount||0)/per[from];
+    const others=['MXN','EUR','CLP'].filter(c=>c!==from);
+    out.innerHTML=others.map(c=>`<div class="orow"><span class="ol">${({EUR:'Euro',MXN:'Peso mexicano',CLP:'Peso chileno'})[c]}</span><span class="ov">${fmt(c,eurVal*per[c])}</span></div>`).join('');
+  }
+  conv.querySelectorAll('.seg button').forEach(b=>{
+    if(b.dataset.c===from) b.classList.add('on');
+    b.onclick=()=>{ from=b.dataset.c; conv.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b)); calc(); };
+  });
+  inp.oninput=()=>{ amount=parseFloat(inp.value); calc(); };
+  calc();
+
+  v.appendChild(el('div','sec-title','Tipos de cambio'));
+  v.appendChild(el('div','sub','El de la hoja es de junio de 2026: edítalo con el real antes de viajar. Se guarda en este móvil.'));
+  const rc=el('div','card rates');
+  rc.innerHTML=`
+    <label>1 € = <span style="margin-left:auto"></span><input id="rMXN" type="number" inputmode="decimal" value="${rates.MXN}"> $ (MXN)</label>
+    <label>1 € = <span style="margin-left:auto"></span><input id="rCLP" type="number" inputmode="decimal" value="${rates.CLP}"> $ (CLP)</label>`;
+  v.appendChild(rc);
+  const persist=()=>saveState(RKEY,{MXN:rates.MXN,CLP:rates.CLP});
+  rc.querySelector('#rMXN').oninput=e=>{ rates.MXN=parseFloat(e.target.value)||rates.MXN; persist(); calc(); };
+  rc.querySelector('#rCLP').oninput=e=>{ rates.CLP=parseFloat(e.target.value)||rates.CLP; persist(); calc(); };
+}
+
+/* ============== LA BODA ============== */
+function renderBoda(){
+  const v=$('#v-boda'); v.innerHTML=backbar('mas');
+  v.appendChild(el('div','sec-title','La boda'));
+  const hero=el('div','todayhero');
+  hero.innerHTML=`<div class="dd">El motivo del viaje</div>
+    <h2>${BODA.fecha}</h2>
+    <div class="meta"><span class="chip">${I.pin} ${BODA.lugar}</span><span class="chip">${BODA.ventana}</span></div>`;
+  v.appendChild(hero);
+
+  const c=el('div','card');
+  c.innerHTML=`<div class="note" style="margin:0"><span class="ni">${I.bed}</span><span>${BODA.hoteles}</span></div>`;
+  v.appendChild(c);
+
+  v.appendChild(el('div','sec-title','Por cerrar'));
+  v.appendChild(el('div','sub','Lo que sigue pendiente según la hoja de planificación.'));
+  const pc=el('div','card');
+  BODA.pendientes.forEach(t=>pc.appendChild(el('div','note',`<span class="ni">${I.info}</span><span>${t}</span>`)));
+  v.appendChild(pc);
+
+  const dgo=ITIN.filter(d=>d.city==='DGO');
+  if(dgo.length){
+    v.appendChild(el('div','sec-title','Los días en Durango'));
+    const dc=el('div','card flat');
+    dgo.forEach(d=>{
+      const [dd,mm]=d.date.split('/');
+      const esBoda=d.date==='17/10';
+      dc.appendChild(el('div','bodaday'+(esBoda?' isboda':''),
+        `<div class="date"><div class="d">${dd}</div><div class="mo">${monName(mm)}</div></div>
+         <div class="ti"><b>${d.dow}${esBoda?' · BODA':''}</b><span>${d.hotel}${d.tr?' · '+d.tr:''}</span></div>`));
+    });
+    v.appendChild(dc);
+  }
+}
+
+/* ============== OFFLINE INDICATOR ============== */
+function updateOnline(){
+  $('#offlineBar').classList.toggle('show', !navigator.onLine);
+}
+window.addEventListener('online', updateOnline);
+window.addEventListener('offline', updateOnline);
+
+/* ============== INIT ============== */
+countdown();
+renderHoy();
+renderPlan();
+renderLog();
+renderMoney();
+renderFood();
+renderListas();
+renderInfo();
+renderMas();
+renderConversor();
+renderBoda();
+updateOnline();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+}
+</script>
+</body>
+</html>

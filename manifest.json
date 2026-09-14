@@ -1,0 +1,17 @@
+{
+  "name": "Viaje · México 2026",
+  "short_name": "México 2026",
+  "description": "CDMX · Oaxaca · Puerto Escondido · Durango. Itinerario, dinero, gastos y guía, sin conexión.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#5e1f3d",
+  "theme_color": "#5e1f3d",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
