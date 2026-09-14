@@ -1,2 +1,16 @@
+# La app no se indexa, pero sí se deja que los mensajeros lean la vista previa
+# del enlace cuando se comparte (el link no es adivinable).
+User-agent: WhatsApp
+Disallow:
+
+User-agent: facebookexternalhit
+Disallow:
+
+User-agent: Twitterbot
+Disallow:
+
+User-agent: TelegramBot
+Disallow:
+
 User-agent: *
 Disallow: /
