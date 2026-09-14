@@ -1394,9 +1394,8 @@ function renderMoney(){
 
   const dif=Math.abs(suma.Javiera-suma.Juan);
   if(sinAsignar>0.005){
-    v.appendChild(el('div','callout warn',
-      `<span class="ci">${I.info}</span><div>Quedan <b>${eurN(sinAsignar)}</b> sin asignar.
-       Dale a repartir y se reparten solos, o ponlos a medias uno a uno.</div>`));
+    v.appendChild(el('div','sub',
+      'Por defecto van a medias. Si prefieren que cada uno se encargue de uno entero, tóquenlo o denle a repartir.'));
   } else if(dif>0.005){
     v.appendChild(el('div','sub',`Diferencia entre los dos: ${eurN(dif)}. Se cuadra con cualquier gasto del viaje.`));
   } else {
