@@ -560,8 +560,8 @@ const CITY = {
 const STATS = [ {v:'20', k:'noches'}, {v:'4', k:'destinos'}, {v:'6', k:'vuelos'} ];
 /*SYNC:TOTALS*/
 const TOTALS = {
-  eur_total:'5.780,00 €', mxn_total:'116.175 MXN',
-  eur_pp:'2.890,00 €', mxn_pp:'58.087 MXN',
+  eur_total:'6.088,00 €', mxn_total:'122.366 MXN',
+  eur_pp:'3.044,00 €', mxn_pp:'61.183 MXN',
   rate:'1 € ≈ 20,10 MXN', rate_val:20.1,
   pagado:'3.263,03 €', pagado_val:3263.03,
   sin_asignar:'50,00 €', sin_asignar_val:50.0,
@@ -637,7 +637,7 @@ const ITIN = [
   {date:'16/10',dow:'Viernes',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'',note:''},
   {date:'17/10',dow:'Sábado',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'BODA',tr:'',note:'Evento principal del viaje (sábado).'},
   {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'Llegada al AIFA 17:12, traslado al alojamiento y cena tranquila',tr:'Durango a CDMX (Aeroméxico AM 2469, 15:42)',note:'Llega al AIFA a las 17:12. Fin ventana boda.'},
-  {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Teotihuacán: salir muy temprano (6:30-7:00). Calzada de los Muertos y Pirámides del Sol y la Luna',a:'Comida tardía en La Gruta, dentro de una caverna, y vuelta a la ciudad',e:'Noche tranquila',tr:'',note:'Los lunes cierra casi todo museo en CDMX, pero la zona arqueológica abre. Uber no llega a Teotihuacán y el taxi sale caro: contratar un tour con transporte.'},
+  {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'VUELO EN GLOBO sobre las pirámides al amanecer (45-60 min) y desayuno · después, la zona arqueológica: Calzada de los Muertos y Pirámides del Sol y la Luna',a:'Comida tardía en La Gruta, dentro de una caverna, y vuelta a la ciudad',e:'Noche tranquila: el madrugón se nota',tr:'',note:'Madrugón fuerte: la recogida en CDMX suele ser sobre las 4:00-4:30 (confirmar con el operador). Llevar una capa de abrigo, al amanecer hace frío. Los lunes cierra casi todo museo en CDMX, pero la zona arqueológica abre.'},
   {date:'20/10',dow:'Martes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Museo Frida Kahlo (Casa Azul) 11:30, con la entrada reservada',a:'Coyoacán: Casa de León Trotsky, Jardín Hidalgo, Parroquia de San Juan Bautista y Bazar Artesanal',e:'Cena por Coyoacán',tr:'',note:'La Casa-Estudio Diego Rivera y Frida Kahlo (San Ángel) queda cerca por si sobra tiempo.'},
   {date:'21/10',dow:'Miércoles',city:'MEX',tag:'',hotel:'Uniko Living',m:'Castillo de Chapultepec (Museo Nacional de Historia) y Museo Nacional de Antropología',a:'San Miguel Chapultepec: Casa Luis Barragán (hay que reservar) y galerías de la zona',e:'Polanco: Avenida Presidente Masaryk y Parque Lincoln',tr:'',note:'La Casa Luis Barragán solo se visita con reserva previa.'},
   {date:'22/10',dow:'Jueves',city:'MEX',tag:'',hotel:'Uniko Living',m:'Biblioteca Vasconcelos, Zócalo, Catedral Metropolitana y Templo Mayor · calle Madero y Casa de los Azulejos',a:'Palacio de Bellas Artes y Palacio Postal · MUNAL · Alameda Central y mirador del Monumento a la Revolución',e:'Última cena por el Centro o la Tabacalera',tr:'',note:'Moverse por el eje Zócalo - Bellas Artes - Monumento a la Revolución. Evitar Tepito y La Lagunilla.'},
@@ -729,7 +729,8 @@ const BUDGET = [
   {cat:'Transporte local',v:'200,00 €',real:'—',n:'Taxis, colectivos, metro, Uber/Didi',ic:I.bus},
   {cat:'Actividades y tours',v:'400,00 €',real:'—',n:'Monte Albán, Teotihuacán, snorkel, mezcal...',ic:I.star},
   {cat:'Conectividad',v:'50,00 €',real:'50,00 €',n:'eSIM México (2 pax)',ic:I.globe},
-  {cat:'Compras / souvenirs',v:'200,00 €',real:'—',n:'Artesanía, mezcal, regalos',ic:I.euro}
+  {cat:'Compras / souvenirs',v:'200,00 €',real:'—',n:'Artesanía, mezcal, regalos',ic:I.euro},
+  {cat:'Actividades y tours',v:'308,00 €',real:'—',n:'Vuelo en globo en Teotihuacán (2 pax)',ic:I.star}
 ];
 /*END:BUDGET*/
 /*SYNC:PAYMENTS*/
@@ -743,6 +744,7 @@ const PAYMENTS = [
   {c:'Actividades y tours · Monte Albán, Teotihuacán, snorkel, mezcal...',k:'cat',by:'—',amt:'400,00 €',val:400.0,st:'Pendiente',n:''},
   {c:'Conectividad · eSIM México (2 pax)',k:'cat',by:'—',amt:'50,00 €',val:50.0,st:'Pagado',n:''},
   {c:'Compras / souvenirs · Artesanía, mezcal, regalos',k:'cat',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
+  {c:'Actividades y tours · Vuelo en globo en Teotihuacán (2 pax)',k:'cat',by:'—',amt:'308,00 €',val:308.0,st:'Pendiente',n:'Paquete compartido con transporte desde CDMX: 3.100 MXN/persona de referencia (globosaerostaticosteotihuacan.com, sep-2026). Sin reservar todavía.'},
   {c:'Condesa Suites · Ciudad de México (inicio)',k:'hotel',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
   {c:'Hotel Posada San Rafael · Oaxaca',k:'hotel',by:'—',amt:'147,00 €',val:147.0,st:'Pendiente',n:'5 noches · 29,40 €/noche · se paga en recepción'},
   {c:'Carri Surf Studio · Puerto Escondido',k:'hotel',by:'Juan',amt:'173,80 €',val:173.8,st:'Pagado',n:'4 noches · 43,45 €/noche'},
@@ -885,7 +887,8 @@ const TASKS = [
   {cat:'Reservas',t:'Vincular la reserva de VivaAerobus a una cuenta Viva',n:'Reserva ADS1TJ (CDMX-Oaxaca del 5/10). Sin vincularla no se puede hacer check-in en línea ni modificarla.',done:false},
   {cat:'Reservas',t:'Reservar la Casa Luis Barragán (CDMX)',n:'Solo se visita con reserva previa. Para el 21/10.',done:false},
   {cat:'Reservas',t:'Reservar el tour a Teotihuacán con transporte',n:'Uber no llega y el taxi sale caro. Para el 19/10, salida 6:30-7:00.',done:false},
-  {cat:'Reservas',t:'Reservar restaurantes que lo exigen (CDMX)',n:'Handshake Speakeasy, Esquina Común, Mi Compa Chava. Pujol y Quintonil, con mucha antelación.',done:false}
+  {cat:'Reservas',t:'Reservar restaurantes que lo exigen (CDMX)',n:'Handshake Speakeasy, Esquina Común, Mi Compa Chava. Pujol y Quintonil, con mucha antelación.',done:false},
+  {cat:'Reservas',t:'Reservar el vuelo en globo en Teotihuacán (2 pax)',n:'Para el 19/10, al amanecer. Elegir paquete con transporte desde CDMX. Confirmar hora de recogida y política si se cancela por viento.',done:false}
 ];
 /*END:TASKS*/
 
@@ -1559,8 +1562,8 @@ function renderMoney(){
 
   if(M.estimado>0.005){
     v.appendChild(el('div','sub',
-      `Aparte queda el gasto del día a día allí (comida, transporte, actividades y compras),
-       estimado en ${eurN(M.estimado)}. Eso no se reparte por adelantado: se va apuntando en Gastos.`));
+      `Aparte quedan el gasto del día a día y las actividades (comida, transporte, tours y compras),
+       estimados en ${eurN(M.estimado)}. Eso no se reparte por adelantado: se va apuntando en Gastos.`));
   }
 
   /* ---- saldo vivo + acceso a los gastos ---- */
