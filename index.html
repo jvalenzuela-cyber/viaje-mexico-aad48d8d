@@ -876,7 +876,7 @@ const CONTACTS = [
 const $ = s => document.querySelector(s);
 const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
 const cityBadge = c => `<span class="badge-city" style="background:${CITY[c].c}">${CITY[c].n}</span>`;
-const eur = n => (n<0?'−':'')+Math.abs(n).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const eur = n => (n<0?'−':'')+eurN(Math.abs(n));
 const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')">`;
 const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
 const mapBtn = (q,label) => `<a class="mapbtn" href="${mapsUrl(q)}" target="_blank" rel="noopener">${I.pin} ${label||'Ver en mapa'}</a>`;
@@ -983,7 +983,7 @@ function renderHoyBefore(v){
   const prep=el('div','prep');
   prep.innerHTML=`
     <div class="pcard" onclick="showView('listas')"><div class="pi" style="background:rgba(31,143,160,.12);color:var(--aegean)">${I.check}</div><div><div class="pv">${tareas.pending}</div><div class="pk">tareas pendientes</div></div></div>
-    <div class="pcard" onclick="showView('dinero')"><div class="pi" style="background:rgba(200,68,58,.12);color:var(--bad)">${I.coins}</div><div><div class="pv">${eur(pend).replace(',00','')}</div><div class="pk">por pagar</div></div></div>
+    <div class="pcard" onclick="showView('dinero')"><div class="pi" style="background:rgba(200,68,58,.12);color:var(--bad)">${I.coins}</div><div><div class="pv">${Math.round(pend).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')} €</div><div class="pk">por pagar</div></div></div>
     <div class="pcard" onclick="showView('listas')"><div class="pi" style="background:rgba(47,158,110,.12);color:var(--good)">${I.bed}</div><div><div class="pv">${maleta.done}/${maleta.total}</div><div class="pk">maleta</div></div></div>
     <div class="pcard" onclick="showView('plan')"><div class="pi" style="background:rgba(232,163,61,.14);color:var(--gold)">${I.map}</div><div><div class="pv">21</div><div class="pk">días de plan</div></div></div>`;
   v.appendChild(prep);
