@@ -388,6 +388,26 @@
 
   .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
   .daynote.sinplan{background:rgba(232,163,61,.1);border-left-color:var(--gold);font-style:italic}
+  .splithead{display:flex;gap:10px;margin-bottom:12px}
+  .splithead .sh{flex:1;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:12px 13px;box-shadow:var(--shadow)}
+  .splithead .sh .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;
+    font-weight:700;font-family:'Fraunces',serif;font-size:14px;color:#fff;flex:0 0 auto}
+  .splithead .sh b{font-family:'Fraunces',serif;font-size:16px;display:block;line-height:1.1}
+  .splithead .sh span{font-size:11px;color:var(--muted);font-weight:600}
+  .exbtn.wide{width:100%;font-family:inherit;font-size:13.5px;font-weight:700;padding:12px;border-radius:12px;
+    border:1px solid var(--aegean);background:rgba(31,143,160,.08);color:var(--aegean);cursor:pointer;margin-bottom:12px}
+  .exbtn.wide.compartir{margin-top:12px;border-style:dashed}
+  .asigrow{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .asigrow:last-child{border-bottom:0}
+  .asigrow.done{opacity:.55}
+  .asigrow .pc{flex:1;min-width:0}
+  .asigrow .pc b{font-size:13.5px;display:block}
+  .asigrow .pc>span{font-size:11.5px;color:var(--muted);display:block}
+  .asigrow .pv{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:14.5px;white-space:nowrap}
+  .asigrow .markpaid{display:block;margin-top:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;
+    padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+  .asigrow.done .markpaid{background:rgba(47,158,110,.14);border-color:transparent;color:var(--good)}
 
   /* --- fix heredado: la insignia de ciudad se volvia invisible dentro de .ti --- */
   .day-head .ti .badge-city{color:#fff}
@@ -476,6 +496,7 @@
   <section class="view" id="v-listas"></section>
   <section class="view" id="v-info"></section>
   <section class="view" id="v-conversor"></section>
+  <section class="view" id="v-gastos"></section>
   <section class="view" id="v-boda"></section>
   <div class="footer">App de viaje · hecha desde la hoja de planificación · funciona sin conexión</div>
 </main>
@@ -527,11 +548,11 @@ const CITY = {
 const STATS = [ {v:'20', k:'noches'}, {v:'4', k:'destinos'}, {v:'6', k:'vuelos'} ];
 /*SYNC:TOTALS*/
 const TOTALS = {
-  eur_total:'5.780,00 €', mxn_total:'116.175 MXN',
-  eur_pp:'2.890,00 €', mxn_pp:'58.087 MXN',
+  eur_total:'5.753,00 €', mxn_total:'115.639 MXN',
+  eur_pp:'2.877,00 €', mxn_pp:'57.820 MXN',
   rate:'1 € ≈ 20,10 MXN', rate_val:20.1,
   pagado:'3.263,03 €', pagado_val:3263.03,
-  sin_asignar:'446,00 €', sin_asignar_val:446.0,
+  sin_asignar:'50,00 €', sin_asignar_val:50.0,
 };
 /*END:TOTALS*/
 
@@ -557,11 +578,11 @@ const NEXT = [
 
 /*SYNC:FLIGHTS*/
 const FLIGHTS = [
-  {n:1,date:'03/10',from:'BCN',to:'MEX',cityFrom:'Barcelona',cityTo:'Ciudad de México',airline:'Emirates EK255',dep:'por confirmar',arr:'por confirmar',loc:'MyTrip 1127-541-022',terminal:'T1 BCN',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Vuelo directo BCN-MEX. Clase Turista. Confirmar horarios y franquicia.'},
-  {n:2,date:'23/10',from:'MEX',to:'BCN',cityFrom:'Ciudad de México',cityTo:'Barcelona',airline:'Emirates EK256',dep:'por confirmar',arr:'por confirmar',loc:'MyTrip 1127-541-022',terminal:'-',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Llega a BCN el 24/10 por husos horarios. Confirmar.'},
+  {n:1,date:'03/10',from:'BCN',to:'MEX',cityFrom:'Barcelona',cityTo:'Ciudad de México',airline:'Emirates EK255',dep:'por confirmar',arr:'por confirmar',loc:'RMQTJB',terminal:'T1 BCN',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Vuelo directo BCN-MEX. Clase Turista. Pedido MyTrip 1127-541-022. Confirmar horarios y franquicia.'},
+  {n:2,date:'23/10',from:'MEX',to:'BCN',cityFrom:'Ciudad de México',cityTo:'Barcelona',airline:'Emirates EK256',dep:'por confirmar',arr:'por confirmar',loc:'RMQTJB',terminal:'-',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'Llega a BCN el 24/10 por husos horarios. Pedido MyTrip 1127-541-022. Confirmar.'},
   {n:3,date:'05/10',from:'MEX',to:'OAX',cityFrom:'Ciudad de México',cityTo:'Oaxaca',airline:'Aeroméxico/Volaris/VivaAerobus',dep:'15:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'48,00 €',status:'Pagado',stop:false,note:'Vuelo directo ~1h. Alternativa: bus ADO ~6-7h.'},
   {n:4,date:'10/10',from:'OAX',to:'PXM',cityFrom:'Oaxaca',cityTo:'Puerto Escondido',airline:'Aerotucán (regional)',dep:'por confirmar',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'sin precio',status:'Pagado',stop:false,note:'bus'},
-  {n:5,date:'14/10',from:'PXM',to:'DGO',cityFrom:'Puerto Escondido',cityTo:'Durango',airline:'vía CDMX o Guadalajara',dep:'13:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'121,00 €',status:'Pagado',stop:false,note:'Sin vuelo directo. Conexión necesaria. Para llegar a la boda (15 oct).'},
+  {n:5,date:'14/10',from:'PXM',to:'DGO',cityFrom:'Puerto Escondido',cityTo:'Durango',airline:'Volaris',dep:'13:00',arr:'por confirmar',loc:'KLSYGE',terminal:'',bag:'verificar',price:'121,00 €',status:'Pagado',stop:true,note:'PXM-DGO con 1 escala. Check-in en línea desde 3 días antes. Para llegar a la boda.'},
   {n:6,date:'18/10',from:'DGO',to:'MEX',cityFrom:'Durango',cityTo:'Ciudad de México',airline:'Aeroméxico/Volaris/VivaAerobus',dep:'15:00',arr:'por confirmar',loc:'por confirmar',terminal:'',bag:'verificar',price:'199,94 €',status:'Pagado',stop:false,note:'Vuelo directo ~1h50. 2 vuelos/día. Volver para el EK256 del 23.'}
 ];
 /*END:FLIGHTS*/
@@ -571,8 +592,7 @@ const HOTELS = [
   {city:'MEX',name:'Condesa Suites',type:'Studio',inn:'03/10',out:'',nights:2,ppn:'51,38 €',total:'102,75 €',status:'Pagado',addr:'Ciudad de México (inicio)',note:'Llegada 03/10'},
   {city:'OAX',name:'Hotel Posada San Rafael',type:'Hotel',inn:'05/10',out:'10/10',nights:5,ppn:'29,40 €',total:'147,00 €',status:'Pendiente',addr:'Oaxaca',note:''},
   {city:'PXM',name:'Carri Surf Studio',type:'Hotel',inn:'10/10',out:'14/10',nights:4,ppn:'43,45 €',total:'173,80 €',status:'Pagado',addr:'Puerto Escondido',note:'Playa, fin temporada lluvias'},
-  {city:'DGO',name:'Hotel Maria Elena',type:'Hotel',inn:'14/10',out:'15/10',nights:1,ppn:'26,65 €',total:'26,65 €',status:'Pendiente',addr:'Durango (boda)',note:''},
-  {city:'DGO',name:'Hampton Inn',type:'Hotel',inn:'15/10',out:'18/10',nights:3,ppn:'90,39 €',total:'271,16 €',status:'Pendiente',addr:'Durango (boda)',note:'Confirmar si hay hotel/bloqueo del evento'},
+  {city:'DGO',name:'Hampton Inn',type:'Hotel',inn:'14/10',out:'18/10',nights:4,ppn:'67,79 €',total:'271,16 €',status:'Pendiente',addr:'Durango (boda)',note:'4 noches (14-18 oct). El importe de 271,16 era de 3 noches: confirmar el real.'},
   {city:'MEX',name:'Uniko Living',type:'Hotel',inn:'18/10',out:'23/10',nights:5,ppn:'45,30 €',total:'226,48 €',status:'Pagado',addr:'Ciudad de México (final)',note:'Antes del vuelo del 23/10'}
 ];
 /*END:HOTELS*/
@@ -603,7 +623,7 @@ const ITIN = [
   {date:'15/10',dow:'Jueves',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'Cambio de hotel (a Hampton Inn)',note:'Inicio ventana boda (15-18 oct).'},
   {date:'16/10',dow:'Viernes',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'',note:''},
   {date:'17/10',dow:'Sábado',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'BODA',tr:'',note:'Evento principal del viaje (sábado).'},
-  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'',tr:'Durango a CDMX (avión, 15:00)',note:'Fin ventana boda.'},
+  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:'Inicio ventana boda (15-18 oct).'},
   {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
   {date:'20/10',dow:'Martes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Frida Kahlo 11:30',a:'',e:'',tr:'',note:''},
   {date:'21/10',dow:'Miércoles',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
@@ -684,7 +704,7 @@ const BUDGET = [
   {cat:'Vuelos internos',v:'120,00 €',real:'48,00 €',n:'CDMX-Oaxaca (2 pax)',ic:I.plane},
   {cat:'Vuelos internos',v:'196,00 €',real:'196,00 €',n:'Puerto Escondido-Durango (2 pax)',ic:I.plane},
   {cat:'Vuelos internos',v:'200,00 €',real:'200,00 €',n:'Durango-CDMX (2 pax)',ic:I.plane},
-  {cat:'Alojamiento',v:'947,84 €',real:'947,84 €',n:'Total alojamiento (enlazado)',ic:I.bed},
+  {cat:'Alojamiento',v:'921,19 €',real:'921,19 €',n:'Total alojamiento (enlazado)',ic:I.bed},
   {cat:'Comida y bebida',v:'1.200,00 €',real:'—',n:'Aprox. por día x 20 días x 2 pax',ic:I.food},
   {cat:'Transporte local',v:'200,00 €',real:'—',n:'Taxis, colectivos, metro, Uber/Didi',ic:I.bus},
   {cat:'Actividades y tours',v:'400,00 €',real:'—',n:'Monte Albán, Teotihuacán, snorkel, mezcal...',ic:I.star},
@@ -696,8 +716,8 @@ const BUDGET = [
 const PAYMENTS = [
   {c:'Vuelos internacionales · Emirates ida+vuelta (2 pax), YA PAGADO',by:'Javiera',amt:'2.266,00 €',val:2266.0,st:'Pagado',n:'2.356.875 CLP, recibo MyTrip 1127-541-022. Pon aquí el importe en EUR de tu cargo.'},
   {c:'Vuelos internos · CDMX-Oaxaca (2 pax)',by:'Javiera',amt:'48,00 €',val:48.0,st:'Pagado',n:''},
-  {c:'Vuelos internos · Puerto Escondido-Durango (2 pax)',by:'—',amt:'196,00 €',val:196.0,st:'Pagado',n:''},
-  {c:'Vuelos internos · Durango-CDMX (2 pax)',by:'—',amt:'200,00 €',val:200.0,st:'Pagado',n:''},
+  {c:'Vuelos internos · Puerto Escondido-Durango (2 pax)',by:'Javiera',amt:'196,00 €',val:196.0,st:'Pagado',n:''},
+  {c:'Vuelos internos · Durango-CDMX (2 pax)',by:'Javiera',amt:'200,00 €',val:200.0,st:'Pagado',n:''},
   {c:'Comida y bebida · Aprox. por día x 20 días x 2 pax',by:'—',amt:'1.200,00 €',val:1200.0,st:'Pendiente',n:''},
   {c:'Transporte local · Taxis, colectivos, metro, Uber/Didi',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
   {c:'Actividades y tours · Monte Albán, Teotihuacán, snorkel, mezcal...',by:'—',amt:'400,00 €',val:400.0,st:'Pendiente',n:''},
@@ -706,11 +726,15 @@ const PAYMENTS = [
   {c:'Alojamiento · Condesa Suites (Ciudad de México (inicio))',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
   {c:'Alojamiento · Hotel Posada San Rafael (Oaxaca)',by:'—',amt:'147,00 €',val:147.0,st:'Pendiente',n:'5 noches · 29,40 €/noche · se paga en recepción'},
   {c:'Alojamiento · Carri Surf Studio (Puerto Escondido)',by:'Juan',amt:'173,80 €',val:173.8,st:'Pagado',n:'4 noches · 43,45 €/noche'},
-  {c:'Alojamiento · Hotel Maria Elena (Durango (boda))',by:'—',amt:'26,65 €',val:26.65,st:'Pendiente',n:'1 noches · 26,65 €/noche · se paga en recepción'},
-  {c:'Alojamiento · Hampton Inn (Durango (boda))',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'3 noches · 90,39 €/noche · se paga en recepción'},
+  {c:'Alojamiento · Hampton Inn (Durango (boda))',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'4 noches · 67,79 €/noche · se paga en recepción'},
   {c:'Alojamiento · Uniko Living (Ciudad de México (final))',by:'Juan',amt:'226,48 €',val:226.48,st:'Pagado',n:'5 noches · 45,30 €/noche'}
 ];
 /*END:PAYMENTS*/
+/*SYNC:GASTOS*/
+const GASTOS = [
+
+];
+/*END:GASTOS*/
 
 const DISHES = {
   'Ciudad de México': [
@@ -758,7 +782,9 @@ const TASKS = [
   {cat:'Boda',t:'Regalo / mesa de regalos',n:'',done:false},
   {cat:'Equipaje',t:'Adaptador de enchufe (tipo A/B, 127V)',n:'',done:false},
   {cat:'Equipaje',t:'Revisar franquicia de equipaje Emirates',n:'',done:false},
-  {cat:'Seguro',t:'Contratar seguro de viaje',n:'Recomendado, no obligatorio.',done:false}
+  {cat:'Seguro',t:'Contratar seguro de viaje',n:'Recomendado, no obligatorio.',done:false},
+  {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Emirates',n:'Reserva RMQTJB. Emirates suele abrirlo 48h antes de cada vuelo.',done:false},
+  {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Volaris',n:'Reserva KLSYGE (PXM-DGO del 14/10). Se abre 3 días antes.',done:false}
 ];
 /*END:TASKS*/
 
@@ -858,14 +884,14 @@ const CONTACTS = [
   {t:'Asistencia carretera',sub:'Ángeles Verdes · Turistas en carretera.',tel:'078',web:'',ic:I.shield},
   {t:'Embajada de España',sub:'En Ciudad de México · Confirmar teléfono actual.',tel:'verificar',web:'https://exteriores.gob.es',ic:I.globe},
   {t:'Consulado de Chile',sub:'En Ciudad de México · Confirmar teléfono actual.',tel:'verificar',web:'https://chile.gob.cl',ic:I.globe},
-  {t:'Aerolínea',sub:'Emirates · Vuelos EK255 / EK256.',tel:'verificar',web:'https://emirates.com',ic:I.plane},
+  {t:'Aerolínea',sub:'Emirates · Reserva RMQTJB · vuelos EK255 / EK256.',tel:'verificar',web:'https://emirates.com',ic:I.plane},
   {t:'Agencia',sub:'MyTrip / Gotogate · Pedido 1127-541-022.',tel:'',web:'https://mytrip.com',ic:I.plane},
   {t:'Seguro de viaje',sub:'(rellenar al contratar) · Asistencia 24h.',tel:'',web:'',ic:I.shield},
   {t:'Bloqueo de tarjetas',sub:'Banco · Por si pérdida/robo.',tel:'',web:'',ic:I.coins},
   {t:'Alojamiento CDMX',sub:'Condesa Suites / Uniko Living · 03-05 oct (inicio) y 18-23 oct (final)',tel:'',web:'',ic:I.bed},
   {t:'Alojamiento Oaxaca',sub:'Hotel Posada San Rafael · 05-10 oct',tel:'',web:'',ic:I.bed},
   {t:'Alojamiento Pto Escondido',sub:'Carri Surf Studio · 10-14 oct',tel:'',web:'',ic:I.bed},
-  {t:'Alojamiento Durango',sub:'Hotel Maria Elena / Hampton Inn · 14-15 y 15-18 oct (boda)',tel:'',web:'',ic:I.bed},
+  {t:'Alojamiento Durango',sub:'Hampton Inn · 14-18 oct (boda)',tel:'',web:'',ic:I.bed},
   {t:'Boda',sub:'Contacto del evento · Anfitriones / organización.',tel:'',web:'',ic:I.star},
   {t:'Aeropuertos',sub:'MEX (CDMX) · OAX · PXM · DGO · Confirmar terminal de llegada de Emirates.',tel:'',web:'',ic:I.plane}
 ];
@@ -910,13 +936,13 @@ function checkCount(items,key,hasDefaults){
 }
 function pendingPay(){
   const st=loadState('mx_pagos'); let pend=0;
-  PAYMENTS.forEach((p,i)=>{ const id='mx_pagos_'+i; const paid=(id in st)?st[id]:(p.st==='Pagado'); if(!paid) pend+=p.val; });
+  PAYMENTS.forEach((p,i)=>{ if(p.st!=='Pagado' && !st['mx_pagos_'+i]) pend+=p.val; });
   return pend;
 }
 
 /* ============== NAVIGATION ============== */
 const PRIMARY=['hoy','plan','dinero','comida','mas'];
-const PARENT={logistica:'mas',listas:'mas',info:'mas',conversor:'mas',boda:'mas'};
+const PARENT={logistica:'mas',listas:'mas',info:'mas',conversor:'mas',boda:'mas',gastos:'dinero'};
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
   const sec=$('#v-'+id); if(sec) sec.classList.add('on');
@@ -1193,67 +1219,101 @@ function renderLog(){
 }
 
 /* ============== DINERO ============== */
-/* Todo el dinero se calcula aquí, en el momento, a partir de:
-   - PAYMENTS (lo que viene de la hoja de planificación)
-   - lo que se marca como pagado en este móvil (mx_pagos)
-   - quién puso cada pago (mx_pagador), editable desde la app
-   - los gastos que se van añadiendo sobre la marcha (mx_gastos)
-   Regla: el viaje se reparte a medias salvo que un gasto se marque de uno solo. */
-const PAYKEY='mx_pagos', WHOKEY='mx_pagador', EXPKEY='mx_gastos';
+/* Regla acordada con Javiera (14-sep-2026): lo pagado ANTES del viaje queda saldado,
+   nadie le debe nada a nadie por eso. De aquí en adelante, todo a medias:
+   - lo que queda por pagar se reparte concepto a concepto, buscando que cada uno
+     ponga la mitad;
+   - lo que se gasta durante el viaje va en su propia hoja y genera el saldo vivo.
+   Nada de esto se calcula en el sync: se calcula aquí, con lo que haya marcado en
+   el móvil, para que siga cuadrando cuando cambien las cosas sobre la marcha. */
+const PAYKEY='mx_pagos', WHOKEY='mx_pagador', ASIGKEY='mx_asigna', EXPKEY='mx_gastos';
 const YO=['Javiera','Juan'];
 const PCOLOR={Javiera:'#1f8fa0', Juan:'#c4633a'};
 
 function loadExpenses(){ try{ return JSON.parse(localStorage.getItem(EXPKEY))||[]; }catch(e){ return []; } }
 function saveExpenses(a){ localStorage.setItem(EXPKEY, JSON.stringify(a)); }
-/* formato español a mano: toLocaleString no siempre agrupa los miles según el
-   navegador, y quedaban importes como "5707,84 €" en vez de "5.707,84 €" */
 const eurN = v => {
   const neg = v<0; const [ent,dec] = Math.abs(v).toFixed(2).split('.');
   return (neg?'-':'') + ent.replace(/\B(?=(\d{3})+(?!\d))/g,'.') + ',' + dec + ' €';
 };
+const miles = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+
+/* reparto automático: el concepto más caro va siempre al que menos lleva.
+   Con estos importes deja una diferencia de pocos euros, que se ve en pantalla. */
+function repartoAuto(items){
+  /* Lo que esté puesto a medias a propósito (la comida del día a día, por ejemplo)
+     no se toca: ya cuenta mitad y mitad. El resto se reparte dando siempre el
+     concepto más caro al que menos lleva. */
+  const suma={Javiera:0,Juan:0}, out={};
+  items.filter(i=>i.asig==='medias').forEach(it=>{ suma.Javiera+=it.val/2; suma.Juan+=it.val/2; });
+  items.filter(i=>i.asig!=='medias').sort((a,b)=>b.val-a.val).forEach(it=>{
+    const quien = suma.Javiera<=suma.Juan ? 'Javiera' : 'Juan';
+    out[it.i]=quien; suma[quien]+=it.val;
+  });
+  return out;
+}
 
 function moneyState(){
-  const paidSt=loadState(PAYKEY), whoSt=loadState(WHOKEY);
-  const isPaid=(p,i)=> (PAYKEY+'_'+i in paidSt) ? paidSt[PAYKEY+'_'+i] : (p.st==='Pagado');
-  const payer =(p,i)=> (WHOKEY+'_'+i in whoSt)  ? whoSt[WHOKEY+'_'+i]  : (YO.includes(p.by)?p.by:'');
+  const paidSt=loadState(PAYKEY), whoSt=loadState(WHOKEY), asigSt=loadState(ASIGKEY);
+  const yaEstaba = p => p.st==='Pagado';                       // pagado antes del viaje: saldado
+  const isPaid = (p,i)=> yaEstaba(p) || !!paidSt[PAYKEY+'_'+i];
+  const payer  = (p,i)=> whoSt[WHOKEY+'_'+i] || (YO.includes(p.by)?p.by:'');
+  const asig   = (p,i)=> asigSt[ASIGKEY+'_'+i] || '';
 
-  const put={Javiera:0,Juan:0};       // lo que cada uno ha desembolsado
-  const oweAll={Javiera:0,Juan:0};    // su parte de todo el viaje (lo pagado sin dueño no se reparte: ya está pagado)
-  const owePaid={Javiera:0,Juan:0};   // su parte de lo pagado Y con dueño conocido: sirve para liquidar hoy
-  let paid=0, pend=0, unassigned=0;
-
-  // reparte un importe entre los dos segun a quien corresponda el gasto
-  const share=(acc,val,split)=>{
-    if(split==='medias'||!YO.includes(split)){ acc.Javiera+=val/2; acc.Juan+=val/2; }
-    else acc[split]+=val;
-  };
-
+  // 1. línea base: lo ya pagado, solo informativo
+  const base={Javiera:0,Juan:0}; let baseSinDueno=0, pagadoBase=0;
+  // 2. lo que queda: conceptos a repartir
+  const pendientes=[]; let pend=0;
   PAYMENTS.forEach((p,i)=>{
-    const done=isPaid(p,i), by=done?payer(p,i):'';
-    if(done){
-      paid+=p.val;
-      if(YO.includes(by)){ put[by]+=p.val; share(oweAll,p.val,'medias'); share(owePaid,p.val,'medias'); }
-      else unassigned+=p.val;          // pagado, pero no se sabe quien: fuera del reparto hasta asignarlo
+    if(yaEstaba(p)){
+      pagadoBase+=p.val;
+      const by=payer(p,i);
+      if(YO.includes(by)) base[by]+=p.val; else baseSinDueno+=p.val;
     } else {
       pend+=p.val;
-      share(oweAll,p.val,'medias');
+      pendientes.push({i, c:p.c, n:p.n, val:p.val, asig:asig(p,i), pagado:isPaid(p,i), by:payer(p,i)});
     }
   });
 
-  const exps=loadExpenses();
-  exps.forEach(e=>{
-    paid+=e.eur;
-    if(YO.includes(e.by)){ put[e.by]+=e.eur; share(oweAll,e.eur,e.split); share(owePaid,e.eur,e.split); }
-    else unassigned+=e.eur;
+  // 3. dos cuentas distintas, que no se deben mezclar:
+  //    owe    = lo que le corresponde de TODO lo que queda (para "le toca poner")
+  //    owePag = su parte de lo que YA se ha desembolsado (para el saldo de hoy)
+  const owe={Javiera:0,Juan:0}, owePag={Javiera:0,Juan:0}, put={Javiera:0,Juan:0};
+  const tocaPoner={Javiera:0,Juan:0};
+  const reparte=(acc,val,quien)=>{
+    if(YO.includes(quien)) acc[quien]+=val;
+    else { acc.Javiera+=val/2; acc.Juan+=val/2; }
+  };
+  pendientes.forEach(p=>{
+    reparte(owe, p.val, p.asig);
+    if(p.pagado){
+      reparte(owePag, p.val, p.asig);
+      if(YO.includes(p.by)) put[p.by]+=p.val;
+    } else {
+      reparte(tocaPoner, p.val, p.asig);
+    }
   });
 
-  const total=paid+pend;
-  const rows=YO.map(n=>({
-    name:n, put:put[n], owe:oweAll[n],
-    falta: oweAll[n]-put[n],      // lo que le queda por poner hasta el final del viaje
-    saldo: owePaid[n]-put[n]      // si liquidaran hoy: positivo = debe, negativo = le deben
-  }));
-  return {isPaid, payer, paid, pend, total, unassigned, rows, exps};
+  const gastos=allGastos();
+  let gastadoViaje=0;
+  gastos.forEach(g=>{
+    gastadoViaje+=g.eur;
+    if(YO.includes(g.by)) put[g.by]+=g.eur;
+    reparte(owe, g.eur, g.split);
+    reparte(owePag, g.eur, g.split);
+  });
+
+  const rows=YO.map(n=>({name:n, base:base[n], owe:owe[n], put:put[n],
+                         toca:tocaPoner[n], saldo:Math.round((owePag[n]-put[n])*100)/100}));
+  return {isPaid, payer, asig, pendientes, pend, pagadoBase, base, baseSinDueno,
+          gastos, gastadoViaje, rows, total:pagadoBase+pend+gastadoViaje};
+}
+
+/* gastos del viaje: los de la hoja (los ven los dos) + los apuntados en este móvil */
+function allGastos(){
+  const locales=loadExpenses().map(g=>Object.assign({}, g, {local:true}));
+  const hoja=(typeof GASTOS!=='undefined'?GASTOS:[]).map(g=>Object.assign({}, g, {local:false}));
+  return hoja.concat(locales);
 }
 
 function settleMoves(rows){
@@ -1273,49 +1333,107 @@ function renderMoney(){
   const v=$('#v-dinero'); v.innerHTML='';
   const M=moneyState();
 
-  /* ---- 1. cuánto llevamos ---- */
+  /* ---- cómo va ---- */
   v.appendChild(el('div','sec-title','Cómo va el dinero'));
   const tb=el('div','total-bar');
   tb.innerHTML=`<div><div class="tt">Total del viaje</div><small>2 personas · 20 noches</small></div>
     <div style="text-align:right"><div class="tv">${eurN(M.total)}</div><small>${eurN(M.total/2)} por persona</small></div>`;
   v.appendChild(tb);
+  const pagado=M.pagadoBase+M.gastadoViaje;
+  const restante=Math.max(0, M.total-pagado);
   const pb=el('div','paysum');
-  pb.innerHTML=`<div class="bar"><i style="width:${M.total?(M.paid/M.total*100):0}%"></i></div>
-    <div class="legend"><span class="paid"><span class="k">Ya pagado</span><b>${eurN(M.paid)}</b></span>
-    <span class="pend" style="text-align:right"><span class="k">Queda por pagar</span><b>${eurN(M.pend)}</b></span></div>`;
+  pb.innerHTML=`<div class="bar"><i style="width:${M.total?(pagado/M.total*100):0}%"></i></div>
+    <div class="legend"><span class="paid"><span class="k">Ya pagado</span><b>${eurN(pagado)}</b></span>
+    <span class="pend" style="text-align:right"><span class="k">Queda por pagar</span><b>${eurN(restante)}</b></span></div>`;
   v.appendChild(pb);
 
-  if(M.unassigned>0.005){
-    v.appendChild(el('div','callout warn',
-      `<span class="ci">${I.info}</span><div>Hay <b>${eurN(M.unassigned)}</b> ya pagados sin saber quién los puso.
-       Asígnalos en <b>Estado de pagos</b>, abajo, y el reparto se recalcula solo.</div>`));
-  }
+  v.appendChild(el('div','callout',
+    `<span class="ci">${I.check}</span><div>Lo pagado antes de salir queda saldado: no se deben nada por eso
+     (Javiera puso ${eurN(M.base.Javiera)} y Juan ${eurN(M.base.Juan)}).
+     De aquí en adelante, todo a medias.</div>`));
 
-  /* ---- 2. lo que queda, repartido para que salga equitativo ---- */
-  v.appendChild(el('div','sec-title','Lo que queda por pagar, repartido'));
-  v.appendChild(el('div','sub','Cada uno paga esta parte de lo que falta y al final del viaje quedan a la par, sin transferencias.'));
-  const split=el('div','card flat');
-  let algoNegativo=false;
-  M.rows.forEach(r=>{
-    const falta=Math.max(0, r.falta);
-    if(r.falta<-0.005) algoNegativo=true;
-    split.appendChild(el('div','putrow',
-      `<i class="av" style="background:${PCOLOR[r.name]}">${r.name[0]}</i>
-       <div class="pr"><b>${r.name}</b><span>Ya ha puesto ${eurN(r.put)} · su parte del viaje son ${eurN(r.owe)}</span></div>
-       <div class="pamt">${eurN(falta)}<div class="pk">le toca poner</div></div>`));
+  /* ---- quién paga qué de lo que queda ---- */
+  v.appendChild(el('div','sec-title','Quién paga qué de lo que queda'));
+  v.appendChild(el('div','sub','Repartido para que cada uno ponga la mitad. Toca un concepto para cambiar a quién le toca.'));
+
+  const suma={Javiera:0,Juan:0}; let sinAsignar=0;
+  M.pendientes.forEach(p=>{
+    if(YO.includes(p.asig)) suma[p.asig]+=p.val;
+    else { suma.Javiera+=p.val/2; suma.Juan+=p.val/2; if(p.asig!=='medias') sinAsignar+=p.val; }
   });
-  v.appendChild(split);
-  if(algoNegativo){
-    v.appendChild(el('div','sub','Alguien ya ha puesto más de lo que le corresponde en todo el viaje: aunque no pague nada más, el otro tendrá que devolverle la diferencia (abajo).'));
-  }
+  const head=el('div','splithead');
+  head.innerHTML=YO.map(n=>`<div class="sh"><i class="av" style="background:${PCOLOR[n]}">${n[0]}</i>
+      <div><b>${eurN(suma[n])}</b><span>${n}</span></div></div>`).join('');
+  v.appendChild(head);
 
-  /* ---- 3. quién paga a quién ---- */
-  const moves=settleMoves(M.rows);
-  v.appendChild(el('div','sec-title','Quién debe a quién, ahora mismo'));
-  if(!moves.length){
-    v.appendChild(el('div','callout',`<span class="ci">${I.check}</span><div>Están a la par con lo pagado hasta ahora.</div>`));
+  const dif=Math.abs(suma.Javiera-suma.Juan);
+  if(sinAsignar>0.005){
+    v.appendChild(el('div','callout warn',
+      `<span class="ci">${I.info}</span><div>Quedan <b>${eurN(sinAsignar)}</b> sin asignar.
+       Dale a repartir y se reparten solos, o ponlos a medias uno a uno.</div>`));
+  } else if(dif>0.005){
+    v.appendChild(el('div','sub',`Diferencia entre los dos: ${eurN(dif)}. Se cuadra con cualquier gasto del viaje.`));
   } else {
-    v.appendChild(el('div','sub','Si liquidaran hoy, solo con lo que ya está pagado.'));
+    v.appendChild(el('div','sub','Repartido exacto: cada uno pone la mitad.'));
+  }
+  v.appendChild(el('div','sub','Lo que se paga a diario entre los dos (la comida, por ejemplo) conviene dejarlo a medias y apuntar cada gasto en Gastos.'));
+
+  const btn=el('button','exbtn wide');
+  btn.textContent='Repartir lo que queda a partes iguales';
+  btn.onclick=()=>{
+    const st=loadState(ASIGKEY);
+    const auto=repartoAuto(M.pendientes);
+    Object.entries(auto).forEach(([i,quien])=>{ st[ASIGKEY+'_'+i]=quien; });
+    saveState(ASIGKEY,st); renderMoney();
+  };
+  v.appendChild(btn);
+
+  const compartir=el('button','exbtn wide compartir');
+  compartir.textContent='Mandarle el reparto a la otra persona';
+  compartir.onclick=()=>{
+    const lineas=M.pendientes.map(p=>{
+      const q = YO.includes(p.asig) ? p.asig : 'a medias';
+      return `· ${p.c}: ${eurN(p.val)} → ${q}${p.pagado?' (ya pagado)':''}`;
+    });
+    const txt=`Reparto de lo que queda por pagar del viaje a México\n\n`+
+      `${lineas.join('\n')}\n\nJaviera: ${eurN(suma.Javiera)} · Juan: ${eurN(suma.Juan)}`;
+    if(navigator.share) navigator.share({text:txt}).catch(()=>{});
+    else { navigator.clipboard.writeText(txt); alert('Reparto copiado.'); }
+  };
+
+  const lc=el('div','card flat');
+  M.pendientes.forEach(p=>{
+    const row=el('div','asigrow'+(p.pagado?' done':''));
+    row.innerHTML=`
+      <div class="pc"><b>${p.c}</b><span>${p.n||''}</span>
+        <div class="whosel">${YO.map(n=>`<button data-w="${n}" class="${p.asig===n?'on':''}">${n}</button>`).join('')}
+          <button data-w="medias" class="${p.asig==='medias'?'on':''}">a medias</button></div>
+      </div>
+      <div class="pv">${eurN(p.val)}
+        <button class="markpaid">${p.pagado?'pagado':'marcar pagado'}</button></div>`;
+    row.querySelectorAll('.whosel button').forEach(b=>b.onclick=()=>{
+      const st=loadState(ASIGKEY); st[ASIGKEY+'_'+p.i]=b.dataset.w; saveState(ASIGKEY,st);
+      renderMoney();
+    });
+    row.querySelector('.markpaid').onclick=()=>{
+      const st=loadState(PAYKEY); st[PAYKEY+'_'+p.i]=!p.pagado; saveState(PAYKEY,st);
+      if(!p.pagado && YO.includes(p.asig)){       // lo normal: lo paga quien lo tenía asignado
+        const w=loadState(WHOKEY); w[WHOKEY+'_'+p.i]=p.asig; saveState(WHOKEY,w);
+      }
+      renderMoney(); renderHoy();
+    };
+    lc.appendChild(row);
+  });
+  v.appendChild(lc);
+  v.appendChild(compartir);
+
+  /* ---- saldo vivo + acceso a los gastos ---- */
+  const moves=settleMoves(M.rows);
+  v.appendChild(el('div','sec-title','Saldo entre ustedes'));
+  if(!moves.length){
+    v.appendChild(el('div','callout',`<span class="ci">${I.check}</span><div>Están a la par.</div>`));
+  } else {
+    v.appendChild(el('div','sub','Solo de lo que se va pagando a partir de ahora.'));
     moves.forEach(m=>v.appendChild(el('div','settle',
       `<i class="av" style="background:${PCOLOR[m.from]||'#7a6068'}">${m.from[0]}</i>
        <span class="ar">${I.chevR}</span>
@@ -1323,11 +1441,64 @@ function renderMoney(){
        <div class="slbl"><b>${m.from}</b> le debe a <b>${m.to}</b></div>
        <div class="samt">${eurN(m.amt)}</div>`)));
   }
+  const tile=el('button','mtile');
+  tile.innerHTML=`<div class="mi">${I.coins}</div><div class="mt"><b>Gastos del viaje</b>
+    <span>${M.gastos.length?`${M.gastos.length} apuntados · ${eurN(M.gastadoViaje)}`:'Todavía sin apuntar nada'}</span></div>
+    <span class="arr">${I.chevR}</span>`;
+  tile.onclick=()=>showView('gastos');
+  v.appendChild(tile);
 
-  /* ---- 4. gastos sobre la marcha ---- */
+  /* ---- presupuesto previsto ---- */
+  v.appendChild(el('div','sec-title','Presupuesto previsto'));
+  v.appendChild(el('div','sub','Lo que está estimado en la hoja, categoría a categoría.'));
+  const bc=el('div','card');
+  BUDGET.forEach(b=>bc.appendChild(el('div','bud',
+    `<div class="bic">${b.ic}</div><div class="bn">${b.cat}<span>${b.n}</span></div>
+     <div class="bv">${b.v}${b.real&&b.real!=='—'?`<div class="breal">real ${b.real}</div>`:''}</div>`)));
+  v.appendChild(bc);
+
+  /* ---- lo ya pagado, para consultar ---- */
+  const det=el('div','detail');
+  det.innerHTML=`<div class="detail-h">${I.chev} Ver lo que ya estaba pagado</div><div class="detail-b"></div>`;
+  const db=det.querySelector('.detail-b');
+  db.appendChild(el('div','sub','Saldado, no entra en el reparto. El selector es solo para dejar constancia de quién lo puso.'));
+  const whoSt=loadState(WHOKEY);
+  PAYMENTS.forEach((p,i)=>{
+    if(p.st!=='Pagado') return;
+    const by=M.payer(p,i);
+    const row=el('div','paychk done');
+    row.innerHTML=`<div class="box">${checkSVG}</div>
+      <div class="pc"><b>${p.c}</b><span>${p.n||''}</span>
+        <div class="whosel">${YO.map(n=>`<button data-w="${n}" class="${by===n?'on':''}">${n}</button>`).join('')}
+          <button data-w="" class="${by?'':'on'}">sin asignar</button></div>
+      </div>
+      <div class="pv">${p.amt}</div>`;
+    row.querySelectorAll('.whosel button').forEach(b=>b.onclick=(ev)=>{
+      ev.stopPropagation();
+      whoSt[WHOKEY+'_'+i]=b.dataset.w; saveState(WHOKEY,whoSt); renderMoney();
+    });
+    db.appendChild(row);
+  });
+  det.querySelector('.detail-h').onclick=()=>det.classList.toggle('open');
+  v.appendChild(det);
+}
+
+/* ============== GASTOS DEL VIAJE ============== */
+function renderGastos(){
+  const v=$('#v-gastos'); v.innerHTML=backbar('dinero');
+  const M=moneyState();
   v.appendChild(el('div','sec-title','Gastos del viaje'));
-  v.appendChild(el('div','sub','Apunta aquí lo que vayan gastando allí. Se guarda en este móvil: para que el otro lo vea, usa Compartir.'));
+  v.appendChild(el('div','sub','Lo que se va gastando allí. La hoja "Gastos" del Sheet es la lista buena: lo que apuntes aquí es un borrador hasta que lo pases a la hoja.'));
 
+  const moves=settleMoves(M.rows);
+  const res=el('div','total-bar');
+  res.innerHTML=`<div><div class="tt">Gastado en el viaje</div><small>${M.gastos.length} apunte${M.gastos.length===1?'':'s'}</small></div>
+    <div style="text-align:right"><div class="tv">${eurN(M.gastadoViaje)}</div>
+      <small>${moves.length?`${moves[0].from} debe ${eurN(moves[0].amt)}`:'están a la par'}</small></div>`;
+  v.appendChild(res);
+
+  /* apunte rápido */
+  v.appendChild(el('div','sec-title','Apuntar un gasto'));
   const form=el('div','card expform');
   form.innerHTML=`
     <input class="ex-c" type="text" placeholder="Concepto (comida, taxi, entradas...)">
@@ -1353,99 +1524,67 @@ function renderMoney(){
     const c=form.querySelector('.ex-c').value.trim();
     const a=parseFloat((form.querySelector('.ex-a').value||'').replace(',','.'));
     if(!c || !a || a<=0){ form.querySelector('.ex-c').focus(); return; }
-    const cur=getCur();
-    const rate=TOTALS.rate_val||20.1;
-    const eurVal=Math.round((cur==='MXN'? a/rate : a)*100)/100;
+    const cur=getCur(), rate=TOTALS.rate_val||20.1;
     const exps=loadExpenses();
-    exps.push({id:Date.now(), c, amt:a, cur, eur:eurVal, by:getBy(), split:getSp(),
-               d:new Date().toISOString().slice(0,10)});
+    exps.push({id:Date.now(), c, amt:a, cur, eur:Math.round((cur==='MXN'? a/rate : a)*100)/100,
+               by:getBy(), split:getSp(), d:new Date().toISOString().slice(0,10)});
     saveExpenses(exps);
-    renderMoney(); renderHoy();
+    renderGastos(); renderMoney(); renderHoy();
   };
 
-  const exps=M.exps;
-  if(exps.length){
+  /* los de la hoja */
+  const hoja=M.gastos.filter(g=>!g.local);
+  if(hoja.length){
+    v.appendChild(el('div','sec-title','En la hoja'));
+    const hc=el('div','card flat');
+    hoja.forEach(g=>hc.appendChild(el('div','exitem',
+      `<div class="pc"><b>${g.c}</b><span>${g.d||''}${g.d?' · ':''}pagó ${g.by||'—'} · ${g.split==='medias'?'a medias':'solo '+g.split}</span></div>
+       <div class="pv">${eurN(g.eur)}${g.cur==='MXN'?`<div class="sub2">${miles(g.amt)} MXN</div>`:''}</div>`)));
+    v.appendChild(hc);
+  }
+
+  /* los de este móvil */
+  const locales=M.gastos.filter(g=>g.local);
+  if(locales.length){
+    v.appendChild(el('div','sec-title','Apuntados en este móvil'));
+    v.appendChild(el('div','sub','Todavía no están en la hoja. Pásalos cuando tengas cobertura y bórralos de aquí.'));
     const lc=el('div','card flat');
-    exps.slice().reverse().forEach(e=>{
+    locales.slice().reverse().forEach(g=>{
       const row=el('div','exitem');
-      const dd=e.d?e.d.slice(8,10)+'/'+e.d.slice(5,7):'';
-      const spl=e.split==='medias'?'a medias':'solo '+e.split;
-      row.innerHTML=`<div class="pc"><b>${e.c}</b><span>${dd} · pagó ${e.by} · ${spl}</span></div>
-        <div class="pv">${eurN(e.eur)}${e.cur==='MXN'?`<div class="sub2">${e.amt.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')} MXN</div>`:''}</div>
+      const dd=g.d?g.d.slice(8,10)+'/'+g.d.slice(5,7):'';
+      row.innerHTML=`<div class="pc"><b>${g.c}</b><span>${dd} · pagó ${g.by} · ${g.split==='medias'?'a medias':'solo '+g.split}</span></div>
+        <div class="pv">${eurN(g.eur)}${g.cur==='MXN'?`<div class="sub2">${miles(g.amt)} MXN</div>`:''}</div>
         <button class="exdel" title="Borrar">×</button>`;
       row.querySelector('.exdel').onclick=()=>{
-        saveExpenses(loadExpenses().filter(x=>x.id!==e.id));
-        renderMoney(); renderHoy();
+        saveExpenses(loadExpenses().filter(x=>x.id!==g.id));
+        renderGastos(); renderMoney(); renderHoy();
       };
       lc.appendChild(row);
     });
     v.appendChild(lc);
 
     const acts=el('div','exacts');
-    acts.innerHTML=`<button class="exbtn share">Compartir resumen</button>
-                    <button class="exbtn copy">Copiar datos</button>
-                    <button class="exbtn paste">Pegar datos</button>`;
+    acts.innerHTML=`<button class="exbtn share">Compartir</button><button class="exbtn copy">Copiar para la hoja</button>`;
     v.appendChild(acts);
+    acts.querySelector('.copy').onclick=()=>{
+      const tsv=locales.map(g=>[g.d,g.c,String(g.amt).replace('.',','),g.cur,g.by,
+                                g.split==='medias'?'A medias':g.split,''].join('\t')).join('\n');
+      navigator.clipboard.writeText(tsv);
+      alert('Copiado. Pégalo en la hoja "Gastos" del Sheet, debajo de la última fila.');
+    };
     acts.querySelector('.share').onclick=()=>{
-      const lines=exps.map(e=>`· ${e.c}: ${eurN(e.eur)} (pagó ${e.by}${e.split!=='medias'?', solo '+e.split:''})`);
-      const mv=settleMoves(M.rows).map(m=>`${m.from} le debe a ${m.to}: ${eurN(m.amt)}`).join(' · ')||'están a la par';
-      const txt=`Gastos del viaje a México\n${lines.join('\n')}\n\nTotal apuntado: ${eurN(exps.reduce((s,e)=>s+e.eur,0))}\n${mv}`;
+      const lines=M.gastos.map(g=>`· ${g.c}: ${eurN(g.eur)} (pagó ${g.by||'—'}${g.split!=='medias'?', solo '+g.split:''})`);
+      const mv=moves.length?`${moves[0].from} le debe a ${moves[0].to} ${eurN(moves[0].amt)}`:'estamos a la par';
+      const txt=`Gastos del viaje a México\n${lines.join('\n')}\n\nTotal: ${eurN(M.gastadoViaje)}\n${mv}`;
       if(navigator.share) navigator.share({text:txt}).catch(()=>{});
       else { navigator.clipboard.writeText(txt); alert('Resumen copiado.'); }
     };
-    acts.querySelector('.copy').onclick=()=>{
-      navigator.clipboard.writeText(JSON.stringify(exps));
-      alert('Datos copiados. Pégalos en el otro móvil con "Pegar datos".');
-    };
-    acts.querySelector('.paste').onclick=async()=>{
-      const txt=prompt('Pega aquí los datos copiados del otro móvil:');
-      if(!txt) return;
-      try{
-        const inc=JSON.parse(txt);
-        if(!Array.isArray(inc)) throw 0;
-        const mine=loadExpenses(), ids=new Set(mine.map(x=>x.id));
-        inc.forEach(x=>{ if(!ids.has(x.id)) mine.push(x); });
-        saveExpenses(mine); renderMoney(); renderHoy();
-      }catch(e){ alert('Esos datos no se entienden. Copia otra vez desde el otro móvil.'); }
-    };
   }
 
-  /* ---- 5. presupuesto previsto ---- */
-  v.appendChild(el('div','sec-title','Presupuesto previsto'));
-  v.appendChild(el('div','sub','Lo que estimaron en la hoja, categoría a categoría.'));
-  const bc=el('div','card');
-  BUDGET.forEach(b=>bc.appendChild(el('div','bud',
-    `<div class="bic">${b.ic}</div><div class="bn">${b.cat}<span>${b.n}</span></div>
-     <div class="bv">${b.v}${b.real&&b.real!=='—'?`<div class="breal">real ${b.real}</div>`:''}</div>`)));
-  v.appendChild(bc);
-
-  /* ---- 6. estado de pagos, con quién puso cada uno ---- */
-  v.appendChild(el('div','sec-title','Estado de pagos'));
-  v.appendChild(el('div','sub','Marca lo que ya esté pagado y di quién lo puso. Se guarda en este móvil.'));
-  const paidSt=loadState(PAYKEY), whoSt=loadState(WHOKEY);
-  const pc=el('div','card flat');
-  PAYMENTS.forEach((p,i)=>{
-    const done=M.isPaid(p,i), by=M.payer(p,i);
-    const row=el('div','paychk'+(done?' done':''));
-    row.innerHTML=`<div class="box">${checkSVG}</div>
-      <div class="pc"><b>${p.c}</b><span>${p.n||''}</span>
-        <div class="whosel">${YO.map(n=>`<button data-w="${n}" class="${by===n?'on':''}">${n}</button>`).join('')}
-          <button data-w="" class="${by?'':'on'}">sin asignar</button></div>
-      </div>
-      <div class="pv">${p.amt}</div>`;
-    row.querySelector('.box').onclick=()=>{
-      const now=!row.classList.contains('done');
-      paidSt[PAYKEY+'_'+i]=now; saveState(PAYKEY,paidSt);
-      renderMoney(); renderHoy();
-    };
-    row.querySelectorAll('.whosel button').forEach(b=>b.onclick=(ev)=>{
-      ev.stopPropagation();
-      whoSt[WHOKEY+'_'+i]=b.dataset.w; saveState(WHOKEY,whoSt);
-      renderMoney();
-    });
-    pc.appendChild(row);
-  });
-  v.appendChild(pc);
+  if(!M.gastos.length){
+    v.appendChild(el('div','card flat',
+      `<div class="note" style="margin:0"><span class="ni">${I.info}</span><span>Todavía no hay gastos apuntados.</span></div>`));
+  }
 }
 
 /* ============== COMIDA ============== */
@@ -1657,6 +1796,7 @@ renderHoy();
 renderPlan();
 renderLog();
 renderMoney();
+renderGastos();
 renderFood();
 renderListas();
 renderInfo();
