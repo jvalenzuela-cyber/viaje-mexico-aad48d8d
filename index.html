@@ -714,20 +714,20 @@ const BUDGET = [
 /*END:BUDGET*/
 /*SYNC:PAYMENTS*/
 const PAYMENTS = [
-  {c:'Vuelos internacionales · Emirates ida+vuelta (2 pax), YA PAGADO',by:'Javiera',amt:'2.266,00 €',val:2266.0,st:'Pagado',n:'2.356.875 CLP, recibo MyTrip 1127-541-022. Pon aquí el importe en EUR de tu cargo.'},
-  {c:'Vuelos internos · CDMX-Oaxaca (2 pax)',by:'Javiera',amt:'48,00 €',val:48.0,st:'Pagado',n:''},
-  {c:'Vuelos internos · Puerto Escondido-Durango (2 pax)',by:'Javiera',amt:'196,00 €',val:196.0,st:'Pagado',n:''},
-  {c:'Vuelos internos · Durango-CDMX (2 pax)',by:'Javiera',amt:'200,00 €',val:200.0,st:'Pagado',n:''},
-  {c:'Comida y bebida · Aprox. por día x 20 días x 2 pax',by:'—',amt:'1.200,00 €',val:1200.0,st:'Pendiente',n:''},
-  {c:'Transporte local · Taxis, colectivos, metro, Uber/Didi',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
-  {c:'Actividades y tours · Monte Albán, Teotihuacán, snorkel, mezcal...',by:'—',amt:'400,00 €',val:400.0,st:'Pendiente',n:''},
-  {c:'Conectividad · eSIM México (2 pax)',by:'—',amt:'50,00 €',val:50.0,st:'Pagado',n:''},
-  {c:'Compras / souvenirs · Artesanía, mezcal, regalos',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
-  {c:'Alojamiento · Condesa Suites (Ciudad de México (inicio))',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
-  {c:'Alojamiento · Hotel Posada San Rafael (Oaxaca)',by:'—',amt:'147,00 €',val:147.0,st:'Pendiente',n:'5 noches · 29,40 €/noche · se paga en recepción'},
-  {c:'Alojamiento · Carri Surf Studio (Puerto Escondido)',by:'Juan',amt:'173,80 €',val:173.8,st:'Pagado',n:'4 noches · 43,45 €/noche'},
-  {c:'Alojamiento · Hampton Inn (Durango (boda))',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'4 noches · 67,79 €/noche · se paga en recepción'},
-  {c:'Alojamiento · Uniko Living (Ciudad de México (final))',by:'Juan',amt:'226,48 €',val:226.48,st:'Pagado',n:'5 noches · 45,30 €/noche'}
+  {c:'Vuelos internacionales · Emirates ida+vuelta (2 pax), YA PAGADO',k:'cat',by:'Javiera',amt:'2.266,00 €',val:2266.0,st:'Pagado',n:'2.356.875 CLP, recibo MyTrip 1127-541-022. Pon aquí el importe en EUR de tu cargo.'},
+  {c:'Vuelos internos · CDMX-Oaxaca (2 pax)',k:'cat',by:'Javiera',amt:'48,00 €',val:48.0,st:'Pagado',n:''},
+  {c:'Vuelos internos · Puerto Escondido-Durango (2 pax)',k:'cat',by:'Javiera',amt:'196,00 €',val:196.0,st:'Pagado',n:''},
+  {c:'Vuelos internos · Durango-CDMX (2 pax)',k:'cat',by:'Javiera',amt:'200,00 €',val:200.0,st:'Pagado',n:''},
+  {c:'Comida y bebida · Aprox. por día x 20 días x 2 pax',k:'cat',by:'—',amt:'1.200,00 €',val:1200.0,st:'Pendiente',n:''},
+  {c:'Transporte local · Taxis, colectivos, metro, Uber/Didi',k:'cat',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
+  {c:'Actividades y tours · Monte Albán, Teotihuacán, snorkel, mezcal...',k:'cat',by:'—',amt:'400,00 €',val:400.0,st:'Pendiente',n:''},
+  {c:'Conectividad · eSIM México (2 pax)',k:'cat',by:'—',amt:'50,00 €',val:50.0,st:'Pagado',n:''},
+  {c:'Compras / souvenirs · Artesanía, mezcal, regalos',k:'cat',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
+  {c:'Condesa Suites · Ciudad de México (inicio)',k:'hotel',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
+  {c:'Hotel Posada San Rafael · Oaxaca',k:'hotel',by:'—',amt:'147,00 €',val:147.0,st:'Pendiente',n:'5 noches · 29,40 €/noche · se paga en recepción'},
+  {c:'Carri Surf Studio · Puerto Escondido',k:'hotel',by:'Juan',amt:'173,80 €',val:173.8,st:'Pagado',n:'4 noches · 43,45 €/noche'},
+  {c:'Hampton Inn · Durango (boda)',k:'hotel',by:'—',amt:'271,16 €',val:271.16,st:'Pendiente',n:'4 noches · 67,79 €/noche · se paga en recepción'},
+  {c:'Uniko Living · Ciudad de México (final)',k:'hotel',by:'Juan',amt:'226,48 €',val:226.48,st:'Pagado',n:'5 noches · 45,30 €/noche'}
 ];
 /*END:PAYMENTS*/
 /*SYNC:GASTOS*/
@@ -1241,15 +1241,40 @@ const miles = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')
 /* reparto automático: el concepto más caro va siempre al que menos lleva.
    Con estos importes deja una diferencia de pocos euros, que se ve en pantalla. */
 function repartoAuto(items){
-  /* Lo que esté puesto a medias a propósito (la comida del día a día, por ejemplo)
-     no se toca: ya cuenta mitad y mitad. El resto se reparte dando siempre el
-     concepto más caro al que menos lleva. */
-  const suma={Javiera:0,Juan:0}, out={};
-  items.filter(i=>i.asig==='medias').forEach(it=>{ suma.Javiera+=it.val/2; suma.Juan+=it.val/2; });
-  items.filter(i=>i.asig!=='medias').sort((a,b)=>b.val-a.val).forEach(it=>{
-    const quien = suma.Javiera<=suma.Juan ? 'Javiera' : 'Juan';
-    out[it.i]=quien; suma[quien]+=it.val;
-  });
+  /* Busca el reparto más parejo probando, para cada alojamiento, las tres opciones:
+     lo paga Javiera, lo paga Juan, o lo pagan a medias. Gana la combinación con menos
+     diferencia entre los dos; a igualdad, la que deja menos cosas a medias (para que
+     cada uno se encargue de algo). Con muchas partidas cae al método rápido: el más
+     caro siempre al que menos lleva. */
+  const n=items.length;
+  if(!n) return {};
+  if(n>9){
+    const suma={Javiera:0,Juan:0}, out={};
+    [...items].sort((a,b)=>b.val-a.val).forEach(it=>{
+      const quien = suma.Javiera<=suma.Juan ? 'Javiera' : 'Juan';
+      out[it.i]=quien; suma[quien]+=it.val;
+    });
+    return out;
+  }
+  const OPC=['Javiera','Juan','medias'];
+  let mejor=null;
+  const total=Math.pow(3,n);
+  for(let comb=0; comb<total; comb++){
+    let c=comb, j=0, ju=0, medias=0;
+    const asig=[];
+    for(let k=0;k<n;k++){
+      const o=OPC[c%3]; c=Math.floor(c/3); asig.push(o);
+      if(o==='Javiera') j+=items[k].val;
+      else if(o==='Juan') ju+=items[k].val;
+      else { j+=items[k].val/2; ju+=items[k].val/2; medias++; }
+    }
+    const dif=Math.abs(j-ju);
+    if(!mejor || dif < mejor.dif-0.005 || (Math.abs(dif-mejor.dif)<0.005 && medias<mejor.medias)){
+      mejor={dif, medias, asig};
+    }
+  }
+  const out={};
+  items.forEach((it,k)=>{ out[it.i]=mejor.asig[k]; });
   return out;
 }
 
@@ -1263,7 +1288,7 @@ function moneyState(){
   // 1. línea base: lo ya pagado, solo informativo
   const base={Javiera:0,Juan:0}; let baseSinDueno=0, pagadoBase=0;
   // 2. lo que queda: conceptos a repartir
-  const pendientes=[]; let pend=0;
+  const pendientes=[]; let pend=0, estimado=0;
   PAYMENTS.forEach((p,i)=>{
     if(yaEstaba(p)){
       pagadoBase+=p.val;
@@ -1271,7 +1296,13 @@ function moneyState(){
       if(YO.includes(by)) base[by]+=p.val; else baseSinDueno+=p.val;
     } else {
       pend+=p.val;
-      pendientes.push({i, c:p.c, n:p.n, val:p.val, asig:asig(p,i), pagado:isPaid(p,i), by:payer(p,i)});
+      // solo las reservas concretas se reparten; las categorías estimadas (comida,
+      // transporte, actividades...) se gastan sobre la marcha y van en Gastos
+      if(p.k==='hotel'){
+        pendientes.push({i, c:p.c, n:p.n, val:p.val, asig:asig(p,i), pagado:isPaid(p,i), by:payer(p,i)});
+      } else {
+        estimado+=p.val;
+      }
     }
   });
 
@@ -1305,7 +1336,7 @@ function moneyState(){
 
   const rows=YO.map(n=>({name:n, base:base[n], owe:owe[n], put:put[n],
                          toca:tocaPoner[n], saldo:Math.round((owePag[n]-put[n])*100)/100}));
-  return {isPaid, payer, asig, pendientes, pend, pagadoBase, base, baseSinDueno,
+  return {isPaid, payer, asig, pendientes, pend, estimado, pagadoBase, base, baseSinDueno,
           gastos, gastadoViaje, rows, total:pagadoBase+pend+gastadoViaje};
 }
 
@@ -1347,14 +1378,9 @@ function renderMoney(){
     <span class="pend" style="text-align:right"><span class="k">Queda por pagar</span><b>${eurN(restante)}</b></span></div>`;
   v.appendChild(pb);
 
-  v.appendChild(el('div','callout',
-    `<span class="ci">${I.check}</span><div>Lo pagado antes de salir queda saldado: no se deben nada por eso
-     (Javiera puso ${eurN(M.base.Javiera)} y Juan ${eurN(M.base.Juan)}).
-     De aquí en adelante, todo a medias.</div>`));
-
   /* ---- quién paga qué de lo que queda ---- */
-  v.appendChild(el('div','sec-title','Quién paga qué de lo que queda'));
-  v.appendChild(el('div','sub','Repartido para que cada uno ponga la mitad. Toca un concepto para cambiar a quién le toca.'));
+  v.appendChild(el('div','sec-title','Quién paga qué alojamiento'));
+  v.appendChild(el('div','sub','Los que quedan por pagar, repartidos para que cada uno ponga la mitad. Toca uno para cambiar a quién le toca.'));
 
   const suma={Javiera:0,Juan:0}; let sinAsignar=0;
   M.pendientes.forEach(p=>{
@@ -1376,10 +1402,9 @@ function renderMoney(){
   } else {
     v.appendChild(el('div','sub','Repartido exacto: cada uno pone la mitad.'));
   }
-  v.appendChild(el('div','sub','Lo que se paga a diario entre los dos (la comida, por ejemplo) conviene dejarlo a medias y apuntar cada gasto en Gastos.'));
 
   const btn=el('button','exbtn wide');
-  btn.textContent='Repartir lo que queda a partes iguales';
+  btn.textContent='Repartir los alojamientos a partes iguales';
   btn.onclick=()=>{
     const st=loadState(ASIGKEY);
     const auto=repartoAuto(M.pendientes);
@@ -1395,7 +1420,7 @@ function renderMoney(){
       const q = YO.includes(p.asig) ? p.asig : 'a medias';
       return `· ${p.c}: ${eurN(p.val)} → ${q}${p.pagado?' (ya pagado)':''}`;
     });
-    const txt=`Reparto de lo que queda por pagar del viaje a México\n\n`+
+    const txt=`Reparto de los alojamientos del viaje a México\n\n`+
       `${lineas.join('\n')}\n\nJaviera: ${eurN(suma.Javiera)} · Juan: ${eurN(suma.Juan)}`;
     if(navigator.share) navigator.share({text:txt}).catch(()=>{});
     else { navigator.clipboard.writeText(txt); alert('Reparto copiado.'); }
@@ -1426,6 +1451,12 @@ function renderMoney(){
   });
   v.appendChild(lc);
   v.appendChild(compartir);
+
+  if(M.estimado>0.005){
+    v.appendChild(el('div','sub',
+      `Aparte queda el gasto del día a día allí (comida, transporte, actividades y compras),
+       estimado en ${eurN(M.estimado)}. Eso no se reparte por adelantado: se va apuntando en Gastos.`));
+  }
 
   /* ---- saldo vivo + acceso a los gastos ---- */
   const moves=settleMoves(M.rows);
