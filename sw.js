@@ -1,18 +1,19 @@
 /* Service worker — offline en destino, pero siempre la última versión si hay conexión.
    Estrategia: HTML network-first (refresca al regenerar la app); imágenes/estáticos cache-first. */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = 'viaje-mexico-' + VERSION;
 const IMG_KEYS = [
   'portada',
-  'mex_hero','oax_hero','pxm_hero','dgo_hero','mex_hero2',
-  'd_pastor','d_churros','d_pozole',
-  'd_mole','d_tlayuda','d_chapulines','d_mezcal',
-  'd_pescado','d_desayuno',
-  'd_caldillo','d_gorditas',
-  'x_xochimilco','x_antropologia','x_cholula','x_condesa',
-  'x_teotitlan','x_tule','x_hierve',
-  'x_biolumi','x_tortugas','x_surf',
-  'x_western','x_teleferico'
+  'dgo_hero','mex_hero','mex_hero2','oax_hero','pxm_hero',
+  'd_aguachile','d_barbacoa','d_caldillo','d_chapulines','d_chilaquiles',
+  'd_churros','d_coco','d_desayuno','d_esquites','d_gorditas',
+  'd_memelas','d_mezcal','d_mole','d_nieves','d_panyema',
+  'd_pastor','d_pescado','d_pozole','d_pulque','d_quesillo',
+  'd_quesomenonita','d_tacospescado','d_tamales','d_tasajo','d_tejate',
+  'd_tlacoyos','d_tlayuda','d_tortillaharina','d_zarandeado','x_antropologia',
+  'x_biolumi','x_cholula','x_condesa','x_hierve','x_surf',
+  'x_teleferico','x_teotitlan','x_tortugas','x_tule','x_western',
+  'x_xochimilco'
 ];
 const CORE = ['./', './index.html', './manifest.json',
   './icon-192.png', './icon-512.png', './icon-maskable.png', './icon-180.png']

@@ -1,14 +1,92 @@
 {
-  "d_caldillo": {
-    "title": "Mexican cuisine",
-    "source": "https://upload.wikimedia.org/wikipedia/commons/2/22/Collage_Mexican_Cuisine_by_User-EME.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-    "page": "https://en.wikipedia.org/wiki/Mexican_cuisine"
+  "d_chilaquiles": {
+    "title": "Chilaquiles",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Chilaquiles_at_the_Grand_Cantina%2C_Windsor%2C_Ontario%2C_2025-09-01_04.jpg/3840px-Chilaquiles_at_the_Grand_Cantina%2C_Windsor%2C_Ontario%2C_2025-09-01_04.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Chilaquiles"
   },
-  "portada": {
-    "title": "File:Xochimilco, trajinera boats (20660402936).jpg",
-    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Xochimilco%2C_trajinera_boats_%2820660402936%29.jpg/1920px-Xochimilco%2C_trajinera_boats_%2820660402936%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "page": "https://commons.wikimedia.org/wiki/File%3AXochimilco%2C_trajinera_boats_%2820660402936%29.jpg",
-    "author": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/67769030@N07\">Arian Zwegers</a> from Brussels, Belgium",
-    "license": "CC BY 2.0"
+  "d_tlacoyos": {
+    "title": "Tlacoyo",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/1/11/Mercado_de_Xochimilco_-_Tlacoyos.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Tlacoyo"
+  },
+  "d_esquites": {
+    "title": "Esquites",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/8/80/Esquites_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Esquites"
+  },
+  "d_tamales": {
+    "title": "Tamale",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Tamale_Oaxaque%C3%B1o.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Tamale"
+  },
+  "d_barbacoa": {
+    "title": "Barbacoa",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Barbacoa_%28en_Hidalgo%29.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Barbacoa"
+  },
+  "d_pulque": {
+    "title": "Pulque",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Pulquebottle.JPG/1920px-Pulquebottle.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Pulque"
+  },
+  "d_quesillo": {
+    "title": "Oaxaca cheese",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/d/db/Quesillo_de_Oaxaca.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Oaxaca_cheese"
+  },
+  "d_memelas": {
+    "title": "Memela",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Memelas_Oaxaquenos.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Memela"
+  },
+  "d_tejate": {
+    "title": "Tejate",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/2/23/MX_MR_MUESTRA_ALIMENTARIA_IND%C3%8DGENA_%2828372824688%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Tejate"
+  },
+  "d_panyema": {
+    "title": "Oaxacan cuisine",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/3/31/Mole_du_marche_de_Oaxaca.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Oaxacan_cuisine"
+  },
+  "d_nieves": {
+    "title": "Sorbet",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Strawberry_sorbet_zoomed.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Sorbet"
+  },
+  "d_aguachile": {
+    "title": "Aguachile",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/4/41/Aguachiles.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Aguachile"
+  },
+  "d_tacospescado": {
+    "title": "Taco",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg/3840px-001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Taco"
+  },
+  "d_coco": {
+    "title": "Coconut water",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Young_Coconut_Drink.jpg/1920px-Young_Coconut_Drink.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Coconut_water"
+  },
+  "d_tortillaharina": {
+    "title": "Flour tortilla",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/56/NCI_flour_tortillas.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Flour_tortilla"
+  },
+  "d_quesomenonita": {
+    "title": "Queso Chihuahua",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/5c/%22Chilequeso%22%2C_taco_de_chile_poblano_con_queso.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page": "https://en.wikipedia.org/wiki/Queso_Chihuahua"
+  },
+  "d_tasajo": {
+    "title": "File:Mercado 20 de Noviembre en Oaxaca, México.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Mercado_20_de_Noviembre_en_Oaxaca%2C_M%C3%A9xico.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "page": "https://commons.wikimedia.org/wiki/File%3AMercado_20_de_Noviembre_en_Oaxaca%2C_M%C3%A9xico.jpg"
+  },
+  "d_zarandeado": {
+    "title": "File:Pescado zarandeado, Mazatlán, 31 de enero de 2023 05.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Pescado_zarandeado%2C_Mazatl%C3%A1n%2C_31_de_enero_de_2023_05.jpg/1280px-Pescado_zarandeado%2C_Mazatl%C3%A1n%2C_31_de_enero_de_2023_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "page": "https://commons.wikimedia.org/wiki/File%3APescado_zarandeado%2C_Mazatl%C3%A1n%2C_31_de_enero_de_2023_05.jpg"
   }
 }

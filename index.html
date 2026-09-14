@@ -459,6 +459,11 @@
   .exitem .pv{font-family:'Fraunces',serif;font-weight:700;font-size:15px;white-space:nowrap;text-align:right}
   .exitem .pv .sub2{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;color:var(--muted)}
   .exitem .exdel{border:0;background:none;color:var(--muted);font-size:22px;line-height:1;padding:0 2px;cursor:pointer}
+  .exitem .exedit{border:0;background:none;color:var(--aegean);padding:0 4px;cursor:pointer;display:grid;place-items:center}
+  .exitem.enedicion{background:rgba(31,143,160,.09);border-radius:10px;padding:11px 8px}
+  .expform.editando{border-color:var(--aegean);box-shadow:0 0 0 1px rgba(31,143,160,.35),var(--shadow)}
+  .expform .excancel{width:100%;margin-top:8px;font-family:inherit;font-size:13px;font-weight:600;padding:11px;
+    border:1px solid var(--line);border-radius:12px;background:transparent;color:var(--muted);cursor:pointer}
   .exacts{display:flex;gap:8px;margin-bottom:12px}
   .exacts .exbtn{flex:1;font-family:inherit;font-size:12.5px;font-weight:600;padding:10px 6px;border-radius:11px;
     border:1px solid var(--line);background:var(--card);color:var(--aegean);cursor:pointer}
@@ -541,6 +546,7 @@ const I = {
   clock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>',
   balloon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3.6 3.1 6.2 5 7h4c1.9-.8 5-3.4 5-7a7 7 0 0 0-7-7z"/><path d="M9.5 16h5l-.6 3h-3.8z"/><path d="M10.5 19h3"/></svg>',
   coins:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="6" rx="6" ry="3"/><path d="M3 6v6c0 1.7 2.7 3 6 3s6-1.3 6-3V6"/><path d="M15 12c2.8.3 6 1.4 6 3v0c0 1.7-2.7 3-6 3-1.3 0-2.5-.2-3.5-.6"/></svg>',
+  pencil:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
   chat:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg>',
   wind:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.7 7.5A2.5 2.5 0 1 1 19.5 12H2"/></svg>',
   spark:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>',
@@ -560,11 +566,11 @@ const CITY = {
 const STATS = [ {v:'20', k:'noches'}, {v:'4', k:'destinos'}, {v:'6', k:'vuelos'} ];
 /*SYNC:TOTALS*/
 const TOTALS = {
-  eur_total:'6.088,00 €', mxn_total:'122.366 MXN',
-  eur_pp:'3.044,00 €', mxn_pp:'61.183 MXN',
+  eur_total:'6.038,00 €', mxn_total:'121.361 MXN',
+  eur_pp:'3.019,00 €', mxn_pp:'60.680 MXN',
   rate:'1 € ≈ 20,10 MXN', rate_val:20.1,
-  pagado:'3.263,03 €', pagado_val:3263.03,
-  sin_asignar:'50,00 €', sin_asignar_val:50.0,
+  pagado:'3.213,03 €', pagado_val:3213.03,
+  sin_asignar:'0,00 €', sin_asignar_val:0.0,
 };
 /*END:TOTALS*/
 
@@ -728,21 +734,19 @@ const BUDGET = [
   {cat:'Comida y bebida',v:'1.200,00 €',real:'—',n:'Aprox. por día x 20 días x 2 pax',ic:I.food},
   {cat:'Transporte local',v:'200,00 €',real:'—',n:'Taxis, colectivos, metro, Uber/Didi',ic:I.bus},
   {cat:'Actividades y tours',v:'400,00 €',real:'—',n:'Monte Albán, Teotihuacán, snorkel, mezcal...',ic:I.star},
-  {cat:'Conectividad',v:'50,00 €',real:'50,00 €',n:'eSIM México (2 pax)',ic:I.globe},
   {cat:'Compras / souvenirs',v:'200,00 €',real:'—',n:'Artesanía, mezcal, regalos',ic:I.euro},
   {cat:'Actividades y tours',v:'308,00 €',real:'—',n:'Vuelo en globo en Teotihuacán (2 pax)',ic:I.star}
 ];
 /*END:BUDGET*/
 /*SYNC:PAYMENTS*/
 const PAYMENTS = [
-  {c:'Vuelos internacionales · Emirates ida+vuelta (2 pax), YA PAGADO',k:'cat',by:'Javiera',amt:'2.266,00 €',val:2266.0,st:'Pagado',n:'2.356.875 CLP, recibo MyTrip 1127-541-022. Pon aquí el importe en EUR de tu cargo.'},
+  {c:'Vuelos internacionales · Emirates ida+vuelta (2 pax), YA PAGADO',k:'cat',by:'Javiera',amt:'2.266,00 €',val:2266.0,st:'Pagado',n:'Recibo MyTrip 1127-541-022, reserva RMQTJB. Pagado con ApplePay.'},
   {c:'Vuelos internos · CDMX-Oaxaca (2 pax)',k:'cat',by:'Javiera',amt:'48,00 €',val:48.0,st:'Pagado',n:''},
   {c:'Vuelos internos · Puerto Escondido-Durango (2 pax)',k:'cat',by:'Javiera',amt:'196,00 €',val:196.0,st:'Pagado',n:''},
   {c:'Vuelos internos · Durango-CDMX (2 pax)',k:'cat',by:'Javiera',amt:'200,00 €',val:200.0,st:'Pagado',n:''},
   {c:'Comida y bebida · Aprox. por día x 20 días x 2 pax',k:'cat',by:'—',amt:'1.200,00 €',val:1200.0,st:'Pendiente',n:''},
   {c:'Transporte local · Taxis, colectivos, metro, Uber/Didi',k:'cat',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
   {c:'Actividades y tours · Monte Albán, Teotihuacán, snorkel, mezcal...',k:'cat',by:'—',amt:'400,00 €',val:400.0,st:'Pendiente',n:''},
-  {c:'Conectividad · eSIM México (2 pax)',k:'cat',by:'—',amt:'50,00 €',val:50.0,st:'Pagado',n:''},
   {c:'Compras / souvenirs · Artesanía, mezcal, regalos',k:'cat',by:'—',amt:'200,00 €',val:200.0,st:'Pendiente',n:''},
   {c:'Actividades y tours · Vuelo en globo en Teotihuacán (2 pax)',k:'cat',by:'—',amt:'308,00 €',val:308.0,st:'Pendiente',n:'Paquete compartido con transporte desde CDMX: 3.100 MXN/persona de referencia (globosaerostaticosteotihuacan.com, sep-2026). Sin reservar todavía.'},
   {c:'Condesa Suites · Ciudad de México (inicio)',k:'hotel',by:'Juan',amt:'102,75 €',val:102.75,st:'Pagado',n:'2 noches · 51,38 €/noche'},
@@ -837,23 +841,41 @@ const COMER = [
 
 const DISHES = {
   'Ciudad de México': [
-    {n:'Tacos al pastor',img:'d_pastor',d:'El clásico de la capital: trompo, piña y salsa. De noche y en puesto de barrio.',where:'Roma y Condesa',wq:'taqueria al pastor Colonia Roma, Ciudad de Mexico'},
-    {n:'Churros con chocolate',img:'d_churros',d:'Institución del centro, abierta prácticamente a cualquier hora.',where:'El Moro, Centro',wq:'Churreria El Moro, Centro Historico, Ciudad de Mexico'},
-    {n:'Pozole y comida corrida',img:'d_pozole',d:'Fondas y mercados: la manera barata y buena de comer a mediodía.',where:'Mercado de Coyoacán',wq:'Mercado de Coyoacan, Ciudad de Mexico'},
+    {n:'Tacos al pastor',img:'d_pastor',d:'El trompo de carne adobada con piña, cortada al momento. Se come de noche y de pie, en la taquería de barrio.',where:'Roma y Condesa',wq:'taqueria al pastor Colonia Roma, Ciudad de Mexico'},
+    {n:'Chilaquiles',img:'d_chilaquiles',d:'Totopos bañados en salsa verde o roja, con crema, queso y cebolla. El desayuno mexicano por excelencia; se piden con huevo o pollo.'},
+    {n:'Tlacoyos',img:'d_tlacoyos',d:'Torta ovalada de maíz azul rellena de frijol o haba, hecha en comal a la vista. Callejero, barato y muy de la capital.'},
+    {n:'Esquites',img:'d_esquites',d:'Granos de elote en vaso con mayonesa, queso, chile y limón. El antojo de la tarde, en cualquier esquina.'},
+    {n:'Tamales y guajolota',img:'d_tamales',d:'Masa de maíz cocida al vapor en hoja. La guajolota es el tamal dentro de un bolillo: el desayuno más contundente que existe.'},
+    {n:'Barbacoa de fin de semana',img:'d_barbacoa',d:'Cordero cocido bajo tierra en penca de maguey. Solo sábados y domingos, y se acaba a mediodía.'},
+    {n:'Churros con chocolate',img:'d_churros',d:'Institución del Centro, abierta prácticamente a cualquier hora.',where:'El Moro, Centro',wq:'Churreria El Moro, Centro Historico, Ciudad de Mexico'},
+    {n:'Pozole',img:'d_pozole',d:'Caldo de maíz cacahuazintle con carne, que se remata en la mesa con lechuga, rábano, orégano y limón. Plato de domingo.',where:'Mercado de Coyoacán',wq:'Mercado de Coyoacan, Ciudad de Mexico'},
+    {n:'Pulque',img:'d_pulque',d:'Bebida fermentada del maguey, espesa y ácida, anterior a la cerveza. Se prueba en pulquería, natural o "curado" de fruta.'},
   ],
   'Oaxaca': [
-    {n:'Mole',img:'d_mole',d:'Oaxaca es la cuna del mole: negro, coloradito, amarillo. Vale la pena probar más de uno.',where:'Mercado 20 de Noviembre',wq:'Mercado 20 de Noviembre, Oaxaca'},
-    {n:'Tlayudas',img:'d_tlayuda',d:'La tortilla grande con asiento, frijol, quesillo y carne. Mejor de noche y a la brasa.',where:'Puestos del centro',wq:'tlayudas Oaxaca centro'},
-    {n:'Chapulines y quesillo',img:'d_chapulines',d:'Para picar en el mercado, con limón y chile. El quesillo es el queso oaxaqueño de hebra.',where:'Mercado Benito Juárez',wq:'Mercado Benito Juarez, Oaxaca'},
-    {n:'Mezcal',img:'d_mezcal',d:'Catas en el centro y en los pueblos del valle. Se bebe despacio, no de golpe.',where:'Mezcalerías del andador',wq:'mezcaleria Andador Macedonio Alcala, Oaxaca'},
+    {n:'Los moles',img:'d_mole',d:'Oaxaca es la tierra de los siete moles: negro, rojo, coloradito, amarillo, verde, chichilo y manchamanteles. Vale la pena probar más de uno.',where:'Mercado 20 de Noviembre',wq:'Mercado 20 de Noviembre, Oaxaca'},
+    {n:'Tlayudas',img:'d_tlayuda',d:'Tortilla grande y tostada con asiento de cerdo, frijol, quesillo y carne. Mejor de noche y a la brasa.',where:'Puestos del centro',wq:'tlayudas Oaxaca centro'},
+    {n:'Chapulines',img:'d_chapulines',d:'Saltamontes tostados con ajo, limón y chile. Se comen a puñados o dentro de la tlayuda; crujen y saben a limón.',where:'Mercado Benito Juárez',wq:'Mercado Benito Juarez, Oaxaca'},
+    {n:'Quesillo',img:'d_quesillo',d:'El queso oaxaqueño en hebra, que se vende enrollado como una madeja. Se deshilacha a mano y se derrite en todo.'},
+    {n:'Tasajo y cecina enchilada',img:'d_tasajo',d:'En el pasillo de humo del mercado eliges la carne cruda, te la asan delante y la comes con tortillas y salsas.',where:'Mercado 20 de Noviembre',wq:'Mercado 20 de Noviembre, Oaxaca'},
+    {n:'Memelas',img:'d_memelas',d:'Tortilla gruesa con asiento, frijol y quesillo. El desayuno de diario de Oaxaca.'},
+    {n:'Tejate',img:'d_tejate',d:'Bebida prehispánica de maíz y cacao con espuma blanca flotando, servida fría en jícara. Se toma en los mercados.'},
+    {n:'Pan de yema con chocolate',img:'d_panyema',d:'Pan dulce que se moja en chocolate de agua batido a mano. Merienda clásica oaxaqueña.'},
+    {n:'Mezcal',img:'d_mezcal',d:'Destilado de agave, ahumado y muy distinto del tequila. Se bebe despacio, a sorbos, con sal de gusano y naranja.',where:'Mezcalerías del andador',wq:'mezcaleria Andador Macedonio Alcala, Oaxaca'},
+    {n:'Nieves de garrafa',img:'d_nieves',d:'Helado hecho a mano en garrafa, con sabores que no existen fuera: leche quemada, tuna, elote o pétalo de rosa.'},
   ],
   'Puerto Escondido': [
-    {n:'Pescado y mariscos',img:'d_pescado',d:'Pescado del día, ceviches y tostadas a pie de playa.',where:'Playa Zicatela',wq:'mariscos Playa Zicatela, Puerto Escondido'},
-    {n:'Desayuno de playa',img:'d_desayuno',d:'Fruta, huevos y café en los cafés de Carrizalillo antes de bajar al agua.',where:'Carrizalillo',wq:'cafe Playa Carrizalillo, Puerto Escondido'},
+    {n:'Pescado zarandeado',img:'d_zarandeado',d:'Pescado entero abierto, marinado y asado sobre carbón. El plato de la costa; se pide para compartir.',where:'La Sardina, Carrizalillo',wq:'La Sardina Puerto Escondido'},
+    {n:'Tostadas y ceviche',img:'d_pescado',d:'Pescado curado en limón sobre tostada, con aguacate y salsa. Lo más fresco y barato de la playa.',where:'Playa Zicatela',wq:'mariscos Playa Zicatela, Puerto Escondido'},
+    {n:'Aguachile',img:'d_aguachile',d:'Camarón crudo en limón con chile y pepino, picante de verdad. Se come recién hecho, antes de que el limón lo pase.'},
+    {n:'Tacos de pescado',img:'d_tacospescado',d:'Pescado rebozado con col, crema y salsa. La comida de playa más honesta que hay.',where:'Fish Shack, La Punta',wq:'Fish Shack La Punta, Puerto Escondido'},
+    {n:'Desayuno de playa',img:'d_desayuno',d:'Huevos rancheros o divorciados, fruta y café, en los cafés de Carrizalillo antes de bajar al agua.',where:'Carrizalillo',wq:'cafe Playa Carrizalillo, Puerto Escondido'},
+    {n:'Agua de coco',img:'d_coco',d:'Del coco recién abierto con machete, a pie de playa. Y cuando te lo acabas te lo parten para comer la carne.'},
   ],
   'Durango': [
-    {n:'Caldillo durangueño',img:'d_caldillo',d:'El plato con nombre propio del estado: carne de res con chile colorado.',where:'Centro de Durango',wq:'caldillo duranguense, Durango centro'},
-    {n:'Gorditas y antojitos',img:'d_gorditas',d:'Rellenas de guisado, en puestos del centro. Barato y de todo el día.',where:'Mercado Gómez Palacio',wq:'gorditas Durango centro'},
+    {n:'Caldillo duranguense',img:'d_caldillo',d:'El plato con nombre propio del estado: carne de res deshebrada en caldo de chile colorado. Se come con tortillas de harina.',where:'El Esquilón, Centro',wq:'El Esquilon, Durango'},
+    {n:'Gorditas de horno',img:'d_gorditas',d:'Rellenas de guisado y hechas al momento en puestos del centro. Baratas y a cualquier hora.'},
+    {n:'Tortillas de harina',img:'d_tortillaharina',d:'En el norte la tortilla es de trigo, grande y fina. Acompaña todo y no se parece en nada a la del sur.'},
+    {n:'Queso menonita',img:'d_quesomenonita',d:'Queso norteño de pasta firme que funde muy bien, herencia de las colonias menonitas de la zona.'},
   ],
 };
 
@@ -881,7 +903,6 @@ const TASKS = [
   {cat:'Boda',t:'Regalo / mesa de regalos',n:'',done:false},
   {cat:'Equipaje',t:'Adaptador de enchufe (tipo A/B, 127V)',n:'',done:false},
   {cat:'Equipaje',t:'Revisar franquicia de equipaje Emirates',n:'',done:false},
-  {cat:'Seguro',t:'Contratar seguro de viaje',n:'Recomendado, no obligatorio.',done:false},
   {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Emirates',n:'Reserva RMQTJB. Emirates suele abrirlo 48h antes de cada vuelo.',done:false},
   {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Volaris',n:'Reserva KLSYGE (PXM-DGO del 14/10). Se abre 3 días antes.',done:false},
   {cat:'Reservas',t:'Vincular la reserva de VivaAerobus a una cuenta Viva',n:'Reserva ADS1TJ (CDMX-Oaxaca del 5/10). Sin vincularla no se puede hacer check-in en línea ni modificarla.',done:false},
@@ -990,7 +1011,6 @@ const CONTACTS = [
   {t:'Consulado de Chile',sub:'En Ciudad de México · Confirmar teléfono actual.',tel:'verificar',web:'https://chile.gob.cl',ic:I.globe},
   {t:'Aerolínea',sub:'Emirates · Reserva RMQTJB · vuelos EK255 / EK256.',tel:'verificar',web:'https://emirates.com',ic:I.plane},
   {t:'Agencia',sub:'MyTrip / Gotogate · Pedido 1127-541-022.',tel:'',web:'https://mytrip.com',ic:I.plane},
-  {t:'Seguro de viaje',sub:'(rellenar al contratar) · Asistencia 24h.',tel:'',web:'',ic:I.shield},
   {t:'Bloqueo de tarjetas',sub:'Banco · Por si pérdida/robo.',tel:'',web:'',ic:I.coins},
   {t:'Alojamiento CDMX',sub:'Condesa Suites / Uniko Living · 03-05 oct (inicio) y 18-23 oct (final)',tel:'',web:'',ic:I.bed},
   {t:'Alojamiento Oaxaca',sub:'Hotel Posada San Rafael · 05-10 oct',tel:'',web:'',ic:I.bed},
@@ -1007,7 +1027,7 @@ const $ = s => document.querySelector(s);
 const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
 const cityBadge = c => `<span class="badge-city" style="background:${CITY[c].c}">${CITY[c].n}</span>`;
 const eur = n => (n<0?'−':'')+eurN(Math.abs(n));
-const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')">`;
+const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')" onerror="this.closest('.thumb')?.remove()">`;
 const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
 const mapBtn = (q,label) => `<a class="mapbtn" href="${mapsUrl(q)}" target="_blank" rel="noopener">${I.pin} ${label||'Ver en mapa'}</a>`;
 const dirUrl = (pts, mode) => {
@@ -1019,6 +1039,15 @@ const dirUrl = (pts, mode) => {
   if(mid) u+=`&waypoints=${mid}`;
   return u;
 };
+/* Las marcas del móvil (pagos, reparto, tareas, maleta) se guardaban por POSICIÓN
+   en la lista. Cada vez que el Sheet gana o pierde una fila, eso desplaza lo marcado
+   a otro concepto. Ahora la clave sale del texto del concepto, que no se mueve. */
+function sid(txt){
+  const base=(txt||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+  let h=0; for(let i=0;i<(txt||'').length;i++){ h=((h<<5)-h+txt.charCodeAt(i))|0; }
+  return base+'~'+(h>>>0).toString(36);
+}
 function loadState(key){try{return JSON.parse(localStorage.getItem(key))||{};}catch(e){return {};}}
 function saveState(key,obj){localStorage.setItem(key,JSON.stringify(obj));}
 const checkSVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
@@ -1035,12 +1064,12 @@ const monName = mm => ['','ene','feb','mar','abr','may','jun','jul','ago','sep',
 /* check counters for Hoy */
 function checkCount(items,key,hasDefaults){
   const st=loadState(key); let done=0;
-  items.forEach((it,i)=>{ const id=key+'_'+i; const c=(id in st)?st[id]:(hasDefaults?!!it.done:false); if(c)done++; });
+  items.forEach(it=>{ const id=key+'_'+sid(it.t); const c=(id in st)?st[id]:(hasDefaults?!!it.done:false); if(c)done++; });
   return {done,total:items.length,pending:items.length-done};
 }
 function pendingPay(){
   const st=loadState('mx_pagos'); let pend=0;
-  PAYMENTS.forEach((p,i)=>{ if(p.st!=='Pagado' && !st['mx_pagos_'+i]) pend+=p.val; });
+  PAYMENTS.forEach(p=>{ if(p.st!=='Pagado' && !st['mx_pagos_'+sid(p.c)]) pend+=p.val; });
   return pend;
 }
 
@@ -1339,6 +1368,7 @@ const PAYKEY='mx_pagos', WHOKEY='mx_pagador', ASIGKEY='mx_asigna', EXPKEY='mx_ga
 const YO=['Javiera','Juan'];
 const PCOLOR={Javiera:'#1f8fa0', Juan:'#c4633a'};
 
+let GASTO_EDIT = null;   // id del gasto que se está corrigiendo, o null
 function loadExpenses(){ try{ return JSON.parse(localStorage.getItem(EXPKEY))||[]; }catch(e){ return []; } }
 function saveExpenses(a){ localStorage.setItem(EXPKEY, JSON.stringify(a)); }
 const eurN = v => {
@@ -1361,7 +1391,7 @@ function repartoAuto(items){
     const suma={Javiera:0,Juan:0}, out={};
     [...items].sort((a,b)=>b.val-a.val).forEach(it=>{
       const quien = suma.Javiera<=suma.Juan ? 'Javiera' : 'Juan';
-      out[it.i]=quien; suma[quien]+=it.val;
+      out[it.k]=quien; suma[quien]+=it.val;
     });
     return out;
   }
@@ -1383,32 +1413,32 @@ function repartoAuto(items){
     }
   }
   const out={};
-  items.forEach((it,k)=>{ out[it.i]=mejor.asig[k]; });
+  items.forEach((it,idx)=>{ out[it.k]=mejor.asig[idx]; });
   return out;
 }
 
 function moneyState(){
   const paidSt=loadState(PAYKEY), whoSt=loadState(WHOKEY), asigSt=loadState(ASIGKEY);
   const yaEstaba = p => p.st==='Pagado';                       // pagado antes del viaje: saldado
-  const isPaid = (p,i)=> yaEstaba(p) || !!paidSt[PAYKEY+'_'+i];
-  const payer  = (p,i)=> whoSt[WHOKEY+'_'+i] || (YO.includes(p.by)?p.by:'');
-  const asig   = (p,i)=> asigSt[ASIGKEY+'_'+i] || '';
+  const isPaid = p => yaEstaba(p) || !!paidSt[PAYKEY+'_'+sid(p.c)];
+  const payer  = p => whoSt[WHOKEY+'_'+sid(p.c)] || (YO.includes(p.by)?p.by:'');
+  const asig   = p => asigSt[ASIGKEY+'_'+sid(p.c)] || '';
 
   // 1. línea base: lo ya pagado, solo informativo
   const base={Javiera:0,Juan:0}; let baseSinDueno=0, pagadoBase=0;
   // 2. lo que queda: conceptos a repartir
   const pendientes=[]; let pend=0, estimado=0;
-  PAYMENTS.forEach((p,i)=>{
+  PAYMENTS.forEach(p=>{
     if(yaEstaba(p)){
       pagadoBase+=p.val;
-      const by=payer(p,i);
+      const by=payer(p);
       if(YO.includes(by)) base[by]+=p.val; else baseSinDueno+=p.val;
     } else {
       pend+=p.val;
       // solo las reservas concretas se reparten; las categorías estimadas (comida,
       // transporte, actividades...) se gastan sobre la marcha y van en Gastos
       if(p.k==='hotel'){
-        pendientes.push({i, c:p.c, n:p.n, val:p.val, asig:asig(p,i), pagado:isPaid(p,i), by:payer(p,i)});
+        pendientes.push({k:sid(p.c), c:p.c, n:p.n, val:p.val, asig:asig(p), pagado:isPaid(p), by:payer(p)});
       } else {
         estimado+=p.val;
       }
@@ -1516,7 +1546,7 @@ function renderMoney(){
   btn.onclick=()=>{
     const st=loadState(ASIGKEY);
     const auto=repartoAuto(M.pendientes);
-    Object.entries(auto).forEach(([i,quien])=>{ st[ASIGKEY+'_'+i]=quien; });
+    Object.entries(auto).forEach(([k,quien])=>{ st[ASIGKEY+'_'+k]=quien; });
     saveState(ASIGKEY,st); renderMoney();
   };
   v.appendChild(btn);
@@ -1545,13 +1575,13 @@ function renderMoney(){
       <div class="pv">${eurN(p.val)}
         <button class="markpaid">${p.pagado?'pagado':'marcar pagado'}</button></div>`;
     row.querySelectorAll('.whosel button').forEach(b=>b.onclick=()=>{
-      const st=loadState(ASIGKEY); st[ASIGKEY+'_'+p.i]=b.dataset.w; saveState(ASIGKEY,st);
+      const st=loadState(ASIGKEY); st[ASIGKEY+'_'+p.k]=b.dataset.w; saveState(ASIGKEY,st);
       renderMoney();
     });
     row.querySelector('.markpaid').onclick=()=>{
-      const st=loadState(PAYKEY); st[PAYKEY+'_'+p.i]=!p.pagado; saveState(PAYKEY,st);
+      const st=loadState(PAYKEY); st[PAYKEY+'_'+p.k]=!p.pagado; saveState(PAYKEY,st);
       if(!p.pagado && YO.includes(p.asig)){       // lo normal: lo paga quien lo tenía asignado
-        const w=loadState(WHOKEY); w[WHOKEY+'_'+p.i]=p.asig; saveState(WHOKEY,w);
+        const w=loadState(WHOKEY); w[WHOKEY+'_'+p.k]=p.asig; saveState(WHOKEY,w);
       }
       renderMoney(); renderHoy();
     };
@@ -1602,9 +1632,9 @@ function renderMoney(){
   const db=det.querySelector('.detail-b');
   db.appendChild(el('div','sub','Saldado, no entra en el reparto. El selector es solo para dejar constancia de quién lo puso.'));
   const whoSt=loadState(WHOKEY);
-  PAYMENTS.forEach((p,i)=>{
+  PAYMENTS.forEach(p=>{
     if(p.st!=='Pagado') return;
-    const by=M.payer(p,i);
+    const by=M.payer(p);
     const row=el('div','paychk done');
     row.innerHTML=`<div class="box">${checkSVG}</div>
       <div class="pc"><b>${p.c}</b><span>${p.n||''}</span>
@@ -1614,7 +1644,7 @@ function renderMoney(){
       <div class="pv">${p.amt}</div>`;
     row.querySelectorAll('.whosel button').forEach(b=>b.onclick=(ev)=>{
       ev.stopPropagation();
-      whoSt[WHOKEY+'_'+i]=b.dataset.w; saveState(WHOKEY,whoSt); renderMoney();
+      whoSt[WHOKEY+'_'+sid(p.c)]=b.dataset.w; saveState(WHOKEY,whoSt); renderMoney();
     });
     db.appendChild(row);
   });
@@ -1636,21 +1666,26 @@ function renderGastos(){
       <small>${moves.length?`${moves[0].from} debe ${eurN(moves[0].amt)}`:'están a la par'}</small></div>`;
   v.appendChild(res);
 
-  /* apunte rápido */
-  v.appendChild(el('div','sec-title','Apuntar un gasto'));
-  const form=el('div','card expform');
+  /* el mismo formulario sirve para apuntar y para corregir */
+  const editando = GASTO_EDIT ? loadExpenses().find(g=>g.id===GASTO_EDIT) : null;
+  if(GASTO_EDIT && !editando) GASTO_EDIT=null;
+  const sel=(val,ref)=> val===ref ? ' class="on"' : '';
+  v.appendChild(el('div','sec-title', editando ? 'Corregir el gasto' : 'Apuntar un gasto'));
+  const form=el('div','card expform'+(editando?' editando':''));
   form.innerHTML=`
-    <input class="ex-c" type="text" placeholder="Concepto (comida, taxi, entradas...)">
+    <input class="ex-c" type="text" placeholder="Concepto (comida, taxi, entradas...)" value="${editando?String(editando.c).replace(/"/g,'&quot;'):''}">
     <div class="exrow">
-      <input class="ex-a" type="number" inputmode="decimal" placeholder="0,00">
-      <div class="seg small ex-cur"><button data-c="MXN" class="on">MXN</button><button data-c="EUR">EUR</button></div>
+      <input class="ex-a" type="number" inputmode="decimal" placeholder="0,00" value="${editando?editando.amt:''}">
+      <div class="seg small ex-cur"><button data-c="MXN"${sel(editando?editando.cur:'MXN','MXN')}>MXN</button><button data-c="EUR"${sel(editando?editando.cur:'MXN','EUR')}>EUR</button></div>
     </div>
     <div class="exlbl">Quién pagó</div>
-    <div class="seg ex-by"><button data-b="Javiera" class="on">Javiera</button><button data-b="Juan">Juan</button></div>
+    <div class="seg ex-by"><button data-b="Javiera"${sel(editando?editando.by:'Javiera','Javiera')}>Javiera</button><button data-b="Juan"${sel(editando?editando.by:'Javiera','Juan')}>Juan</button></div>
     <div class="exlbl">De quién es el gasto</div>
-    <div class="seg ex-sp"><button data-s="medias" class="on">A medias</button><button data-s="Javiera">Solo Javiera</button><button data-s="Juan">Solo Juan</button></div>
-    <button class="exadd">Añadir gasto</button>`;
+    <div class="seg ex-sp"><button data-s="medias"${sel(editando?editando.split:'medias','medias')}>A medias</button><button data-s="Javiera"${sel(editando?editando.split:'medias','Javiera')}>Solo Javiera</button><button data-s="Juan"${sel(editando?editando.split:'medias','Juan')}>Solo Juan</button></div>
+    <button class="exadd">${editando?'Guardar cambios':'Añadir gasto'}</button>
+    ${editando?'<button class="excancel">Cancelar</button>':''}`;
   v.appendChild(form);
+  if(editando) form.querySelector('.excancel').onclick=()=>{ GASTO_EDIT=null; renderGastos(); };
   const segPick=(sel,attr)=>{
     const box=form.querySelector(sel);
     box.querySelectorAll('button').forEach(b=>b.onclick=()=>{
@@ -1664,9 +1699,16 @@ function renderGastos(){
     const a=parseFloat((form.querySelector('.ex-a').value||'').replace(',','.'));
     if(!c || !a || a<=0){ form.querySelector('.ex-c').focus(); return; }
     const cur=getCur(), rate=TOTALS.rate_val||20.1;
+    const eur=Math.round((cur==='MXN'? a/rate : a)*100)/100;
     const exps=loadExpenses();
-    exps.push({id:Date.now(), c, amt:a, cur, eur:Math.round((cur==='MXN'? a/rate : a)*100)/100,
-               by:getBy(), split:getSp(), d:new Date().toISOString().slice(0,10)});
+    if(editando){
+      const i=exps.findIndex(g=>g.id===GASTO_EDIT);
+      if(i>=0) exps[i]=Object.assign({}, exps[i], {c, amt:a, cur, eur, by:getBy(), split:getSp()});
+      GASTO_EDIT=null;
+    } else {
+      exps.push({id:Date.now(), c, amt:a, cur, eur, by:getBy(), split:getSp(),
+                 d:new Date().toISOString().slice(0,10)});
+    }
     saveExpenses(exps);
     renderGastos(); renderMoney(); renderHoy();
   };
@@ -1675,6 +1717,7 @@ function renderGastos(){
   const hoja=M.gastos.filter(g=>!g.local);
   if(hoja.length){
     v.appendChild(el('div','sec-title','En la hoja'));
+    v.appendChild(el('div','sub','Estos vienen del Sheet: si hay que corregir alguno, se corrige allí.'));
     const hc=el('div','card flat');
     hoja.forEach(g=>hc.appendChild(el('div','exitem',
       `<div class="pc"><b>${g.c}</b><span>${g.d||''}${g.d?' · ':''}pagó ${g.by||'—'} · ${g.split==='medias'?'a medias':'solo '+g.split}</span></div>
@@ -1691,10 +1734,19 @@ function renderGastos(){
     locales.slice().reverse().forEach(g=>{
       const row=el('div','exitem');
       const dd=g.d?g.d.slice(8,10)+'/'+g.d.slice(5,7):'';
+      if(g.id===GASTO_EDIT) row.classList.add('enedicion');
       row.innerHTML=`<div class="pc"><b>${g.c}</b><span>${dd} · pagó ${g.by} · ${g.split==='medias'?'a medias':'solo '+g.split}</span></div>
         <div class="pv">${eurN(g.eur)}${g.cur==='MXN'?`<div class="sub2">${miles(g.amt)} MXN</div>`:''}</div>
+        <button class="exedit" title="Corregir">${I.pencil}</button>
         <button class="exdel" title="Borrar">×</button>`;
+      row.querySelector('.exedit').onclick=()=>{
+        GASTO_EDIT=g.id; renderGastos();
+        const f=document.querySelector('#v-gastos .expform');
+        if(f) f.scrollIntoView({behavior:'smooth',block:'center'});
+      };
       row.querySelector('.exdel').onclick=()=>{
+        if(!confirm('¿Borrar "'+g.c+'"?')) return;
+        if(GASTO_EDIT===g.id) GASTO_EDIT=null;
         saveExpenses(loadExpenses().filter(x=>x.id!==g.id));
         renderGastos(); renderMoney(); renderHoy();
       };
@@ -1784,12 +1836,12 @@ function renderCheckList(view, items, key, hasDefaults){
   const counter=el('div','sub');
   function update(){
     let done=0;
-    items.forEach((it,i)=>{ const id=key+'_'+i; if((id in state)?state[id]:(hasDefaults?!!it.done:false)) done++; });
+    items.forEach(it=>{ const id=key+'_'+sid(it.t); if((id in state)?state[id]:(hasDefaults?!!it.done:false)) done++; });
     const pct=Math.round(done/items.length*100); fill.style.width=pct+'%';
     counter.textContent=`${done} de ${items.length} · ${pct}%`;
   }
-  items.forEach((it,i)=>{
-    const id=key+'_'+i;
+  items.forEach(it=>{
+    const id=key+'_'+sid(it.t);
     const checked=(id in state)?state[id]:(hasDefaults?!!it.done:false);
     const row=el('div','chk'+(checked?' done':''));
     row.innerHTML=`<div class="box">${checkSVG}</div>
@@ -1860,7 +1912,7 @@ function renderMas(){
     {id:'logistica',ic:I.plane,t:'Vuelos y hoteles',s:`${FLIGHTS.length} vuelos, ${HOTELS.length} alojamientos y traslados`},
     {id:'boda',ic:I.star,t:'La boda',s:'Sábado 17 de octubre, en Durango'},
     {id:'info',ic:I.info,t:'Guía y qué ver',s:'Lugares, clima, notas y contactos'},
-    {id:'conversor',ic:I.coins,t:'Conversor de moneda',s:'Peso mexicano, euro y peso chileno'},
+    {id:'conversor',ic:I.coins,t:'Conversor de moneda',s:'Entre pesos mexicanos y euros'},
     {id:'listas',ic:I.check,t:'Listas',s:'Tareas pendientes y maleta'},
   ];
   items.forEach(it=>{
@@ -1876,29 +1928,28 @@ function renderConversor(){
   const v=$('#v-conversor'); v.innerHTML=backbar('mas');
   v.appendChild(el('div','sec-title','Conversor de moneda'));
   const RKEY='mx_rates';
-  const rates=Object.assign({MXN:(TOTALS.rate_val||20.1), CLP:1044}, loadState(RKEY)); // por 1 €
+  const rates=Object.assign({MXN:(TOTALS.rate_val||20.1)}, loadState(RKEY)); // por 1 €
   let from='MXN', amount=100;
   const conv=el('div','conv');
   conv.innerHTML=`
     <div class="seg">
-      <button data-c="MXN">Peso $</button><button data-c="EUR">EUR €</button><button data-c="CLP">CLP $</button>
+      <button data-c="MXN">Peso mexicano</button><button data-c="EUR">Euro</button>
     </div>
     <input class="amt-in" type="number" inputmode="decimal" value="100">
     <div class="out"></div>`;
   v.appendChild(conv);
   const out=conv.querySelector('.out');
   const inp=conv.querySelector('.amt-in');
-  const per={EUR:1, MXN:rates.MXN, CLP:rates.CLP};
+  const per={EUR:1, MXN:rates.MXN};
   function fmt(c,val){
-    if(c==='CLP') return '$'+Math.round(val).toLocaleString('es-CL')+' CLP';
     if(c==='MXN') return '$'+Math.round(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' MXN';
     return val.toLocaleString('es-ES',{maximumFractionDigits:2})+' €';
   }
   function calc(){
-    per.MXN=rates.MXN; per.CLP=rates.CLP;
+    per.MXN=rates.MXN;
     const eurVal=(amount||0)/per[from];
-    const others=['MXN','EUR','CLP'].filter(c=>c!==from);
-    out.innerHTML=others.map(c=>`<div class="orow"><span class="ol">${({EUR:'Euro',MXN:'Peso mexicano',CLP:'Peso chileno'})[c]}</span><span class="ov">${fmt(c,eurVal*per[c])}</span></div>`).join('');
+    const otra = from==='MXN' ? 'EUR' : 'MXN';
+    out.innerHTML=`<div class="orow"><span class="ol">${otra==='EUR'?'Euro':'Peso mexicano'}</span><span class="ov">${fmt(otra,eurVal*per[otra])}</span></div>`;
   }
   conv.querySelectorAll('.seg button').forEach(b=>{
     if(b.dataset.c===from) b.classList.add('on');
@@ -1911,12 +1962,11 @@ function renderConversor(){
   v.appendChild(el('div','sub','El de la hoja es de junio de 2026: edítalo con el real antes de viajar. Se guarda en este móvil.'));
   const rc=el('div','card rates');
   rc.innerHTML=`
-    <label>1 € = <span style="margin-left:auto"></span><input id="rMXN" type="number" inputmode="decimal" value="${rates.MXN}"> $ (MXN)</label>
-    <label>1 € = <span style="margin-left:auto"></span><input id="rCLP" type="number" inputmode="decimal" value="${rates.CLP}"> $ (CLP)</label>`;
+    <label>1 € = <span style="margin-left:auto"></span><input id="rMXN" type="number" inputmode="decimal" value="${rates.MXN}"> $ (MXN)</label>`;
   v.appendChild(rc);
-  const persist=()=>saveState(RKEY,{MXN:rates.MXN,CLP:rates.CLP});
-  rc.querySelector('#rMXN').oninput=e=>{ rates.MXN=parseFloat(e.target.value)||rates.MXN; persist(); calc(); };
-  rc.querySelector('#rCLP').oninput=e=>{ rates.CLP=parseFloat(e.target.value)||rates.CLP; persist(); calc(); };
+  rc.querySelector('#rMXN').oninput=e=>{
+    rates.MXN=parseFloat(e.target.value)||rates.MXN; saveState(RKEY,{MXN:rates.MXN}); calc();
+  };
 }
 
 /* ============== LA BODA ============== */
@@ -1960,6 +2010,34 @@ function updateOnline(){
 }
 window.addEventListener('online', updateOnline);
 window.addEventListener('offline', updateOnline);
+
+/* ============== MIGRACIÓN DE LO GUARDADO ============== */
+/* Si en el móvil hay marcas del esquema viejo (por posición), se traducen al nuevo
+   antes de pintar nada, para no perder lo que ya estuviera marcado. */
+(function migrarMarcas(){
+  try{
+    if(localStorage.getItem('mx_migrado_v2')) return;
+    const mapas=[
+      ['mx_pagos',   PAYMENTS, p=>p.c],
+      ['mx_pagador', PAYMENTS, p=>p.c],
+      ['mx_asigna',  PAYMENTS, p=>p.c],
+      ['mx_tasks',   TASKS,    t=>t.t],
+      ['mx_pack',    PACK,     t=>t.t],
+    ];
+    mapas.forEach(([key, lista, texto])=>{
+      const st=loadState(key); let tocado=false;
+      Object.keys(st).forEach(k=>{
+        const m=k.match(new RegExp('^'+key+'_(\\d+)$'));
+        if(!m) return;
+        const i=parseInt(m[1],10);
+        if(lista[i]) st[key+'_'+sid(texto(lista[i]))]=st[k];
+        delete st[k]; tocado=true;
+      });
+      if(tocado) saveState(key,st);
+    });
+    localStorage.setItem('mx_migrado_v2','1');
+  }catch(e){ /* si algo falla, mejor no tocar nada de lo guardado */ }
+})();
 
 /* ============== INIT ============== */
 countdown();
