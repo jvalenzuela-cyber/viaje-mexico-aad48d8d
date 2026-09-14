@@ -93,9 +93,11 @@
 
   /* ---------- Hoy ---------- */
   .cd-hero{border-radius:20px;overflow:hidden;position:relative;color:#fff;
-    background:linear-gradient(150deg,#5e1f3d 0%,#8e2750 55%,#c4633a 100%);
-    padding:22px 20px;box-shadow:var(--shadow);margin-bottom:14px;text-align:center}
-  .cd-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(42,176,191,.45),transparent 70%)}
+    background-image:linear-gradient(180deg,rgba(43,26,32,.34) 0%,rgba(94,31,61,.40) 42%,rgba(94,31,61,.80) 100%),url("img/portada.jpg");
+    background-size:cover,cover; background-position:center,center 58%;
+    padding:26px 20px 22px;box-shadow:var(--shadow);margin-bottom:14px;text-align:center}
+  .cd-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(42,176,191,.3),transparent 70%)}
+  .cd-hero .big,.cd-hero .u,.cd-hero .eq,.cd-hero .dts{text-shadow:0 2px 16px rgba(43,26,32,.85),0 1px 4px rgba(43,26,32,.6)}
   .cd-hero>*{position:relative}
   .cd-hero .eq{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#f5d5df;font-weight:600}
   .cd-hero .big{font-family:'Fraunces',serif;font-size:60px;font-weight:700;line-height:.95;margin:6px 0 2px}
@@ -508,7 +510,7 @@
   <section class="view" id="v-conversor"></section>
   <section class="view" id="v-gastos"></section>
   <section class="view" id="v-boda"></section>
-  <div class="footer">App de viaje · hecha desde la hoja de planificación · funciona sin conexión</div>
+  <div class="footer">App de viaje · hecha desde la hoja de planificación · funciona sin conexión<div style="margin-top:6px;font-size:10px;opacity:.75">Portada: trajineras de Xochimilco, <a href="https://commons.wikimedia.org/wiki/File:Xochimilco,_trajinera_boats_(20660402936).jpg" target="_blank" rel="noopener">foto de Arian Zwegers</a>, CC BY 2.0</div></div>
 </main>
 
 <div class="offline-bar" id="offlineBar">Sin conexión · usando los datos guardados</div>

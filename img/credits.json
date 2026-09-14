@@ -3,5 +3,12 @@
     "title": "Mexican cuisine",
     "source": "https://upload.wikimedia.org/wikipedia/commons/2/22/Collage_Mexican_Cuisine_by_User-EME.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
     "page": "https://en.wikipedia.org/wiki/Mexican_cuisine"
+  },
+  "portada": {
+    "title": "File:Xochimilco, trajinera boats (20660402936).jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Xochimilco%2C_trajinera_boats_%2820660402936%29.jpg/1920px-Xochimilco%2C_trajinera_boats_%2820660402936%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "page": "https://commons.wikimedia.org/wiki/File%3AXochimilco%2C_trajinera_boats_%2820660402936%29.jpg",
+    "author": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/67769030@N07\">Arian Zwegers</a> from Brussels, Belgium",
+    "license": "CC BY 2.0"
   }
 }

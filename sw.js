@@ -1,8 +1,9 @@
 /* Service worker — offline en destino, pero siempre la última versión si hay conexión.
    Estrategia: HTML network-first (refresca al regenerar la app); imágenes/estáticos cache-first. */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = 'viaje-mexico-' + VERSION;
 const IMG_KEYS = [
+  'portada',
   'mex_hero','oax_hero','pxm_hero','dgo_hero','mex_hero2',
   'd_pastor','d_churros','d_pozole',
   'd_mole','d_tlayuda','d_chapulines','d_mezcal',
