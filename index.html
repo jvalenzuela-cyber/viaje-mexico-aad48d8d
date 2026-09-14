@@ -26,13 +26,18 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>México · Oaxaca · Puerto Escondido · Durango</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Fuentes guardadas en la propia app: con Google Fonts, la primera vez sin
+     conexión la app cambiaba de cara. Son las dos variables, un archivo cada una. */
+  @font-face{font-family:'Fraunces';font-style:normal;font-weight:500 700;font-display:swap;
+    src:url(fonts/fraunces.woff2) format('woff2')}
+  @font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;
+    src:url(fonts/inter.woff2) format('woff2')}
   :root{
     --sea:#5e1f3d; --sea2:#8e2750; --aegean:#1f8fa0; --turq:#2ab0bf;
-    --sand:#f7ecd9; --paper:#fdf7ee; --ink:#2b1a20; --muted:#7a6068;
+    --sand:#f7ecd9; --paper:#fdf7ee; --ink:#2b1a20; --muted:#6b525a;
     --line:rgba(94,31,61,.12); --gold:#e8a33d; --rose:#d4674f; --orbital:#2f9e6e;
     --good:#2f9e6e; --bad:#c8443a; --warn:#d9902c;
     --card:#ffffff; --shadow:0 6px 24px rgba(94,31,61,.10);
@@ -58,30 +63,36 @@
     box-shadow:0 4px 18px rgba(94,31,61,.25);
   }
   .head-inner{padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand .eyebrow{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#f2bfd0;font-weight:600}
+  .brand .eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#f2bfd0;font-weight:600}
   .brand h1{font-size:17px;margin:2px 0 0;font-weight:600;line-height:1.15}
   .count{
     text-align:right;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
     border-radius:14px;padding:6px 12px;min-width:74px;backdrop-filter:blur(4px)
   }
   .count .num{font-family:'Fraunces',serif;font-size:22px;font-weight:700;line-height:1}
-  .count .lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#f5d5df}
+  .count .lbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#f5d5df}
 
   /* ---------- Bottom nav ---------- */
   .bnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;
     background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);
     padding:7px 4px calc(7px + var(--safe-b));box-shadow:0 -4px 20px rgba(94,31,61,.08)}
   .bnav button{flex:1;border:0;background:none;font-family:inherit;display:flex;flex-direction:column;
-    align-items:center;gap:3px;padding:4px 2px;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;transition:.15s}
+    align-items:center;gap:3px;padding:4px 2px;color:var(--muted);font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s}
   .bnav button .bi{opacity:.65;transition:.15s;display:grid;place-items:center}
   .bnav button.on{color:var(--aegean)}
   .bnav button.on .bi{opacity:1;transform:translateY(-1px)}
 
   /* offline bar */
   .offline-bar{position:fixed;left:0;right:0;bottom:calc(76px + var(--safe-b));z-index:55;
-    background:var(--warn);color:#fff;text-align:center;font-size:12px;font-weight:600;
+    background:var(--warn);color:#fff;text-align:center;font-size:12.5px;font-weight:600;
     padding:7px 12px;transform:translateY(150%);transition:transform .3s;box-shadow:0 -2px 12px rgba(0,0,0,.15)}
   .offline-bar.show{transform:none}
+  .update-bar{position:fixed;left:0;right:0;bottom:calc(76px + var(--safe-b));z-index:56;
+    background:var(--sea);color:#fff;text-align:center;font-size:13px;font-weight:600;
+    padding:10px 12px;transform:translateY(150%);transition:transform .3s;box-shadow:0 -2px 12px rgba(0,0,0,.2)}
+  .update-bar.show{transform:none}
+  .update-bar button{margin-left:10px;font-family:inherit;font-size:12.5px;font-weight:700;
+    padding:6px 14px;border-radius:999px;border:0;background:var(--orbital);color:#06341f;cursor:pointer}
 
   /* ---------- Layout ---------- */
   main{max-width:680px;margin:0 auto;padding:16px 16px 30px}
@@ -95,7 +106,7 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;box-shadow:var(--shadow);margin-bottom:12px}
   .card.flat{box-shadow:none}
 
-  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
   .pill.ok{background:rgba(47,158,110,.13);color:var(--good)}
   .pill.pend{background:rgba(217,144,44,.15);color:var(--warn)}
   .pill.info{background:rgba(31,143,160,.12);color:var(--aegean)}
@@ -112,19 +123,19 @@
   .cd-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(42,176,191,.3),transparent 70%)}
   .cd-hero .big,.cd-hero .u,.cd-hero .eq,.cd-hero .dts{text-shadow:0 2px 16px rgba(43,26,32,.85),0 1px 4px rgba(43,26,32,.6)}
   .cd-hero>*{position:relative}
-  .cd-hero .eq{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#f5d5df;font-weight:600}
+  .cd-hero .eq{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#f5d5df;font-weight:600}
   .cd-hero .big{font-family:'Fraunces',serif;font-size:60px;font-weight:700;line-height:.95;margin:6px 0 2px}
   .cd-hero .u{font-size:13px;color:#fdeef3;font-weight:500}
   .cd-hero .dts{font-size:12.5px;color:#f5d5df;margin-top:10px}
   .cd-hero .who{margin-top:14px;display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
   .ava{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:5px 11px 5px 5px;border-radius:999px;font-size:12.5px;font-weight:600}
-  .ava i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#3d1026}
+  .ava i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:#3d1026}
 
   .todayhero{border-radius:20px;overflow:hidden;position:relative;color:#fff;
     background:linear-gradient(150deg,#5e1f3d,#b5365f);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:12px}
   .todayhero::after{content:"";position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(47,158,110,.35),transparent 70%)}
   .todayhero>*{position:relative}
-  .todayhero .dd{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#f5d5df;font-weight:700}
+  .todayhero .dd{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f5d5df;font-weight:700}
   .todayhero h2{font-family:'Fraunces';font-size:27px;margin:4px 0 0;font-weight:600}
   .todayhero .meta{font-size:12.5px;color:#f9e2ea;margin-top:7px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
   .todayhero .meta .chip{background:rgba(255,255,255,.15);border-radius:999px;padding:3px 10px;display:inline-flex;align-items:center;gap:5px}
@@ -132,38 +143,38 @@
   .nextup{display:flex;align-items:center;gap:13px;background:#fff;border:1px solid rgba(47,158,110,.4);border-left:4px solid var(--orbital);border-radius:14px;padding:13px 15px;margin-bottom:12px;box-shadow:var(--shadow)}
   .nextup .ni{width:40px;height:40px;border-radius:11px;background:rgba(47,158,110,.14);color:#217a53;display:grid;place-items:center;flex:0 0 auto}
   .nextup .nx{flex:1;min-width:0}
-  .nextup .nx .k{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .nextup .nx .k{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .nextup .nx b{font-size:15px;display:block;margin-top:1px}
-  .nextup .nx span{font-size:12px;color:var(--muted)}
+  .nextup .nx span{font-size:12.5px;color:var(--muted)}
 
   .prep{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:center;gap:11px}
   .pcard .pi{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto}
   .pcard .pv{font-family:'Fraunces';font-size:20px;font-weight:700;color:var(--sea);line-height:1}
-  .pcard .pk{font-size:11px;color:var(--muted);margin-top:2px}
+  .pcard .pk{font-size:12px;color:var(--muted);margin-top:2px}
 
   .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 12px;text-align:center;box-shadow:var(--shadow)}
   .stat .v{font-family:'Fraunces',serif;font-size:21px;font-weight:700;color:var(--sea)}
-  .stat .k{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:600}
+  .stat .k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:600}
 
   .budget-hero{background:linear-gradient(135deg,#5e1f3d,#b5365f);color:#fff;border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:16px;position:relative;overflow:hidden}
   .budget-hero::after{content:"";position:absolute;right:-30px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(47,158,110,.4),transparent 70%)}
   .budget-hero>*{position:relative}
   .budget-hero .bh-top{display:flex;justify-content:space-between;align-items:center}
-  .budget-hero .bh-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#f5d5df;font-weight:600}
-  .budget-hero .bh-rate{font-size:10.5px;color:#f5d5df;background:rgba(255,255,255,.14);padding:3px 9px;border-radius:8px;font-weight:600}
+  .budget-hero .bh-lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#f5d5df;font-weight:600}
+  .budget-hero .bh-rate{font-size:11.5px;color:#f5d5df;background:rgba(255,255,255,.14);padding:3px 9px;border-radius:8px;font-weight:600}
   .budget-hero .bh-clp{font-family:'Fraunces',serif;font-size:33px;font-weight:700;line-height:1.05;margin-top:7px}
   .budget-hero .bh-eur{font-size:12.5px;color:#f5d5df;margin-top:3px}
   .budget-hero .bh-pp{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);font-size:13px;color:#fdeef3;display:flex;align-items:baseline;gap:7px}
   .budget-hero .bh-pp b{font-family:'Fraunces',serif;font-size:17px}
-  .budget-hero .bh-pp .sec{color:#bfe3ec;margin-left:auto;font-size:12px}
+  .budget-hero .bh-pp .sec{color:#bfe3ec;margin-left:auto;font-size:12.5px}
 
   .next li{list-style:none}
   .next ul{margin:0;padding:0}
   .next li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
   .next li:last-child{border-bottom:0}
-  .next .tag{flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--rose);padding:3px 8px;border-radius:7px;margin-top:1px}
+  .next .tag{flex:0 0 auto;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--rose);padding:3px 8px;border-radius:7px;margin-top:1px}
 
   /* ---------- Itinerary ---------- */
   .day{margin-bottom:14px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--card)}
@@ -172,11 +183,11 @@
   .day-head .date{flex:0 0 auto;text-align:center;background:var(--sea);color:#fff;border-radius:12px;padding:6px 9px;min-width:46px}
   .day.istoday .day-head .date{background:var(--orbital);color:#ffffff}
   .day-head .date .d{font-family:'Fraunces',serif;font-size:18px;font-weight:700;line-height:1}
-  .day-head .date .mo{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:#bfe3ec}
+  .day-head .date .mo{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:#bfe3ec}
   .day.istoday .day-head .date .mo{color:#ffffff}
   .day-head .ti{flex:1;min-width:0}
   .day-head .ti b{font-size:15px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .day-head .ti span{font-size:11.5px;color:var(--muted);display:block;margin-top:2px}
+  .day-head .ti span{font-size:12.5px;color:var(--muted);display:block;margin-top:2px}
   .day-head .hicon{display:inline-flex;align-items:center;gap:4px;color:var(--aegean)}
   .day-head .chev{transition:.25s;color:var(--aegean);flex:0 0 auto}
   .day.open .chev{transform:rotate(180deg)}
@@ -185,10 +196,10 @@
   .slot{display:flex;gap:11px;padding:9px 0;border-top:1px solid var(--line)}
   .slot .ic{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(31,143,160,.1);color:var(--aegean)}
   .slot .tx{flex:1;font-size:13.5px}
-  .slot .tx b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:block;font-weight:700}
+  .slot .tx b{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:block;font-weight:700}
   .slot .tx b.mealk{color:var(--gold)}
   .daynote{margin-top:11px;font-size:12.5px;color:var(--sea2);background:rgba(31,143,160,.07);border-left:3px solid var(--aegean);padding:9px 11px;border-radius:0 10px 10px 0}
-  .badge-city{font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;padding:2px 8px;border-radius:7px}
+  .badge-city{font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#fff;padding:2px 8px;border-radius:7px}
   .hotelrow{display:flex;align-items:center;gap:10px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:13px}
   .hotelrow .hi{color:var(--aegean)}
   .hotelrow .ha{margin-left:auto}
@@ -199,16 +210,16 @@
   .froute .ap{font-family:'Fraunces',serif;font-size:21px;font-weight:700}
   .froute .arr{flex:1;height:1px;background:linear-gradient(90deg,var(--line),var(--aegean),var(--line));position:relative}
   .froute .arr::after{content:"✈";position:absolute;right:-2px;top:-10px;color:var(--aegean);font-size:14px}
-  .froute .arr .plus{position:absolute;left:50%;top:-9px;transform:translateX(-50%);font-size:10px;color:var(--muted);background:var(--card);padding:0 5px}
-  .ftimes{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px}
+  .froute .arr .plus{position:absolute;left:50%;top:-9px;transform:translateX(-50%);font-size:11.5px;color:var(--muted);background:var(--card);padding:0 5px}
+  .ftimes{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:10px}
   .ftimes b{color:var(--ink);font-size:13px}
-  .fmeta{display:flex;flex-wrap:wrap;gap:7px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
+  .fmeta{display:flex;flex-wrap:wrap;gap:7px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
   .fmeta b{color:var(--ink)}
   .hotel .hh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
   .hotel .hh h3{margin:0;font-size:17px}
-  .hotel .stay{font-size:12px;color:var(--muted);margin-top:3px}
+  .hotel .stay{font-size:12.5px;color:var(--muted);margin-top:3px}
   .hotel .feat{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-  .feat .t{font-size:11.5px;background:rgba(94,31,61,.05);border:1px solid var(--line);padding:4px 9px;border-radius:8px;color:var(--sea2)}
+  .feat .t{font-size:12.5px;background:rgba(94,31,61,.05);border:1px solid var(--line);padding:4px 9px;border-radius:8px;color:var(--sea2)}
   .booklink{display:inline-flex;align-items:center;gap:6px;margin-top:11px;margin-right:8px;font-size:13px;font-weight:600;background:rgba(31,143,160,.1);padding:8px 13px;border-radius:10px}
 
   /* ---------- Money ---------- */
@@ -216,7 +227,7 @@
   .balcard i{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-family:'Fraunces',serif;font-size:16px;color:#3d1026;flex:0 0 auto}
   .balcard .nm{flex:1}
   .balcard .nm b{font-size:15px}
-  .balcard .nm span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px;max-width:32ch}
+  .balcard .nm span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px;max-width:32ch}
   .balcard .amt{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:16px;white-space:nowrap}
   .amt.owe{color:var(--bad)} .amt.get{color:var(--good)}
   .transfer{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
@@ -227,17 +238,17 @@
   .bud:last-child{border-bottom:0}
   .bud .bic{width:30px;height:30px;border-radius:9px;background:rgba(31,143,160,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
   .bud .bn{flex:1;font-size:13.5px}
-  .bud .bn span{display:block;font-size:11px;color:var(--muted)}
+  .bud .bn span{display:block;font-size:12px;color:var(--muted)}
   .bud .bv{font-weight:700;font-family:'Fraunces',serif;font-size:14.5px;white-space:nowrap}
   .total-bar{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(120deg,#5e1f3d,#b5365f);color:#fff;border-radius:14px;padding:14px 17px;margin-top:6px}
-  .total-bar .tt{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f5d5df}
+  .total-bar .tt{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#f5d5df}
   .total-bar .tv{font-family:'Fraunces',serif;font-size:24px;font-weight:700}
-  .total-bar small{display:block;font-size:11px;color:#bfe3ec;text-transform:none;letter-spacing:0}
+  .total-bar small{display:block;font-size:12px;color:#bfe3ec;text-transform:none;letter-spacing:0}
   .payitem{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
   .payitem:last-child{border-bottom:0}
   .payitem .pc{flex:1}
   .payitem .pc b{font-size:13.5px}
-  .payitem .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .payitem .pc span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
   .payitem .pv{text-align:right;white-space:nowrap}
   .payitem .pv b{font-family:'Fraunces',serif;font-size:14px}
   .paysum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:12px}
@@ -255,7 +266,7 @@
   .paychk.done .box svg{opacity:1}
   .paychk .pc{flex:1;min-width:0}
   .paychk .pc b{font-size:13.5px}
-  .paychk .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .paychk .pc span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
   .paychk .pv{text-align:right;white-space:nowrap;font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--bad)}
   .paychk.done .pv{color:var(--good)}
   /* quién debe a quién (simplificado) */
@@ -277,15 +288,15 @@
   .meal{margin-bottom:12px}
   .meal .mh{display:flex;align-items:center;gap:9px;margin-bottom:7px}
   .meal .mh .md{font-family:'Fraunces',serif;font-weight:700;font-size:15px;color:var(--sea)}
-  .meal .mh .mc{font-size:11px;color:var(--muted)}
+  .meal .mh .mc{font-size:12px;color:var(--muted)}
   .meal .row{display:flex;gap:10px;padding:7px 0;font-size:13px;border-top:1px solid var(--line)}
-  .meal .row .lab{flex:0 0 58px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--aegean);padding-top:2px}
+  .meal .row .lab{flex:0 0 58px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--aegean);padding-top:2px}
   .dish{padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
   .dish:last-child{border-bottom:0}
   .dish b{display:block;font-size:13.5px}
   .dish span{display:block;font-size:12.5px;color:var(--muted)}
   .dish .wheretoeat{display:inline-flex}
-  .wheretoeat{display:inline-flex;align-items:flex-start;gap:5px;margin-top:7px;font-size:12px;font-weight:600;color:var(--aegean);line-height:1.35;background:rgba(31,143,160,.08);padding:6px 10px;border-radius:9px}
+  .wheretoeat{display:inline-flex;align-items:flex-start;gap:5px;margin-top:7px;font-size:12.5px;font-weight:600;color:var(--aegean);line-height:1.35;background:rgba(31,143,160,.08);padding:6px 10px;border-radius:9px}
   .wheretoeat svg{flex:0 0 auto;margin-top:1px}
 
   /* ---------- Lists (check) ---------- */
@@ -298,10 +309,10 @@
   .chk .box svg{opacity:0;transition:.15s}
   .chk.done .box svg{opacity:1}
   .chk .ct{flex:1;font-size:14px}
-  .chk .ct span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .chk .ct span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
   .chk.done .ct b{text-decoration:line-through;color:var(--muted)}
-  .chk .cat{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--aegean);background:rgba(31,143,160,.1);padding:2px 7px;border-radius:6px;flex:0 0 auto;margin-top:2px}
-  .reset{display:block;margin:14px auto 0;background:none;border:1px solid var(--line);color:var(--muted);font-family:inherit;font-size:12px;padding:7px 16px;border-radius:999px;cursor:pointer}
+  .chk .cat{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--aegean);background:rgba(31,143,160,.1);padding:2px 7px;border-radius:6px;flex:0 0 auto;margin-top:2px}
+  .reset{display:block;margin:14px auto 0;background:none;border:1px solid var(--line);color:var(--muted);font-family:inherit;font-size:12.5px;padding:7px 16px;border-radius:999px;cursor:pointer}
 
   /* ---------- Info ---------- */
   .note{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
@@ -312,14 +323,14 @@
   .contact .ci{width:38px;height:38px;border-radius:11px;background:rgba(31,143,160,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
   .contact .cd{flex:1;min-width:0}
   .contact .cd b{font-size:13.5px}
-  .contact .cd span{display:block;font-size:11.5px;color:var(--muted)}
+  .contact .cd span{display:block;font-size:12.5px;color:var(--muted)}
   .contact .cact{display:flex;gap:8px}
   .contact .cact a{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--sea);color:#fff}
   .ferry{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
   .ferry:last-child{border-bottom:0}
   .ferry b{flex:1}
   .ferry .fp{font-weight:700;font-family:'Fraunces',serif;color:var(--sea)}
-  .ferry .ft{font-size:11.5px;color:var(--muted)}
+  .ferry .ft{font-size:12.5px;color:var(--muted)}
   .act{padding:10px 0;border-bottom:1px solid var(--line)}
   .act:last-child{border-bottom:0}
   .act b{font-size:14px}
@@ -329,7 +340,7 @@
   .climate .cdot{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:#fff;flex:0 0 auto}
   .climate .cc{flex:1}
   .climate .cc b{font-size:13.5px}
-  .climate .cc span{display:block;font-size:11.5px;color:var(--muted)}
+  .climate .cc span{display:block;font-size:12.5px;color:var(--muted)}
   .climate .ct{font-family:'Fraunces';font-weight:700;color:var(--sea);white-space:nowrap}
   /* ruta del día (Plan) */
   .dayroute{margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
@@ -337,7 +348,7 @@
   .dayroute .drh .hi{color:var(--aegean);display:grid;place-items:center}
   .dayroute .drh .route{margin-left:auto;margin-top:0}
   .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .mapchip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--sea2);background:rgba(94,31,61,.05);border:1px solid var(--line);padding:6px 10px;border-radius:9px}
+  .mapchip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--sea2);background:rgba(94,31,61,.05);border:1px solid var(--line);padding:6px 10px;border-radius:9px}
   .mapchip svg{color:var(--aegean);flex:0 0 auto}
   /* lugares de interés extra (Info) */
   .extra{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
@@ -353,7 +364,7 @@
   .mtile .mi{width:42px;height:42px;border-radius:12px;background:rgba(31,143,160,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
   .mtile .mt{flex:1}
   .mtile .mt b{font-size:15px;color:var(--ink)}
-  .mtile .mt span{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+  .mtile .mt span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
   .mtile .arr{margin-left:auto;color:var(--muted)}
 
   /* ---------- Conversor ---------- */
@@ -367,7 +378,7 @@
   .conv .orow:last-child{border-bottom:0}
   .conv .orow .ol{font-size:13px;color:var(--muted);font-weight:600}
   .conv .orow .ov{font-family:'Fraunces';font-weight:700;font-size:20px;color:var(--ink)}
-  .rates{font-size:12px;color:var(--muted)}
+  .rates{font-size:12.5px;color:var(--muted)}
   .rates label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
   .rates label:last-child{border-bottom:0}
   .rates input{width:110px;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-family:'Inter';font-size:14px;text-align:right;outline:none;color:var(--ink)}
@@ -378,7 +389,7 @@
   .phrase .pes{flex:0 0 38%;font-size:13px;color:var(--muted)}
   .phrase .pt{flex:1}
   .phrase .pt b{font-size:14.5px}
-  .phrase .pt span{display:block;font-size:11.5px;color:var(--aegean);margin-top:1px;font-style:italic}
+  .phrase .pt span{display:block;font-size:12.5px;color:var(--aegean);margin-top:1px;font-style:italic}
 
   /* ---------- Photos / skeleton ---------- */
   img.ph{opacity:0;transition:opacity .4s ease}
@@ -392,34 +403,61 @@
   .rcard .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,26,32,.05) 30%,rgba(43,26,32,.78))}
   .rcard .ov{position:absolute;left:14px;bottom:10px;right:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;z-index:2}
   .rcard .ov .nm{color:#fff}
-  .rcard .ov .nm .num{font-family:'Fraunces',serif;font-size:12px;font-weight:700;opacity:.85;letter-spacing:.04em}
+  .rcard .ov .nm .num{font-family:'Fraunces',serif;font-size:12.5px;font-weight:700;opacity:.85;letter-spacing:.04em}
   .rcard .ov .nm b{font-family:'Fraunces',serif;font-size:22px;font-weight:600;display:block;line-height:1.05;text-shadow:0 1px 8px rgba(0,0,0,.35)}
-  .rcard .ov .when{color:#fff;text-align:right;font-size:11px;font-weight:600;background:rgba(0,0,0,.28);padding:4px 9px;border-radius:8px;backdrop-filter:blur(3px);white-space:nowrap}
+  .rcard .ov .when{color:#fff;text-align:right;font-size:12px;font-weight:600;background:rgba(0,0,0,.28);padding:4px 9px;border-radius:8px;backdrop-filter:blur(3px);white-space:nowrap}
   .rcard .desc{padding:10px 14px 13px;font-size:12.5px;color:var(--muted)}
   .thumb{flex:0 0 auto;width:74px;height:74px;border-radius:12px;overflow:hidden}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block}
   .act.hasimg,.dish.hasimg{display:flex;gap:12px;align-items:flex-start}
   .act.hasimg .meta,.dish.hasimg .meta{flex:1;min-width:0}
 
-  .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
+  .sub{font-size:13.5px;color:var(--muted);margin:-4px 2px 12px;line-height:1.5}
+  .falta{font-style:italic;font-weight:600;color:#a9640f;background:rgba(217,144,44,.16);
+    padding:1px 7px;border-radius:6px;white-space:nowrap}
+  .viajecard{background:var(--sea);color:#fff;border-radius:18px;padding:16px 17px;margin-bottom:12px;
+    box-shadow:var(--shadow)}
+  .viajecard.manana{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .viajecard .vh{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+  .viajecard .vi{display:grid;place-items:center;opacity:.9}
+  .viajecard .vk{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;opacity:.85}
+  .viajecard .vhora{margin-left:auto;font-family:'Fraunces',serif;font-size:22px;font-weight:700}
+  .viajecard .vruta{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-size:19px;
+    font-weight:600;margin-bottom:12px}
+  .viajecard .vruta span{opacity:.6}
+  .viajecard .vdatos{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px}
+  .viajecard .vdatos>div span{display:block;font-size:11.5px;opacity:.7;letter-spacing:.03em}
+  .viajecard .vdatos>div b{font-size:14.5px}
+  .viajecard.manana .vdatos>div span{color:var(--muted);opacity:1}
+  .viajecard .vnota{margin-top:11px;font-size:12.5px;line-height:1.45;opacity:.85}
+  .viajecard .vmas{width:100%;margin-top:13px;font-family:inherit;font-size:13px;font-weight:700;padding:11px;
+    border-radius:11px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;cursor:pointer}
+  .viajecard.manana .vmas{border-color:var(--line);background:transparent;color:var(--aegean)}
+  .pendrow{display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .pendrow:last-of-type{border-bottom:0}
+  .pendrow .pi2{color:var(--warn);flex:0 0 auto;margin-top:1px}
+  .pendrow b{font-size:14px;display:block;font-weight:600}
+  .pendrow span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
   .daynote.sinplan{background:rgba(232,163,61,.1);border-left-color:var(--gold);font-style:italic}
   .froute .ap.busap{display:inline-flex;align-items:center;color:var(--aegean)}
   .comer{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
   .comer:last-child{border-bottom:0}
   .comer .cm{flex:1;min-width:0}
   .comer .cm b{font-size:14px;display:block}
-  .comer .cm .ct{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+  .comer .cm .ct{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
   .comer .cm .ct .pr{color:var(--gold);font-weight:700;letter-spacing:.04em}
-  .comer .cm .cn{display:block;font-size:12px;color:var(--ink);opacity:.75;margin-top:4px}
-  .comer .cmap{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(31,143,160,.1);
+  .comer .cm .cn{display:block;font-size:12.5px;color:var(--ink);opacity:.75;margin-top:4px}
+  .comer .cmap{flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:rgba(31,143,160,.1);
     color:var(--aegean);display:grid;place-items:center}
+  .comergrupo.fiable{border-left:3px solid var(--good)}
+  .comergrupo.porconfirmar{border-left:3px solid var(--warn)}
   .splithead{display:flex;gap:10px;margin-bottom:12px}
   .splithead .sh{flex:1;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
     border-radius:14px;padding:12px 13px;box-shadow:var(--shadow)}
   .splithead .sh .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;
     font-weight:700;font-family:'Fraunces',serif;font-size:14px;color:#fff;flex:0 0 auto}
   .splithead .sh b{font-family:'Fraunces',serif;font-size:16px;display:block;line-height:1.1}
-  .splithead .sh span{font-size:11px;color:var(--muted);font-weight:600}
+  .splithead .sh span{font-size:12px;color:var(--muted);font-weight:600}
   .exbtn.wide{width:100%;font-family:inherit;font-size:13.5px;font-weight:700;padding:12px;border-radius:12px;
     border:1px solid var(--aegean);background:rgba(31,143,160,.08);color:var(--aegean);cursor:pointer;margin-bottom:12px}
   .exbtn.wide.compartir{margin-top:12px;border-style:dashed}
@@ -428,10 +466,10 @@
   .asigrow.done{opacity:.55}
   .asigrow .pc{flex:1;min-width:0}
   .asigrow .pc b{font-size:13.5px;display:block}
-  .asigrow .pc>span{font-size:11.5px;color:var(--muted);display:block}
+  .asigrow .pc>span{font-size:12.5px;color:var(--muted);display:block}
   .asigrow .pv{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:14.5px;white-space:nowrap}
-  .asigrow .markpaid{display:block;margin-top:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;
-    padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+  .asigrow .markpaid{display:block;margin-top:7px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;
+    padding:7px 12px;min-height:34px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
   .asigrow.done .markpaid{background:rgba(47,158,110,.14);border-color:transparent;color:var(--good)}
 
   /* --- fix heredado: la insignia de ciudad se volvia invisible dentro de .ti --- */
@@ -444,9 +482,9 @@
     font-weight:700;font-family:'Fraunces',serif;font-size:15px;color:#fff;flex:0 0 auto}
   .putrow .pr{flex:1;min-width:0}
   .putrow .pr b{font-size:15px}
-  .putrow .pr span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+  .putrow .pr span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
   .putrow .pamt{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:17px;white-space:nowrap;color:var(--sea)}
-  .putrow .pk{font-size:10px;font-weight:600;color:var(--muted);font-family:'Inter',sans-serif}
+  .putrow .pk{font-size:11.5px;font-weight:600;color:var(--muted);font-family:'Inter',sans-serif}
   .callout.warn{border-color:rgba(217,144,44,.45);background:rgba(217,144,44,.08)}
   .callout.warn .ci{background:rgba(217,144,44,.16);color:var(--warn)}
 
@@ -455,7 +493,7 @@
     padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--paper);color:var(--ink)}
   .expform .exrow{display:flex;gap:8px;margin-top:9px;align-items:stretch}
   .expform .exrow input{flex:1}
-  .expform .exlbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  .expform .exlbl{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     font-weight:700;margin:14px 0 6px}
   .expform .seg{display:flex;gap:6px}
   .expform .seg button{flex:1;font-family:inherit;font-size:13px;font-weight:600;padding:9px 6px;border-radius:10px;
@@ -468,9 +506,9 @@
   .exitem:last-child{border-bottom:0}
   .exitem .pc{flex:1;min-width:0}
   .exitem .pc b{font-size:14px;display:block}
-  .exitem .pc span{font-size:11.5px;color:var(--muted)}
+  .exitem .pc span{font-size:12.5px;color:var(--muted)}
   .exitem .pv{font-family:'Fraunces',serif;font-weight:700;font-size:15px;white-space:nowrap;text-align:right}
-  .exitem .pv .sub2{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;color:var(--muted)}
+  .exitem .pv .sub2{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:500;color:var(--muted)}
   .exitem .exdel{border:0;background:none;color:var(--muted);font-size:22px;line-height:1;padding:0 2px;cursor:pointer}
   .exitem .exedit{border:0;background:none;color:var(--aegean);padding:0 4px;cursor:pointer;display:grid;place-items:center}
   .exitem.enedicion{background:rgba(31,143,160,.09);border-radius:10px;padding:11px 8px}
@@ -483,10 +521,10 @@
 
   /* --- quien puso cada pago --- */
   .whosel{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
-  .whosel button{font-family:inherit;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;
+  .whosel button{font-family:inherit;font-size:11.5px;font-weight:600;padding:7px 13px;min-height:34px;border-radius:999px;
     border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
   .whosel button.on{background:var(--aegean);border-color:var(--aegean);color:#fff}
-  .bud .bv .breal{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:var(--good)}
+  .bud .bv .breal{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;color:var(--good)}
 
   /* --- boda --- */
   .bodaday{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid var(--line)}
@@ -494,10 +532,10 @@
   .bodaday.isboda{background:rgba(232,163,61,.1);border-radius:11px;padding:11px 12px;border-bottom:0}
   .bodaday .date{width:40px;text-align:center;flex:0 0 auto}
   .bodaday .date .d{font-family:'Fraunces',serif;font-size:19px;font-weight:700;line-height:1}
-  .bodaday .date .mo{font-size:9.5px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
+  .bodaday .date .mo{font-size:11.5px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
   .bodaday .ti b{font-size:14px}
-  .bodaday .ti span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
-  .footer{text-align:center;font-size:11px;color:var(--muted);margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
+  .bodaday .ti span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
+  .footer{text-align:center;font-size:12px;color:var(--muted);margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -528,10 +566,11 @@
   <section class="view" id="v-conversor"></section>
   <section class="view" id="v-gastos"></section>
   <section class="view" id="v-boda"></section>
-  <div class="footer">App de viaje · hecha desde la hoja de planificación · funciona sin conexión<div style="margin-top:6px;font-size:10px;opacity:.75">Portada: trajineras de Xochimilco, <a href="https://commons.wikimedia.org/wiki/File:Xochimilco,_trajinera_boats_(20660402936).jpg" target="_blank" rel="noopener">foto de Arian Zwegers</a>, CC BY 2.0</div></div>
+  <div class="footer"><span id="selloDatos"></span>App de viaje · hecha desde la hoja de planificación · funciona sin conexión<div style="margin-top:6px;font-size:11.5px;opacity:.75">Portada: trajineras de Xochimilco, <a href="https://commons.wikimedia.org/wiki/File:Xochimilco,_trajinera_boats_(20660402936).jpg" target="_blank" rel="noopener">foto de Arian Zwegers</a>, CC BY 2.0</div></div>
 </main>
 
 <div class="offline-bar" id="offlineBar">Sin conexión · usando los datos guardados</div>
+<div class="update-bar" id="updateBar">Hay una versión nueva <button onclick="location.reload()">Actualizar</button></div>
 <nav class="bnav" id="bnav"></nav>
 
 <script>
@@ -586,6 +625,12 @@ const TOTALS = {
   sin_asignar:'0,00 €', sin_asignar_val:0.0,
 };
 /*END:TOTALS*/
+/*SYNC:SYNC_INFO*/
+const SYNC_INFO = {
+  fecha:'14/09/2026',
+  hora:'15:44',
+};
+/*END:SYNC_INFO*/
 
 const ROUTE = [
   {city:'MEX', name:'Ciudad de México', days:'3–5 oct', nights:'2 noches', img:'mex_hero', desc:'Llegada el 3 con el vuelo de Emirates. Dos noches en la Condesa para aterrizar, con la altitud tomándoselo con calma.'},
@@ -1041,6 +1086,10 @@ const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=
 const cityBadge = c => `<span class="badge-city" style="background:${CITY[c].c}">${CITY[c].n}</span>`;
 const eur = n => (n<0?'−':'')+eurN(Math.abs(n));
 const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')" onerror="this.closest('.thumb')?.remove()">`;
+/* Un dato que falta no puede pintarse igual que uno confirmado. */
+const FALTA = ['por confirmar','verificar','sin precio','—','-','','pendiente de confirmar'];
+const dato = v => FALTA.includes(String(v||'').trim().toLowerCase())
+  ? `<span class="falta">${v && String(v).trim() ? v : 'falta'}</span>` : v;
 const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
 const mapBtn = (q,label) => `<a class="mapbtn" href="${mapsUrl(q)}" target="_blank" rel="noopener">${I.pin} ${label||'Ver en mapa'}</a>`;
 const dirUrl = (pts, mode) => {
@@ -1160,6 +1209,24 @@ function renderHoyBefore(v){
     <div class="pcard" onclick="showView('plan')"><div class="pi" style="background:rgba(232,163,61,.14);color:var(--gold)">${I.map}</div><div><div class="pv">21</div><div class="pk">días de plan</div></div></div>`;
   v.appendChild(prep);
 
+  // lo accionable antes del folleto: qué falta por hacer
+  const stTareas=loadState('mx_tasks');
+  const porHacer=TASKS.filter(t=>{
+    const id='mx_tasks_'+sid(t.t);
+    return !((id in stTareas)?stTareas[id]:t.done);
+  });
+  if(porHacer.length){
+    v.appendChild(el('div','sec-title','Antes de salir'));
+    const pc=el('div','card');
+    porHacer.slice(0,4).forEach(t=>pc.appendChild(el('div','pendrow',
+      `<span class="pi2">${I.check}</span><div><b>${t.t}</b>${t.n?`<span>${t.n}</span>`:''}</div>`)));
+    if(porHacer.length>4) pc.appendChild(el('div','sub',`Y ${porHacer.length-4} más en la lista.`));
+    const b=el('button','exbtn wide'); b.textContent='Abrir la lista completa';
+    b.onclick=()=>showView('listas');
+    pc.appendChild(b);
+    v.appendChild(pc);
+  }
+
   // próximos hitos
   v.appendChild(el('div','sec-title','Lo importante de los próximos días'));
   const nc=el('div','card next'); const ul=el('ul');
@@ -1186,12 +1253,15 @@ function renderHoyTrip(v, idx){
       ${cl?`<span class="chip">${cl.ic} ${cl.t}</span>`:''}${d.tag?`<span class="chip">${d.tag}</span>`:''}</div>`;
   v.appendChild(hero);
 
-  // siguiente / destacado
+  // si hoy hay vuelo o autobús, va arriba y con TODO el dato, no un resumen:
+  // es lo que se mira con prisa en el aeropuerto o en la terminal
   const fl=(flightByDate[d.date]||[])[0];
+  if(fl) v.appendChild(tarjetaViaje(fl, 'Hoy'));
+  const mañana = idx+1<ITIN.length ? (flightByDate[ITIN[idx+1].date]||[])[0] : null;
+  if(mañana) v.appendChild(tarjetaViaje(mañana, 'Mañana'));
+
   let nx;
-  if(fl){ nx = fl.modo==='bus'
-    ? {k:'Autobús de hoy',b:`${fl.dep} · ${fl.cityFrom} → ${fl.cityTo}`,s:`${fl.airline} · ref. ${fl.loc}`,ic:I.bus}
-    : {k:'Vuelo de hoy',b:`${fl.dep} · ${fl.from} → ${fl.to}`,s:`${fl.airline} · loc. ${fl.loc}`,ic:I.plane}; }
+  if(fl){ nx=null; }
   else if(d.m||d.a||d.e){
     const [k,b,ic] = d.m ? ['Primer plan', d.m, I.sun]
                    : d.a ? ['Por la tarde', d.a, I.noon]
@@ -1203,9 +1273,11 @@ function renderHoyTrip(v, idx){
     nx = dp ? {k:'Ideas para hoy',b:dp.pts.map(p=>p.n).join(' · '),s:'Sin plan escrito: toca abajo para abrir el mapa',ic:I.pin}
             : {k:'Hoy',b:'Día libre en '+CITY[d.city].n,s:'Alojamiento: '+d.hotel,ic:I.sun};
   }
-  const nu=el('div','nextup');
-  nu.innerHTML=`<div class="ni">${nx.ic}</div><div class="nx"><div class="k">${nx.k}</div><b>${nx.b}</b><span>${nx.s}</span></div>`;
-  v.appendChild(nu);
+  if(nx){
+    const nu=el('div','nextup');
+    nu.innerHTML=`<div class="ni">${nx.ic}</div><div class="nx"><div class="k">${nx.k}</div><b>${nx.b}</b><span>${nx.s}</span></div>`;
+    v.appendChild(nu);
+  }
 
   // plan del día
   v.appendChild(el('div','sec-title','El plan de hoy'));
@@ -1262,6 +1334,28 @@ function routeCard(r,i){
   return card;
 }
 
+/* Tarjeta de traslado con todo lo que hace falta enseñar en el mostrador. */
+function tarjetaViaje(f, cuando){
+  const bus=f.modo==='bus';
+  const c=el('div','viajecard'+(cuando==='Mañana'?' manana':''));
+  c.innerHTML=`
+    <div class="vh"><span class="vi">${bus?I.bus:I.plane}</span>
+      <span class="vk">${cuando==='Mañana'?'Mañana':'Hoy'} · ${bus?'autobús':'vuelo'}</span>
+      <span class="vhora">${dato(f.dep)}</span></div>
+    <div class="vruta"><b>${f.cityFrom||f.from}</b><span>→</span><b>${f.cityTo||f.to}</b></div>
+    <div class="vdatos">
+      <div><span>${bus?'Referencia':'Localizador'}</span><b>${dato(f.loc)}</b></div>
+      <div><span>Operador</span><b>${f.airline}</b></div>
+      ${f.terminal?`<div><span>Terminal</span><b>${dato(f.terminal)}</b></div>`:''}
+      ${bus?'':`<div><span>Equipaje</span><b>${dato(f.bag)}</b></div>`}
+      <div><span>Llegada</span><b>${dato(f.arr)}</b></div>
+    </div>
+    ${f.note?`<div class="vnota">${f.note}</div>`:''}
+    <button class="vmas">Ver todas las reservas</button>`;
+  c.querySelector('.vmas').onclick=()=>showView('logistica');
+  return c;
+}
+
 /* ============== PLAN (day-centric: plan + comidas + mapa) ============== */
 function dayBody(d, openMeals){
   const body=el('div','day-body');
@@ -1285,7 +1379,7 @@ function dayBody(d, openMeals){
     ${sinPlan?`<div class="daynote sinplan">Día libre, todavía sin plan escrito en la hoja.${dp?' Abajo tienes las ideas de la zona.':''}</div>`:''}
     ${d.note?`<div class="daynote">${d.note}</div>`:''}
     ${routeBlock}
-    ${hotel?`<div class="hotelrow"><span class="hi">${I.bed}</span><div><b>${hotel.name}</b><div style="font-size:11.5px;color:var(--muted)">${hotel.addr}</div></div>
+    ${hotel?`<div class="hotelrow"><span class="hi">${I.bed}</span><div><b>${hotel.name}</b><div style="font-size:12.5px;color:var(--muted)">${hotel.addr}</div></div>
       <a class="ha mapbtn" style="margin-top:0" href="${mapsUrl(hotel.name+' '+hotel.addr)}" target="_blank" rel="noopener">${I.pin} Mapa</a></div>`:''}`;
   return body;
 }
@@ -1297,11 +1391,11 @@ function renderPlan(){
   ITIN.forEach((d,idx)=>{
     const day=el('div','day'+(idx===todayIdx?' istoday':''));
     const [dd,mm]=d.date.split('/');
-    const tagHtml=d.tag?`<span class="pill info" style="font-size:9.5px;padding:2px 7px">${d.tag}</span>`:'';
+    const tagHtml=d.tag?`<span class="pill info" style="font-size:11.5px;padding:2px 7px">${d.tag}</span>`:'';
     const fl=(flightByDate[d.date]||[])[0];
     const boda = d.date==='17/10';
     const hicons = (fl?`<span class="hicon">${fl.modo==='bus'?I.bus:I.plane}</span>`:'')+(boda?`<span class="hicon">${I.star}</span>`:'');
-    const todayBadge = idx===todayIdx?`<span class="pill" style="background:rgba(47,158,110,.16);color:#217a53;font-size:9.5px;padding:2px 7px">HOY</span>`:'';
+    const todayBadge = idx===todayIdx?`<span class="pill" style="background:rgba(47,158,110,.16);color:#217a53;font-size:11.5px;padding:2px 7px">HOY</span>`:'';
     const head=el('div','day-head');
     head.innerHTML=`
       <div class="date"><div class="d">${dd}</div><div class="mo">${monName(mm)}</div></div>
@@ -1330,12 +1424,12 @@ function renderLog(){
         : `<span class="ap">${f.from}</span>
            <span class="arr">${f.stop?'<span class="plus">escala</span>':''}</span>
            <span class="ap">${f.to}</span>`}</div>
-      <div class="ftimes"><span><b>${f.dep}</b> · ${f.cityFrom}</span><span>${f.cityTo} · <b>${f.arr}</b></span></div>
+      <div class="ftimes"><span><b>${dato(f.dep)}</b> · ${f.cityFrom}</span><span>${f.cityTo} · <b>${dato(f.arr)}</b></span></div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <span style="font-size:13px;font-weight:600">${f.date} · ${f.airline}</span>
         <span class="pill ${pillCls}">${f.status}</span></div>
       <div class="fmeta">
-        <span>${bus?'Ref.':'Loc.'} <b>${f.loc}</b></span>${bus?'':`<span>Equipaje <b>${f.bag}</b></span>`}${f.price!=='sin precio'?`<span>Precio <b>${f.price}</b></span>`:''}
+        <span>${bus?'Ref.':'Loc.'} <b>${dato(f.loc)}</b></span>${bus?'':`<span>Equipaje <b>${dato(f.bag)}</b></span>`}${f.price!=='sin precio'?`<span>Precio <b>${f.price}</b></span>`:''}
       </div>
       ${f.note?`<div class="daynote" style="margin-top:10px">${f.note}</div>`:''}`;
     v.appendChild(c);
@@ -1348,7 +1442,7 @@ function renderLog(){
     const pillCls=pagado?'ok':'info';
     const estado=pagado?'Pagado':'Reservado · se paga allí';
     c.innerHTML=`
-      <div class="hh"><div><h3>${h.name}</h3><div class="stay">${cityBadge(h.city)} ${h.inn} → ${h.out} · ${h.nights} noches</div></div>
+      <div class="hh"><div><h3>${h.name}</h3><div class="stay">${cityBadge(h.city)} ${dato(h.inn)} → ${dato(h.out)} · ${h.nights} noches</div></div>
         <span class="pill ${pillCls}">${estado}</span></div>
       <div style="font-size:12.5px;color:var(--muted);margin-top:9px">${h.addr}</div>
       <div class="feat">${h.type?`<span class="t">${h.type}</span>`:''}
@@ -1631,13 +1725,17 @@ function renderMoney(){
   v.appendChild(tile);
 
   /* ---- presupuesto previsto ---- */
-  v.appendChild(el('div','sec-title','Presupuesto previsto'));
-  v.appendChild(el('div','sub','Lo que está estimado en la hoja, categoría a categoría.'));
+  const dp=el('div','detail');
+  dp.innerHTML=`<div class="detail-h">${I.chev} Ver el presupuesto previsto</div><div class="detail-b"></div>`;
+  const dpb=dp.querySelector('.detail-b');
+  dpb.appendChild(el('div','sub','Lo que está estimado en la hoja, categoría a categoría.'));
   const bc=el('div','card');
   BUDGET.forEach(b=>bc.appendChild(el('div','bud',
     `<div class="bic">${b.ic}</div><div class="bn">${b.cat}<span>${b.n}</span></div>
      <div class="bv">${b.v}${b.real&&b.real!=='—'?`<div class="breal">real ${b.real}</div>`:''}</div>`)));
-  v.appendChild(bc);
+  dpb.appendChild(bc);
+  dp.querySelector('.detail-h').onclick=()=>dp.classList.toggle('open');
+  v.appendChild(dp);
 
   /* ---- lo ya pagado, para consultar ---- */
   const det=el('div','detail');
@@ -1796,26 +1894,37 @@ function renderFood(){
   const v=$('#v-comida'); v.innerHTML='';
 
   if(typeof COMER!=='undefined' && COMER.length){
-    v.appendChild(el('div','sec-title','Dónde comer'));
-    v.appendChild(el('div','sub','Las de CDMX las pasó una amiga que vive allí. Las de Oaxaca, Puerto Escondido y Durango están buscadas en internet: conviene confirmar horarios antes de ir.'));
     v.appendChild(el('div','sub','Precio por persona sin alcohol: <b>$</b> menos de 300 MXN · <b>$$</b> 300-800 · <b>$$$</b> 800-1.500 · <b>$$$$</b> más de 1.500.'));
+    const deAmiga = c => (c.fuente||'').toLowerCase().includes('amiga');
     const zonas={};
     COMER.forEach(c=>{ (zonas[c.zona]=zonas[c.zona]||[]).push(c); });
     const CIUDAD={'Centro Histórico':'Ciudad de Mexico','Juárez':'Ciudad de Mexico',
       'Polanco / Chapultepec':'Ciudad de Mexico','Roma / Condesa':'Ciudad de Mexico',
       'Coyoacán / San Ángel':'Ciudad de Mexico','Teotihuacán':'Teotihuacan',
       'Oaxaca':'Oaxaca de Juarez','Puerto Escondido':'Puerto Escondido, Oaxaca','Durango':'Durango'};
-    Object.entries(zonas).forEach(([zona,sitios])=>{
-      const card=el('div','card');
-      const deAmiga = sitios[0].fuente && sitios[0].fuente.toLowerCase().includes('amiga');
+    const grupos=[
+      {titulo:'Recomendado por tu amiga', sub:'Le funcionan a alguien que vive en CDMX: son las de fiar.',
+       test:c=>deAmiga(c), cls:'fiable'},
+      {titulo:'Buscado en internet', sub:'Para Oaxaca, Puerto Escondido y Durango no hay recomendación de nadie conocido. Salen de guías y reseñas: confirma que sigue abierto y el horario antes de ir.',
+       test:c=>!deAmiga(c), cls:'porconfirmar'},
+    ];
+    grupos.forEach(g=>{
+      const zonasG=Object.entries(zonas).filter(([z,ss])=>ss.some(g.test));
+      if(!zonasG.length) return;
+      const n=zonasG.reduce((t,[z,ss])=>t+ss.filter(g.test).length,0);
+      v.appendChild(el('div','sec-title', g.titulo));
+      v.appendChild(el('div','sub', `${n} sitios. ${g.sub}`));
+      zonasG.forEach(([zona,todos])=>{
+      const sitios=todos.filter(g.test);
+      const card=el('div','card comergrupo '+g.cls);
       card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:2px">${zona}</div>
-        <div style="font-size:10.5px;color:var(--muted);margin-bottom:8px">${sitios.length} sitio${sitios.length===1?'':'s'} · ${deAmiga?'recomendados por tu amiga':'buscados en internet'}</div>`));
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">${sitios.length} sitio${sitios.length===1?'':'s'}</div>`));
       sitios.forEach(c=>{
         const row=el('div','comer');
         row.innerHTML=`
           <div class="cm">
             <b>${c.n}</b>
-            <span class="ct">${c.tipo}${c.precio?` · <span class="pr">${c.precio}</span>`:''}</span>
+            <span class="ct">${c.tipo}${c.precio?` · <span class="pr">${c.precio}</span>`:` · <span class="falta">precio sin mirar</span>`}</span>
             ${c.nota?`<span class="cn">${c.nota}</span>`:''}
             ${c.reserva?`<span class="pill pend" style="margin-top:6px;display:inline-flex">Reserva ${c.reserva.toLowerCase()}</span>`:''}
           </div>
@@ -1823,6 +1932,7 @@ function renderFood(){
         card.appendChild(row);
       });
       v.appendChild(card);
+      });
     });
   }
 
@@ -1911,7 +2021,7 @@ function renderInfo(){
     if(c.web) acts.push(`<a href="${c.web}" target="_blank" rel="noopener">${I.globe}</a>`);
     cc.appendChild(el('div','contact',
       `<div class="ci">${c.ic}</div>
-       <div class="cd"><b>${c.t}</b><span>${c.sub}${c.tel==='verificar'?' · teléfono por confirmar':''}</span></div>
+       <div class="cd"><b>${c.t}</b><span>${c.sub}${c.tel==='verificar'?' '+dato('teléfono por confirmar'):''}</span></div>
        <div class="cact">${acts.join('')}</div>`));
   });
   v.appendChild(cc);
@@ -2021,6 +2131,12 @@ function renderBoda(){
 function updateOnline(){
   $('#offlineBar').classList.toggle('show', !navigator.onLine);
 }
+/* el service worker avisa cuando ha bajado una versión distinta */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.addEventListener('message', e=>{
+    if(e.data==='actualizada') $('#updateBar').classList.add('show');
+  });
+}
 window.addEventListener('online', updateOnline);
 window.addEventListener('offline', updateOnline);
 
@@ -2053,6 +2169,9 @@ window.addEventListener('offline', updateOnline);
 })();
 
 /* ============== INIT ============== */
+if(SYNC_INFO.fecha){
+  $('#selloDatos').innerHTML = `Datos de la hoja del ${SYNC_INFO.fecha} a las ${SYNC_INFO.hora}<br>`;
+}
 countdown();
 renderHoy();
 renderPlan();

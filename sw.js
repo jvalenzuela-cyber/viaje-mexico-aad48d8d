@@ -1,6 +1,6 @@
 /* Service worker — offline en destino, pero siempre la última versión si hay conexión.
    Estrategia: HTML network-first (refresca al regenerar la app); imágenes/estáticos cache-first. */
-const VERSION = 'v3';
+const VERSION = 'v4';
 const CACHE = 'viaje-mexico-' + VERSION;
 const IMG_KEYS = [
   'portada',
@@ -16,7 +16,8 @@ const IMG_KEYS = [
   'x_xochimilco'
 ];
 const CORE = ['./', './index.html', './manifest.json',
-  './icon-192.png', './icon-512.png', './icon-maskable.png', './icon-180.png']
+  './icon-192.png', './icon-512.png', './icon-maskable.png', './icon-180.png',
+  './fonts/inter.woff2', './fonts/fraunces.woff2']
   .concat(IMG_KEYS.map(k => 'img/' + k + '.jpg'));
 
 self.addEventListener('install', e => {
