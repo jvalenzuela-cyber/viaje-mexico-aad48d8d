@@ -758,31 +758,78 @@ const GASTOS = [
 /*END:GASTOS*/
 /*SYNC:COMER*/
 const COMER = [
-  {zona:'Centro Histórico',n:'Azul Histórico',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'En un patio del siglo XVII resguardado por árboles. Obligado pedir mole.'},
-  {zona:'Centro Histórico',n:'Terraza Cha Cha Chá',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Cocina creativa en una azotea con vistas al Monumento a la Revolución.'},
-  {zona:'Centro Histórico',n:'Tacos Domingo - Pacheco',tipo:'Tacos',precio:'$$',reserva:'',nota:'Excelentes tacos céntricos.'},
-  {zona:'Centro Histórico',n:'Sede Café Parque Alameda',tipo:'Café',precio:'$',reserva:'',nota:'Para la pausa entre museos.'},
-  {zona:'Juárez',n:'Cantina La Extra',tipo:'Cantina clásica',precio:'$$',reserva:'',nota:'Para un trago a media tarde y comida de cantina.'},
-  {zona:'Polanco / Chapultepec',n:'Hacienda de Los Morales',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Hacienda del siglo XVI. Imperdible pedir los escamoles, el caviar mexicano.'},
-  {zona:'Polanco / Chapultepec',n:'Los Panchos',tipo:'Tacos',precio:'$$',reserva:'',nota:'Institución clásica. Buena opción de desayuno salado.'},
-  {zona:'Polanco / Chapultepec',n:'Quintonil',tipo:'Mexicana de autor',precio:'$$$$',reserva:'Obligatoria',nota:'Alta gastronomía. Reservar con mucha antelación.'},
-  {zona:'Polanco / Chapultepec',n:'Pujol',tipo:'Mexicana contemporánea',precio:'$$$$',reserva:'Obligatoria',nota:'Alta gastronomía. Reservar con mucha antelación.'},
-  {zona:'Polanco / Chapultepec',n:'Nevería Roxy',tipo:'Nieves',precio:'$',reserva:'',nota:'Al lado de la Librería en el Bosque. Pedir la de mamey.'},
-  {zona:'Roma / Condesa',n:'Contramar',tipo:'Mariscos',precio:'$$$',reserva:'Recomendable',nota:'Una institución. Tostada de atún y pescado a la talla.'},
-  {zona:'Roma / Condesa',n:'Esquina Común',tipo:'Cocina de autor',precio:'$$$',reserva:'Requerida',nota:'De las mejores experiencias actuales.'},
-  {zona:'Roma / Condesa',n:'Maizajo',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Cocina de maíz.'},
-  {zona:'Roma / Condesa',n:'Cerrajería',tipo:'Desayunos',precio:'$$',reserva:'',nota:'El brunch más codiciado de la zona.'},
-  {zona:'Roma / Condesa',n:'Cuina',tipo:'Panadería y desayunos',precio:'$$',reserva:'',nota:'Fusión catalana. Llegar temprano.'},
-  {zona:'Roma / Condesa',n:'Handshake Speakeasy',tipo:'Coctelería',precio:'$$$',reserva:'Obligatoria',nota:'Considerado de los mejores bares del mundo. Mixología molecular.'},
-  {zona:'Roma / Condesa',n:'Tlecan',tipo:'Cócteles',precio:'$$',reserva:'',nota:'En la lista de The World’s 50 Best Bars.'},
-  {zona:'Roma / Condesa',n:'Tacos Atarantados',tipo:'Tacos',precio:'$$',reserva:'',nota:'Pedir la Gaonera de rib eye y el surtido de trompos.'},
-  {zona:'Roma / Condesa',n:'El Minutito',tipo:'Café',precio:'$',reserva:'',nota:'Pausa rápida y buen café.'},
-  {zona:'Coyoacán / San Ángel',n:'Mariscos "Mi Compa Chava"',tipo:'Mariscos',precio:'$$',reserva:'Con antelación',nota:'De los imprescindibles de la zona.'},
-  {zona:'Coyoacán / San Ángel',n:'Tetetlan',tipo:'Mexicana',precio:'$$',reserva:'',nota:'En una obra de Luis Barragán, sobre roca volcánica.'},
-  {zona:'Coyoacán / San Ángel',n:'Los Danzantes',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Clásico frente al jardín, con buena carta de mezcales.'},
-  {zona:'Coyoacán / San Ángel',n:'Trinidad Ritual de Sabores',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Chilaquiles antes o después de los museos.'},
-  {zona:'Coyoacán / San Ángel',n:'Café El Jarocho',tipo:'Cafetería de barrio',precio:'$',reserva:'',nota:'El café de toda la vida de Coyoacán.'},
-  {zona:'Teotihuacán',n:'La Gruta',tipo:'Mexicana',precio:'$$$',reserva:'Recomendable',nota:'Dentro de una caverna, al lado de las pirámides.'}
+  {zona:'Centro Histórico',n:'Azul Histórico',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'En un patio del siglo XVII resguardado por árboles. Obligado pedir mole.',fuente:'Amiga de CDMX'},
+  {zona:'Centro Histórico',n:'Terraza Cha Cha Chá',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Cocina creativa en una azotea con vistas al Monumento a la Revolución.',fuente:'Amiga de CDMX'},
+  {zona:'Centro Histórico',n:'Tacos Domingo - Pacheco',tipo:'Tacos',precio:'$$',reserva:'',nota:'Excelentes tacos céntricos.',fuente:'Amiga de CDMX'},
+  {zona:'Centro Histórico',n:'Sede Café Parque Alameda',tipo:'Café',precio:'$',reserva:'',nota:'Para la pausa entre museos.',fuente:'Amiga de CDMX'},
+  {zona:'Juárez',n:'Cantina La Extra',tipo:'Cantina clásica',precio:'$$',reserva:'',nota:'Para un trago a media tarde y comida de cantina.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Hacienda de Los Morales',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Hacienda del siglo XVI. Imperdible pedir los escamoles, el caviar mexicano.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Los Panchos',tipo:'Tacos',precio:'$$',reserva:'',nota:'Institución clásica. Buena opción de desayuno salado.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Quintonil',tipo:'Mexicana de autor',precio:'$$$$',reserva:'Obligatoria',nota:'Alta gastronomía. Reservar con mucha antelación.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Pujol',tipo:'Mexicana contemporánea',precio:'$$$$',reserva:'Obligatoria',nota:'Alta gastronomía. Reservar con mucha antelación.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Nevería Roxy',tipo:'Nieves',precio:'$',reserva:'',nota:'Al lado de la Librería en el Bosque. Pedir la de mamey.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Contramar',tipo:'Mariscos',precio:'$$$',reserva:'Recomendable',nota:'Una institución. Tostada de atún y pescado a la talla.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Esquina Común',tipo:'Cocina de autor',precio:'$$$',reserva:'Requerida',nota:'De las mejores experiencias actuales.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Maizajo',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Cocina de maíz.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Cerrajería',tipo:'Desayunos',precio:'$$',reserva:'',nota:'El brunch más codiciado de la zona.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Cuina',tipo:'Panadería y desayunos',precio:'$$',reserva:'',nota:'Fusión catalana. Llegar temprano.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Handshake Speakeasy',tipo:'Coctelería',precio:'$$$',reserva:'Obligatoria',nota:'Considerado de los mejores bares del mundo. Mixología molecular.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Tlecan',tipo:'Cócteles',precio:'$$',reserva:'',nota:'En la lista de The World’s 50 Best Bars.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Tacos Atarantados',tipo:'Tacos',precio:'$$',reserva:'',nota:'Pedir la Gaonera de rib eye y el surtido de trompos.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'El Minutito',tipo:'Café',precio:'$',reserva:'',nota:'Pausa rápida y buen café.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Mariscos "Mi Compa Chava"',tipo:'Mariscos',precio:'$$',reserva:'Con antelación',nota:'De los imprescindibles de la zona.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Tetetlan',tipo:'Mexicana',precio:'$$',reserva:'',nota:'En una obra de Luis Barragán, sobre roca volcánica.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Los Danzantes',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Clásico frente al jardín, con buena carta de mezcales.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Trinidad Ritual de Sabores',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Chilaquiles antes o después de los museos.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Café El Jarocho',tipo:'Cafetería de barrio',precio:'$',reserva:'',nota:'El café de toda la vida de Coyoacán.',fuente:'Amiga de CDMX'},
+  {zona:'Teotihuacán',n:'La Gruta',tipo:'Mexicana',precio:'$$$',reserva:'Recomendable',nota:'Dentro de una caverna, al lado de las pirámides.',fuente:'Amiga de CDMX'},
+  {zona:'Centro Histórico',n:'Masala y Maíz',tipo:'Fusión México-India-África',precio:'$$$',reserva:'',nota:'Explora la migración culinaria con platos únicos y vinos naturales.',fuente:'Amiga de CDMX'},
+  {zona:'Juárez',n:'Taverna',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Entremar',tipo:'Mariscos',precio:'$$$',reserva:'',nota:'Pedir el pescado a la talla y las tostadas de atún.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Ticuchi',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Imperdible su tamal de esquites.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'MILPA',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Ingredientes de temporada.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Comal Oculto - Itacate',tipo:'Mexicana auténtica',precio:'$$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Taquería El Turix',tipo:'Cochinita pibil',precio:'$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Taquería Selene',tipo:'Tacos al pastor',precio:'$',reserva:'',nota:'Clásico sin pretensiones.',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Taquería la Bonvi',tipo:'Tacos',precio:'$$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Polanco / Chapultepec',n:'Goya Taller',tipo:'Brunch',precio:'$$',reserva:'',nota:'Ideal antes de los museos.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Odette',tipo:'Panadería',precio:'$$',reserva:'',nota:'Croissants y repostería fina.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Expendio de Maíz Sin Nombre',tipo:'Cocina de origen',precio:'$$$',reserva:'',nota:'Sin menú fijo: cocinan con maíces y productos de origen.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Taller de Ostiones by FISM',tipo:'Mariscos',precio:'$$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'La Oncemil',tipo:'Taquería',precio:'$$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Cariñito Tacos',tipo:'Tacos de fusión asiática',precio:'$$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Taquería Orinoco',tipo:'Tacos norteños',precio:'$$',reserva:'',nota:'El chicharrón es obligatorio.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Tacos Paris',tipo:'Tacos de autor',precio:'$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Hiya Wine Bar',tipo:'Vinos naturales',precio:'$$',reserva:'',nota:'Ambiente íntimo.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Travieso Travieso',tipo:'Bar',precio:'$$',reserva:'',nota:'Espacio desenfadado y divertido.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'Salón Palomilla',tipo:'Cantina',precio:'$$',reserva:'',nota:'Cantina renovada, muy buen ambiente.',fuente:'Amiga de CDMX'},
+  {zona:'Roma / Condesa',n:'RUIDO',tipo:'Listening bar',precio:'$$',reserva:'',nota:'Viniles, acústica cuidada y buenos tragos.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Mercado 89 Coyoacán',tipo:'Mercado',precio:'$$',reserva:'',nota:'Espacio moderno con locales variados.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Coyote Hambriento',tipo:'Comida casual',precio:'$$',reserva:'',nota:'A pasos de las plazas.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'El Huequito',tipo:'Tacos al pastor',precio:'$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Ocote Café',tipo:'Café de especialidad',precio:'$',reserva:'',nota:'Café de autor bien cuidado.',fuente:'Amiga de CDMX'},
+  {zona:'Coyoacán / San Ángel',n:'Helados Siberia',tipo:'Nieves',precio:'$',reserva:'',nota:'',fuente:'Amiga de CDMX'},
+  {zona:'Oaxaca',n:'Mercado 20 de Noviembre',tipo:'Mercado',precio:'$',reserva:'',nota:'El pasillo de carnes: eliges tasajo, cecina o chorizo, lo asan y lo acompañas con tortillas y salsas. Tlayudas de 35-50 MXN. Llevar efectivo.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Comedor Chabelita',tipo:'Tlayudas',precio:'$',reserva:'',nota:'Dentro del Mercado 20 de Noviembre, de los puestos más recomendados.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Doña Flavia',tipo:'Tlayudas',precio:'',reserva:'',nota:'Para sentarse con comodidad y elegir entre combinaciones.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'La Chinita',tipo:'Tlayudas',precio:'',reserva:'',nota:'La experiencia de tlayuda callejera.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Mercado Benito Juárez',tipo:'Mercado',precio:'$',reserva:'',nota:'Quesillo, chapulines, chocolate oaxaqueño y mezcal.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Las Quince Letras',tipo:'Oaxaqueña tradicional',precio:'',reserva:'',nota:'Mole negro ahumado y molotes de plátano. Cocina de Celia Florián.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Casa Oaxaca El Restaurante',tipo:'Oaxaqueña contemporánea',precio:'',reserva:'Recomendable',nota:'De los más conocidos de la ciudad.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Origen',tipo:'Cocina de autor',precio:'',reserva:'Recomendable',nota:'Del chef Rodolfo Castellanos, cerca del Zócalo.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Zandunga',tipo:'Cocina del Istmo',precio:'',reserva:'',nota:'Patio de casa colonial, música en vivo y buena carta de mezcal.',fuente:'Buscado en internet'},
+  {zona:'Oaxaca',n:'Boulenc',tipo:'Panadería y desayunos',precio:'',reserva:'',nota:'Croissants y pan de masa madre; a mediodía, pizzas al horno de leña.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'El Coste',tipo:'Mariscos',precio:'',reserva:'',nota:'En Zicatela. Ceviche, tartar de atún y pulpo a la parrilla.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'Fish Shack La Punta',tipo:'Tacos de pescado',precio:'',reserva:'',nota:'En La Punta Zicatela, a un paso de la playa.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'La Sardina',tipo:'Mariscos',precio:'$$',reserva:'',nota:'En lo alto de las escaleras de Carrizalillo, con vistas a la cala. El pescado zarandeado es lo mejor de la carta.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'Espadín',tipo:'Alta cocina',precio:'',reserva:'Recomendable',nota:'Las mejores vistas sobre Playa Carrizalillo.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'Nana Pancha',tipo:'Oaxaqueña y mariscos',precio:'',reserva:'',nota:'En el barrio de Carrizalillo.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'Beach Hotel Inés',tipo:'Mariscos',precio:'',reserva:'',nota:'En la playa de Zicatela. Mariscos frescos, pasta y carnes por la noche.',fuente:'Buscado en internet'},
+  {zona:'Puerto Escondido',n:'Chicama',tipo:'Peruano',precio:'',reserva:'',nota:'Para variar de los mariscos mexicanos: ceviche peruano.',fuente:'Buscado en internet'},
+  {zona:'Durango',n:'El Esquilón',tipo:'Regional',precio:'',reserva:'',nota:'El caldillo duranguense. Hidalgo 317, Zona Centro. Abre de 8:30 a 17:30.',fuente:'Buscado en internet'},
+  {zona:'Durango',n:'Casablanca',tipo:'Regional',precio:'',reserva:'',nota:'Especialidad en caldillo duranguense. Ambiente familiar y piano en vivo.',fuente:'Buscado en internet'},
+  {zona:'Durango',n:'Fonda de la Tía Chona',tipo:'Guisados tradicionales',precio:'',reserva:'',nota:'Buena variedad de guisados. Hidalgo 411 Sur, Centro. De lunes a sábado, 8:00 a 23:00.',fuente:'Buscado en internet'},
+  {zona:'Durango',n:'Mendoza Restaurante Galería',tipo:'Cenas',precio:'',reserva:'Recomendable',nota:'Nogal 110, Barrio del Calvario. De martes a sábado por la noche; domingo, mediodía.',fuente:'Buscado en internet'}
 ];
 /*END:COMER*/
 
@@ -1681,13 +1728,20 @@ function renderFood(){
   const v=$('#v-comida'); v.innerHTML='';
 
   if(typeof COMER!=='undefined' && COMER.length){
-    v.appendChild(el('div','sec-title','Dónde comer en CDMX'));
-    v.appendChild(el('div','sub','Recomendaciones de una amiga que vive allí. Precio por persona sin alcohol: $ menos de 300 MXN · $$ 300-800 · $$$ 800-1.500 · $$$$ más de 1.500.'));
+    v.appendChild(el('div','sec-title','Dónde comer'));
+    v.appendChild(el('div','sub','Las de CDMX las pasó una amiga que vive allí. Las de Oaxaca, Puerto Escondido y Durango están buscadas en internet: conviene confirmar horarios antes de ir.'));
+    v.appendChild(el('div','sub','Precio por persona sin alcohol: <b>$</b> menos de 300 MXN · <b>$$</b> 300-800 · <b>$$$</b> 800-1.500 · <b>$$$$</b> más de 1.500.'));
     const zonas={};
     COMER.forEach(c=>{ (zonas[c.zona]=zonas[c.zona]||[]).push(c); });
+    const CIUDAD={'Centro Histórico':'Ciudad de Mexico','Juárez':'Ciudad de Mexico',
+      'Polanco / Chapultepec':'Ciudad de Mexico','Roma / Condesa':'Ciudad de Mexico',
+      'Coyoacán / San Ángel':'Ciudad de Mexico','Teotihuacán':'Teotihuacan',
+      'Oaxaca':'Oaxaca de Juarez','Puerto Escondido':'Puerto Escondido, Oaxaca','Durango':'Durango'};
     Object.entries(zonas).forEach(([zona,sitios])=>{
       const card=el('div','card');
-      card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${zona}</div>`));
+      const deAmiga = sitios[0].fuente && sitios[0].fuente.toLowerCase().includes('amiga');
+      card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:2px">${zona}</div>
+        <div style="font-size:10.5px;color:var(--muted);margin-bottom:8px">${sitios.length} sitio${sitios.length===1?'':'s'} · ${deAmiga?'recomendados por tu amiga':'buscados en internet'}</div>`));
       sitios.forEach(c=>{
         const row=el('div','comer');
         row.innerHTML=`
@@ -1697,7 +1751,7 @@ function renderFood(){
             ${c.nota?`<span class="cn">${c.nota}</span>`:''}
             ${c.reserva?`<span class="pill pend" style="margin-top:6px;display:inline-flex">Reserva ${c.reserva.toLowerCase()}</span>`:''}
           </div>
-          <a class="cmap" href="${mapsUrl(c.n+', '+(c.zona.includes('Teoti')?'Teotihuacan':'Ciudad de Mexico'))}" target="_blank" rel="noopener">${I.pin}</a>`;
+          <a class="cmap" href="${mapsUrl(c.n+', '+(CIUDAD[c.zona]||'Mexico'))}" target="_blank" rel="noopener">${I.pin}</a>`;
         card.appendChild(row);
       });
       v.appendChild(card);
