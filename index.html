@@ -389,6 +389,15 @@
   .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
   .daynote.sinplan{background:rgba(232,163,61,.1);border-left-color:var(--gold);font-style:italic}
   .froute .ap.busap{display:inline-flex;align-items:center;color:var(--aegean)}
+  .comer{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .comer:last-child{border-bottom:0}
+  .comer .cm{flex:1;min-width:0}
+  .comer .cm b{font-size:14px;display:block}
+  .comer .cm .ct{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+  .comer .cm .ct .pr{color:var(--gold);font-weight:700;letter-spacing:.04em}
+  .comer .cm .cn{display:block;font-size:12px;color:var(--ink);opacity:.75;margin-top:4px}
+  .comer .cmap{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(31,143,160,.1);
+    color:var(--aegean);display:grid;place-items:center}
   .splithead{display:flex;gap:10px;margin-bottom:12px}
   .splithead .sh{flex:1;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
     border-radius:14px;padding:12px 13px;box-shadow:var(--shadow)}
@@ -611,8 +620,8 @@ const TRANSFERS_LOG = [
 /*SYNC:ITIN*/
 const ITIN = [
   {date:'03/10',dow:'Sábado',city:'MEX',tag:'LLEGADA',hotel:'Condesa Suites',m:'',a:'',e:'Llegada vuelo Emirates EK255',tr:'Vuelo internacional Barcelona-CDMX',note:'Aterriza en CDMX. Organizar traslado aeropuerto a alojamiento.'},
-  {date:'04/10',dow:'Domingo',city:'MEX',tag:'',hotel:'Condesa Suites',m:'',a:'',e:'',tr:'',note:''},
-  {date:'05/10',dow:'Lunes',city:'OAX',tag:'LLEGADA',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'CDMX a Oaxaca (VivaAerobus 15:00)',note:'Sale del AIFA (NLU), no del aeropuerto de la ciudad. Vuelo VB 9214, llega 16:08.'},
+  {date:'04/10',dow:'Domingo',city:'MEX',tag:'',hotel:'Condesa Suites',m:'Condesa: Parque México y Parque España, arquitectura Art Déco',a:'Roma Norte por Álvaro Obregón y la Fuente de Cibeles · colonia Juárez y el Ángel de la Independencia',e:'Cena y coctelería por la Roma o la Juárez',tr:'',note:'Primer día completo: a 2.240 m la altitud se nota, mejor un plan tranquilo. Es domingo: la Reforma se cierra a los coches hasta las 14:00 y se puede recorrer en Ecobici.'},
+  {date:'05/10',dow:'Lunes',city:'OAX',tag:'LLEGADA',hotel:'Hotel Posada San Rafael',m:'Desayuno tranquilo y salida hacia el AIFA con tiempo de sobra',a:'',e:'',tr:'CDMX a Oaxaca (VivaAerobus 15:00)',note:'Sale del AIFA (NLU), no del aeropuerto de la ciudad. Vuelo VB 9214, llega 16:08.'},
   {date:'06/10',dow:'Martes',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
   {date:'07/10',dow:'Miércoles',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
   {date:'08/10',dow:'Jueves',city:'OAX',tag:'',hotel:'Hotel Posada San Rafael',m:'',a:'',e:'',tr:'',note:''},
@@ -625,11 +634,11 @@ const ITIN = [
   {date:'15/10',dow:'Jueves',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'Cambio de hotel (a Hampton Inn)',note:'Inicio ventana boda (15-18 oct).'},
   {date:'16/10',dow:'Viernes',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'',tr:'',note:''},
   {date:'17/10',dow:'Sábado',city:'DGO',tag:'',hotel:'Hampton Inn',m:'',a:'',e:'BODA',tr:'',note:'Evento principal del viaje (sábado).'},
-  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'',tr:'Durango a CDMX (Aeroméxico AM 2469, 15:42)',note:'Llega al AIFA a las 17:12. Fin ventana boda.'},
-  {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
-  {date:'20/10',dow:'Martes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Frida Kahlo 11:30',a:'',e:'',tr:'',note:''},
-  {date:'21/10',dow:'Miércoles',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
-  {date:'22/10',dow:'Jueves',city:'MEX',tag:'',hotel:'Uniko Living',m:'',a:'',e:'',tr:'',note:''},
+  {date:'18/10',dow:'Domingo',city:'DGO',tag:'SALIDA',hotel:'Uniko Living',m:'',a:'',e:'Llegada al AIFA 17:12, traslado al alojamiento y cena tranquila',tr:'Durango a CDMX (Aeroméxico AM 2469, 15:42)',note:'Llega al AIFA a las 17:12. Fin ventana boda.'},
+  {date:'19/10',dow:'Lunes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Teotihuacán: salir muy temprano (6:30-7:00). Calzada de los Muertos y Pirámides del Sol y la Luna',a:'Comida tardía en La Gruta, dentro de una caverna, y vuelta a la ciudad',e:'Noche tranquila',tr:'',note:'Los lunes cierra casi todo museo en CDMX, pero la zona arqueológica abre. Uber no llega a Teotihuacán y el taxi sale caro: contratar un tour con transporte.'},
+  {date:'20/10',dow:'Martes',city:'MEX',tag:'',hotel:'Uniko Living',m:'Museo Frida Kahlo (Casa Azul) 11:30, con la entrada reservada',a:'Coyoacán: Casa de León Trotsky, Jardín Hidalgo, Parroquia de San Juan Bautista y Bazar Artesanal',e:'Cena por Coyoacán',tr:'',note:'La Casa-Estudio Diego Rivera y Frida Kahlo (San Ángel) queda cerca por si sobra tiempo.'},
+  {date:'21/10',dow:'Miércoles',city:'MEX',tag:'',hotel:'Uniko Living',m:'Castillo de Chapultepec (Museo Nacional de Historia) y Museo Nacional de Antropología',a:'San Miguel Chapultepec: Casa Luis Barragán (hay que reservar) y galerías de la zona',e:'Polanco: Avenida Presidente Masaryk y Parque Lincoln',tr:'',note:'La Casa Luis Barragán solo se visita con reserva previa.'},
+  {date:'22/10',dow:'Jueves',city:'MEX',tag:'',hotel:'Uniko Living',m:'Biblioteca Vasconcelos, Zócalo, Catedral Metropolitana y Templo Mayor · calle Madero y Casa de los Azulejos',a:'Palacio de Bellas Artes y Palacio Postal · MUNAL · Alameda Central y mirador del Monumento a la Revolución',e:'Última cena por el Centro o la Tabacalera',tr:'',note:'Moverse por el eje Zócalo - Bellas Artes - Monumento a la Revolución. Evitar Tepito y La Lagunilla.'},
   {date:'23/10',dow:'Viernes',city:'MEX',tag:'REGRESO',hotel:'Uniko Living (check-out)',m:'',a:'',e:'Vuelo Emirates EK256',tr:'Vuelo internacional CDMX-Barcelona',note:'Llega a Barcelona el 24/10 por husos horarios. Confirmar horarios.'}
 ];
 /*END:ITIN*/
@@ -638,10 +647,10 @@ const ITIN = [
    Los días de puro vuelo o llegada no llevan ruta a propósito. */
 const DAY_PLACES = {
   '04/10':{mode:'walking',pts:[
-    {n:'Zócalo',q:'Zocalo, Ciudad de Mexico'},
-    {n:'Catedral Metropolitana',q:'Catedral Metropolitana, Ciudad de Mexico'},
-    {n:'Templo Mayor',q:'Templo Mayor, Ciudad de Mexico'},
-    {n:'Palacio de Bellas Artes',q:'Palacio de Bellas Artes, Ciudad de Mexico'},
+    {n:'Parque México',q:'Parque Mexico, Condesa, Ciudad de Mexico'},
+    {n:'Parque España',q:'Parque Espana, Condesa, Ciudad de Mexico'},
+    {n:'Fuente de Cibeles',q:'Fuente de Cibeles, Roma Norte, Ciudad de Mexico'},
+    {n:'Ángel de la Independencia',q:'Angel de la Independencia, Ciudad de Mexico'},
   ]},
   '06/10':{mode:'walking',pts:[
     {n:'Templo de Santo Domingo',q:'Templo de Santo Domingo de Guzman, Oaxaca'},
@@ -683,20 +692,27 @@ const DAY_PLACES = {
   ]},
   '19/10':{mode:'driving',pts:[
     {n:'Teotihuacán',q:'Teotihuacan, Estado de Mexico'},
+    {n:'La Gruta',q:'Restaurante La Gruta, Teotihuacan'},
   ]},
   '20/10':{mode:'walking',pts:[
     {n:'Museo Frida Kahlo',q:'Museo Frida Kahlo, Coyoacan'},
-    {n:'Coyoacán',q:'Coyoacan, Ciudad de Mexico'},
+    {n:'Casa de León Trotsky',q:'Museo Casa de Leon Trotsky, Coyoacan'},
+    {n:'Jardín Hidalgo',q:'Jardin Hidalgo, Coyoacan'},
+    {n:'Parroquia de San Juan Bautista',q:'Parroquia de San Juan Bautista, Coyoacan'},
     {n:'Mercado de Coyoacán',q:'Mercado de Coyoacan, Ciudad de Mexico'},
   ]},
   '21/10':{mode:'walking',pts:[
-    {n:'Museo Nacional de Antropología',q:'Museo Nacional de Antropologia, Ciudad de Mexico'},
-    {n:'Bosque de Chapultepec',q:'Bosque de Chapultepec, Ciudad de Mexico'},
     {n:'Castillo de Chapultepec',q:'Castillo de Chapultepec, Ciudad de Mexico'},
+    {n:'Museo Nacional de Antropología',q:'Museo Nacional de Antropologia, Ciudad de Mexico'},
+    {n:'Casa Luis Barragán',q:'Casa Luis Barragan, Ciudad de Mexico'},
+    {n:'Parque Lincoln',q:'Parque Lincoln, Polanco, Ciudad de Mexico'},
   ]},
   '22/10':{mode:'walking',pts:[
-    {n:'Xochimilco',q:'Xochimilco, Ciudad de Mexico'},
-    {n:'Roma y Condesa',q:'Colonia Roma, Ciudad de Mexico'},
+    {n:'Biblioteca Vasconcelos',q:'Biblioteca Vasconcelos, Ciudad de Mexico'},
+    {n:'Zócalo',q:'Zocalo, Ciudad de Mexico'},
+    {n:'Templo Mayor',q:'Templo Mayor, Ciudad de Mexico'},
+    {n:'Palacio de Bellas Artes',q:'Palacio de Bellas Artes, Ciudad de Mexico'},
+    {n:'Monumento a la Revolución',q:'Monumento a la Revolucion, Ciudad de Mexico'},
   ]},
 };
 
@@ -738,6 +754,35 @@ const GASTOS = [
 
 ];
 /*END:GASTOS*/
+/*SYNC:COMER*/
+const COMER = [
+  {zona:'Centro Histórico',n:'Azul Histórico',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'En un patio del siglo XVII resguardado por árboles. Obligado pedir mole.'},
+  {zona:'Centro Histórico',n:'Terraza Cha Cha Chá',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Cocina creativa en una azotea con vistas al Monumento a la Revolución.'},
+  {zona:'Centro Histórico',n:'Tacos Domingo - Pacheco',tipo:'Tacos',precio:'$$',reserva:'',nota:'Excelentes tacos céntricos.'},
+  {zona:'Centro Histórico',n:'Sede Café Parque Alameda',tipo:'Café',precio:'$',reserva:'',nota:'Para la pausa entre museos.'},
+  {zona:'Juárez',n:'Cantina La Extra',tipo:'Cantina clásica',precio:'$$',reserva:'',nota:'Para un trago a media tarde y comida de cantina.'},
+  {zona:'Polanco / Chapultepec',n:'Hacienda de Los Morales',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Hacienda del siglo XVI. Imperdible pedir los escamoles, el caviar mexicano.'},
+  {zona:'Polanco / Chapultepec',n:'Los Panchos',tipo:'Tacos',precio:'$$',reserva:'',nota:'Institución clásica. Buena opción de desayuno salado.'},
+  {zona:'Polanco / Chapultepec',n:'Quintonil',tipo:'Mexicana de autor',precio:'$$$$',reserva:'Obligatoria',nota:'Alta gastronomía. Reservar con mucha antelación.'},
+  {zona:'Polanco / Chapultepec',n:'Pujol',tipo:'Mexicana contemporánea',precio:'$$$$',reserva:'Obligatoria',nota:'Alta gastronomía. Reservar con mucha antelación.'},
+  {zona:'Polanco / Chapultepec',n:'Nevería Roxy',tipo:'Nieves',precio:'$',reserva:'',nota:'Al lado de la Librería en el Bosque. Pedir la de mamey.'},
+  {zona:'Roma / Condesa',n:'Contramar',tipo:'Mariscos',precio:'$$$',reserva:'Recomendable',nota:'Una institución. Tostada de atún y pescado a la talla.'},
+  {zona:'Roma / Condesa',n:'Esquina Común',tipo:'Cocina de autor',precio:'$$$',reserva:'Requerida',nota:'De las mejores experiencias actuales.'},
+  {zona:'Roma / Condesa',n:'Maizajo',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Cocina de maíz.'},
+  {zona:'Roma / Condesa',n:'Cerrajería',tipo:'Desayunos',precio:'$$',reserva:'',nota:'El brunch más codiciado de la zona.'},
+  {zona:'Roma / Condesa',n:'Cuina',tipo:'Panadería y desayunos',precio:'$$',reserva:'',nota:'Fusión catalana. Llegar temprano.'},
+  {zona:'Roma / Condesa',n:'Handshake Speakeasy',tipo:'Coctelería',precio:'$$$',reserva:'Obligatoria',nota:'Considerado de los mejores bares del mundo. Mixología molecular.'},
+  {zona:'Roma / Condesa',n:'Tlecan',tipo:'Cócteles',precio:'$$',reserva:'',nota:'En la lista de The World’s 50 Best Bars.'},
+  {zona:'Roma / Condesa',n:'Tacos Atarantados',tipo:'Tacos',precio:'$$',reserva:'',nota:'Pedir la Gaonera de rib eye y el surtido de trompos.'},
+  {zona:'Roma / Condesa',n:'El Minutito',tipo:'Café',precio:'$',reserva:'',nota:'Pausa rápida y buen café.'},
+  {zona:'Coyoacán / San Ángel',n:'Mariscos "Mi Compa Chava"',tipo:'Mariscos',precio:'$$',reserva:'Con antelación',nota:'De los imprescindibles de la zona.'},
+  {zona:'Coyoacán / San Ángel',n:'Tetetlan',tipo:'Mexicana',precio:'$$',reserva:'',nota:'En una obra de Luis Barragán, sobre roca volcánica.'},
+  {zona:'Coyoacán / San Ángel',n:'Los Danzantes',tipo:'Mexicana',precio:'$$$',reserva:'',nota:'Clásico frente al jardín, con buena carta de mezcales.'},
+  {zona:'Coyoacán / San Ángel',n:'Trinidad Ritual de Sabores',tipo:'Mexicana',precio:'$$',reserva:'',nota:'Chilaquiles antes o después de los museos.'},
+  {zona:'Coyoacán / San Ángel',n:'Café El Jarocho',tipo:'Cafetería de barrio',precio:'$',reserva:'',nota:'El café de toda la vida de Coyoacán.'},
+  {zona:'Teotihuacán',n:'La Gruta',tipo:'Mexicana',precio:'$$$',reserva:'Recomendable',nota:'Dentro de una caverna, al lado de las pirámides.'}
+];
+/*END:COMER*/
 
 const DISHES = {
   'Ciudad de México': [
@@ -788,7 +833,10 @@ const TASKS = [
   {cat:'Seguro',t:'Contratar seguro de viaje',n:'Recomendado, no obligatorio.',done:false},
   {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Emirates',n:'Reserva RMQTJB. Emirates suele abrirlo 48h antes de cada vuelo.',done:false},
   {cat:'Reservas',t:'Autoregistro de entrada (check-in online) de Volaris',n:'Reserva KLSYGE (PXM-DGO del 14/10). Se abre 3 días antes.',done:false},
-  {cat:'Reservas',t:'Vincular la reserva de VivaAerobus a una cuenta Viva',n:'Reserva ADS1TJ (CDMX-Oaxaca del 5/10). Sin vincularla no se puede hacer check-in en línea ni modificarla.',done:false}
+  {cat:'Reservas',t:'Vincular la reserva de VivaAerobus a una cuenta Viva',n:'Reserva ADS1TJ (CDMX-Oaxaca del 5/10). Sin vincularla no se puede hacer check-in en línea ni modificarla.',done:false},
+  {cat:'Reservas',t:'Reservar la Casa Luis Barragán (CDMX)',n:'Solo se visita con reserva previa. Para el 21/10.',done:false},
+  {cat:'Reservas',t:'Reservar el tour a Teotihuacán con transporte',n:'Uber no llega y el taxi sale caro. Para el 19/10, salida 6:30-7:00.',done:false},
+  {cat:'Reservas',t:'Reservar restaurantes que lo exigen (CDMX)',n:'Handshake Speakeasy, Esquina Común, Mi Compa Chava. Pujol y Quintonil, con mucha antelación.',done:false}
 ];
 /*END:TASKS*/
 
@@ -847,10 +895,10 @@ const CLIMATE_NOTE = 'Clima típico de octubre según la hoja de planificación 
 /* EXTRAS: ideas que NO están en el plan del día, por si sobra tiempo */
 const EXTRAS = {
   'Ciudad de México':[
-    {n:'Xochimilco',d:'Paseo en trajinera por los canales.',q:'Xochimilco, Ciudad de Mexico',img:'x_xochimilco'},
-    {n:'Museo Nacional de Antropología',d:'De los mejores del mundo, con Chapultepec al lado.',q:'Museo Nacional de Antropologia, Ciudad de Mexico',img:'x_antropologia'},
-    {n:'Puebla y Cholula',d:'Excursión de un día desde la capital.',q:'Cholula, Puebla',img:'x_cholula'},
-    {n:'Roma y Condesa',d:'Barrios para comer, café y noche.',q:'Colonia Condesa, Ciudad de Mexico',img:'x_condesa'},
+    {n:'Xochimilco con Arca Tierra',d:'En vez de los embarcaderos masivos: desayuno en una chinampa navegando por los canales al amanecer. Se reserva.',q:'Parque Ecologico de Xochimilco, Ciudad de Mexico',img:'x_xochimilco'},
+    {n:'Museo Anahuacalli',d:'Fortaleza de piedra volcánica que diseñó Diego Rivera para su colección prehispánica.',q:'Museo Anahuacalli, Ciudad de Mexico',img:'x_antropologia'},
+    {n:'Museo Dolores Olmedo',d:'Ex hacienda del XVI con obra de Diego Rivera y Frida Kahlo, entre pavorreales y xoloitzcuintles.',q:'Museo Dolores Olmedo, Ciudad de Mexico',img:'x_cholula'},
+    {n:'San Ángel y el Bazar Sábado',d:'Arte y diseño local en la Plaza San Jacinto, más la Casa-Estudio Diego Rivera y Frida Kahlo. Ojo: el bazar es solo los sábados y no hay ninguno libre en CDMX.',q:'Plaza San Jacinto, San Angel, Ciudad de Mexico',img:'x_condesa'},
   ],
   'Oaxaca':[
     {n:'Teotitlán del Valle',d:'Pueblo de tejedores y textiles.',q:'Teotitlan del Valle, Oaxaca',img:'x_teotitlan'},
@@ -1629,6 +1677,31 @@ function renderGastos(){
 /* ============== COMIDA ============== */
 function renderFood(){
   const v=$('#v-comida'); v.innerHTML='';
+
+  if(typeof COMER!=='undefined' && COMER.length){
+    v.appendChild(el('div','sec-title','Dónde comer en CDMX'));
+    v.appendChild(el('div','sub','Recomendaciones de una amiga que vive allí. Precio por persona sin alcohol: $ menos de 300 MXN · $$ 300-800 · $$$ 800-1.500 · $$$$ más de 1.500.'));
+    const zonas={};
+    COMER.forEach(c=>{ (zonas[c.zona]=zonas[c.zona]||[]).push(c); });
+    Object.entries(zonas).forEach(([zona,sitios])=>{
+      const card=el('div','card');
+      card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${zona}</div>`));
+      sitios.forEach(c=>{
+        const row=el('div','comer');
+        row.innerHTML=`
+          <div class="cm">
+            <b>${c.n}</b>
+            <span class="ct">${c.tipo}${c.precio?` · <span class="pr">${c.precio}</span>`:''}</span>
+            ${c.nota?`<span class="cn">${c.nota}</span>`:''}
+            ${c.reserva?`<span class="pill pend" style="margin-top:6px;display:inline-flex">Reserva ${c.reserva.toLowerCase()}</span>`:''}
+          </div>
+          <a class="cmap" href="${mapsUrl(c.n+', '+(c.zona.includes('Teoti')?'Teotihuacan':'Ciudad de Mexico'))}" target="_blank" rel="noopener">${I.pin}</a>`;
+        card.appendChild(row);
+      });
+      v.appendChild(card);
+    });
+  }
+
   v.appendChild(el('div','sec-title','Qué probar en cada sitio'));
   v.appendChild(el('div','sub','Platos típicos de cada zona y dónde buscarlos. Ideas, no reservas.'));
   Object.entries(DISHES).forEach(([title,arr])=>{
